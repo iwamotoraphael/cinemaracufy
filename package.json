@@ -1,0 +1,24 @@
+{
+  "name": "cinemaracufy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwamotoraphael/cinemaracufy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iwamotoraphael/cinemaracufy/issues"
+  },
+  "homepage": "https://github.com/iwamotoraphael/cinemaracufy#readme",
+  "dependencies": {
+    "node-themoviedb": "^0.2.8",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
+  }
+}
