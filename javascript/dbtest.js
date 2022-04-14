@@ -5,8 +5,8 @@ client.connect()
 
 async function main(){
     try{
-    let resp = await api.multiSearch('Nicolas Cage')
-    console.log(resp.data.results)
+    let resp = await api.getTVCredits(92749)
+    console.log(resp.data)
       
     } 
     catch(err)
