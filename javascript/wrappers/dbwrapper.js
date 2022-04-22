@@ -1,15 +1,15 @@
 const db = require('../config/_dbconfig')
 
-async function createNetwork(id, nome)
+async function createNetwork(nome, foto)
 {
     try{
-        let check = await db.query(`SELECT EXISTS(SELECT id_emissora FROM emissora WHERE id_emissora = ${id})`)
+        let check = await db.query(`SELECT EXISTS(SELECT nome_emissora FROM emissora WHERE nome_emissora = ${nome})`)
         if(check.rows[0].exists)
             return 1
         else
         {
             await db.query(`BEGIN`)
-            await db.query(`INSERT INTO emissora VALUES(${id}, '${nome}')`)
+            await db.query(`INSERT INTO emissora(nome_emissora, logo_emissora) VALUES('${nome}', '${foto}')`)
             await db.query('COMMIT')
             return 0
         }
@@ -21,19 +21,13 @@ async function createNetwork(id, nome)
     }
 }
 
-async function createCast(id, nome)
+async function createCast(nome, foto)
 {
     try{
-        let check = await db.query(`SELECT EXISTS(SELECT id_pessoa FROM pessoacast WHERE id_pessoa = ${id})`)
-        if(check.rows[0].exists)
-            return 1
-        else
-        {
-            await db.query(`BEGIN`)
-            await db.query(`INSERT INTO pessoacast VALUES(${id}, '${nome}')`)
-            await db.query('COMMIT')
-            return 0
-        }
+        await db.query(`BEGIN`)
+        await db.query(`INSERT INTO pessoacast(nome_cast, foto_pessoa) VALUES('${nome}', '${foto}')`)
+        await db.query('COMMIT')
+        return 0
     }
     catch(err)
     {
@@ -63,16 +57,31 @@ async function createGenre(id, nome)
     }
 }
 
-async function createCreator(id, nome)
+async function createCreator(nome, foto)
 {
     try{
-        let check = await db.query(`SELECT EXISTS(SELECT id_criador FROM criador WHERE id_criador = ${id})`)
+        await db.query(`BEGIN`)
+        await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES('${nome}', '${foto}')`)
+        await db.query('COMMIT')
+        return 0
+    }
+    catch(err)
+    {
+        await db.query('ROLLBACK')
+        return 2
+    }
+}
+
+async function createProvider(nome, foto)
+{
+    try{
+        let check = await db.query(`SELECT EXISTS(SELECT nome_plataforma FROM plataforma WHERE nome_plataforma = ${nome})`)
         if(check.rows[0].exists)
             return 1
         else
         {
             await db.query(`BEGIN`)
-            await db.query(`INSERT INTO criador VALUES(${id}, '${nome}')`)
+            await db.query(`INSERT INTO plataforma(nome_plataforma, logo_plataforma) VALUES('${nome}', '${foto}')`)
             await db.query('COMMIT')
             return 0
         }
@@ -84,37 +93,16 @@ async function createCreator(id, nome)
     }
 }
 
-async function createProvider(id, nome)
+async function createCompany(nome, foto)
 {
     try{
-        let check = await db.query(`SELECT EXISTS(SELECT FROM plataforma WHERE id_plataforma = ${id})`)
+        let check = await db.query(`SELECT EXISTS(SELECT FROM companhia WHERE nome_companhia = ${nome})`)
         if(check.rows[0].exists)
             return 1
         else
         {
             await db.query(`BEGIN`)
-            await db.query(`INSERT INTO plataforma VALUES(${id}, '${nome}')`)
-            await db.query('COMMIT')
-            return 0
-        }
-    }
-    catch(err)
-    {
-        await db.query('ROLLBACK')
-        return 2
-    }
-}
-
-async function createCompany(id, nome)
-{
-    try{
-        let check = await db.query(`SELECT EXISTS(SELECT FROM companhia WHERE id_companhia = ${id})`)
-        if(check.rows[0].exists)
-            return 1
-        else
-        {
-            await db.query(`BEGIN`)
-            await db.query(`INSERT INTO companhia VALUES(${id}, '${nome}')`)
+            await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES('${nome}', '${foto}')`)
             await db.query('COMMIT')
             return 0
         }
@@ -142,21 +130,25 @@ async function createUser(nome, id_avatar, hash_senha){
     catch(err)
     {
         await db.query('ROLLBACK')
-        console.log(err.stack)
         return 2
     }
 }
 
-async function createItem(id_item, lancamento, nome_item)
+async function createItem(nome_item, id_tmdb, poster_item, tipo)
 {
     try{
-        let check = await db.query(`SELECT EXISTS(SELECT id_item FROM itemsistema WHERE id_item='${id_item}')`)
+        let check = await db.query(`SELECT EXISTS(SELECT id_tmdb FROM itemsistema WHERE id_tmdb=${id_tmdb})`)
         if(check.rows[0].exists)
             return 1
         else
         {
             await db.query(`BEGIN`)
-            await db.query(`INSERT INTO itemsistema VALUES(${id_item}, ${lancamento}, '${nome_item}')`)
+            let id = await db.query(`INSERT INTO itemsistema(nome_item, id_tmdb, poster_item, tipo) VALUES('${nome_item}', ${id_tmdb}, '${poster_item}', ${tipo})`)
+            if(tipo)
+                await createMovie(id)
+            else
+                await createSerie(id)
+
             await db.query('COMMIT')
             return 0
         }
@@ -169,18 +161,45 @@ async function createItem(id_item, lancamento, nome_item)
 }
 
 
-//TO-DO
-/* O json recebido no método deve ser o mesmo retornado pela API */
-async function createMovie(jsaon)
+async function createMovie(id)
 {
     try{
-        
+        let check = await db.query(`SELECT EXISTS(SELECT id_item FROM filme WHERE id_item=${id})`)
+        if(check.rows[0].exists)
+            return 1
+        else
+        {
+            await db.query(`BEGIN`)
+            await db.query(`INSERT INTO filme(id_item) VALUES(${id})`)
+            await db.query('COMMIT')
+            return 0
+        }
     }
     catch(err)
     {
         await db.query('ROLLBACK')
-        console.log(err.stack)
-        return false
+        return 2
+    }
+}
+
+async function createSerie(id)
+{
+    try{
+        let check = await db.query(`SELECT EXISTS(SELECT id_item FROM serie WHERE id_item=${id})`)
+        if(check.rows[0].exists)
+            return 1
+        else
+        {
+            await db.query(`BEGIN`)
+            await db.query(`INSERT INTO serie(id_item) VALUES(${id})`)
+            await db.query('COMMIT')
+            return 0
+        }
+    }
+    catch(err)
+    {
+        await db.query('ROLLBACK')
+        return 2
     }
 }
 
