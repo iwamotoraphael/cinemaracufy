@@ -8,15 +8,12 @@ const db = require('../config/_dbconfig')
                 return 1
             else
             {
-                await db.query(`BEGIN`)
                 await db.query(`INSERT INTO emissora(nome_emissora, logo_emissora) VALUES('${nome}', '${foto}')`)
-                await db.query('COMMIT')
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -24,35 +21,29 @@ const db = require('../config/_dbconfig')
     async function createCast(nome, foto)
     {
         try{
-            await db.query(`BEGIN`)
             await db.query(`INSERT INTO pessoacast(nome_cast, foto_pessoa) VALUES('${nome}', '${foto}')`)
-            await db.query('COMMIT')
             return 0
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
 
-    async function createGenre(id, nome)
+    async function createGenre(nome)
     {
         try{
-            let check = await db.query(`SELECT EXISTS(SELECT id_genero FROM genero WHERE id_genero = ${id})`)
+            let check = await db.query(`SELECT EXISTS(SELECT nome_genero FROM genero WHERE nome_genero = ${nome})`)
             if(check.rows[0].exists)
                 return 1
             else
             {
-                await db.query(`BEGIN`)
-                await db.query(`INSERT INTO genero VALUES(${id}, '${nome}')`)
-                await db.query('COMMIT')
+                await db.query(`INSERT INTO genero(nome_genero) VALUES('${nome}')`)
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -60,14 +51,11 @@ const db = require('../config/_dbconfig')
     async function createCreator(nome, foto)
     {
         try{
-            await db.query(`BEGIN`)
             await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES('${nome}', '${foto}')`)
-            await db.query('COMMIT')
             return 0
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -80,15 +68,12 @@ const db = require('../config/_dbconfig')
                 return 1
             else
             {
-                await db.query(`BEGIN`)
                 await db.query(`INSERT INTO plataforma(nome_plataforma, logo_plataforma) VALUES('${nome}', '${foto}')`)
-                await db.query('COMMIT')
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -101,15 +86,12 @@ const db = require('../config/_dbconfig')
                 return 1
             else
             {
-                await db.query(`BEGIN`)
                 await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES('${nome}', '${foto}')`)
-                await db.query('COMMIT')
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -121,15 +103,12 @@ const db = require('../config/_dbconfig')
                 return 1
             else
             {
-                await db.query(`BEGIN`)
                 await db.query(`INSERT INTO usuario(nome_usuario, hash_senha, id_avatar) VALUES('${nome}', '${hash_senha}', '${id_avatar}')`)
-                await db.query('COMMIT')
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
@@ -217,15 +196,12 @@ const db = require('../config/_dbconfig')
                 return 1
             else
             {
-                await db.query(`BEGIN`)
                 await db.query(`INSERT INTO temporada VALUES(${numero_temporada},${id_item},'${titulo}')`)
-                await db.query('COMMIT')
                 return 0
             }
         }
         catch(err)
         {
-            await db.query('ROLLBACK')
             return 2
         }
     }
