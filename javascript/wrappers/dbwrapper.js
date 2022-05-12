@@ -203,6 +203,55 @@ const db = require('../config/_dbconfig')
         }
     }
 
+    async function createReview(id_usuario, id_item, nota, comentario, data)
+    {
+        try{
+            await db.query(`INSERT INTO avaliacao(id_usuario, id_item, nota, comentario, data) VALUES($1,$2, $3, $4, $5)`, [id_usuario, id_item, nota, comentario, data])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function like(id_usuario, id_avaliacao)
+    {
+        try{
+            await db.query(`INSERT INTO curtidas(id_usuario, id_avaliacao) VALUES($1,$2)`, [id_usuario, id_avaliacao])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function unlike(id_usuario, id_avaliacao)
+    {
+        try{
+            await db.query(`DELETE FROM curtidas WHERE id_usuario = $1 AND id_avaliacao = $2`, [id_usuario, id_avaliacao])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+
 
 module.exports = {
     createUser,
@@ -213,5 +262,7 @@ module.exports = {
     createGenre,
     createNetwork,
     createProvider,
-    createSeason
+    createSeason,
+    createList,
+    createReview
 }
