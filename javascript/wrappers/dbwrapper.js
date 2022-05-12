@@ -187,6 +187,22 @@ const db = require('../config/_dbconfig')
         }
     }
 
+    async function createList(id_usuario, nome_lista)
+    {
+        try{
+            await db.query(`INSERT INTO lista(nome_lista, id_usuario) VALUES($1,$2)`, [nome_lista, id_usuario])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
 
 module.exports = {
     createUser,
