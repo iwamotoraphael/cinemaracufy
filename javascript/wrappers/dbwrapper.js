@@ -307,6 +307,22 @@ const db = require('../config/_dbconfig')
         }
     }
 
+    async function linkItemList(id_lista, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO lista_item(id_lista, id_item) VALUES($1,$2)`, [id_lista, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
     async function linkSerieEmissora(id_emissora, id_item)
     {
         try{
@@ -356,4 +372,9 @@ module.exports = {
     like,
     unlike,
     linkItemPlataforma,
+    linkItemCast,
+    linkItemCompanhia,
+    linkItemGenero,
+    linkSerieEmissora,
+    linkSerieCriador
 }
