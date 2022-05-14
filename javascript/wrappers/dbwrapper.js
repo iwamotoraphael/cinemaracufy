@@ -227,6 +227,30 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
+            return 2
+        }
+    }
+
+    async function unlike(id_usuario, id_avaliacao)
+    {
+        try{
+            await db.query(`DELETE FROM curtidas WHERE id_usuario = $1 AND id_avaliacao = $2`, [id_usuario, id_avaliacao])
+            return 0
+        }
+        catch(err)
+        {
+            return 2
+        }
+    }
+
+    async function linkItemPlataforma(id_plataforma, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO itemsistema_plataforma(id_plataforma, id_item) VALUES($1,$2)`, [id_plataforma, id_item])
+            return 0
+        }
+        catch(err)
+        {
             //error code 23505 means primary key already exists
             if(err.code == 23505)
                 return 1
@@ -235,10 +259,74 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function unlike(id_usuario, id_avaliacao)
+    async function linkItemCast(id_pessoa, id_item)
     {
         try{
-            await db.query(`DELETE FROM curtidas WHERE id_usuario = $1 AND id_avaliacao = $2`, [id_usuario, id_avaliacao])
+            await db.query(`INSERT INTO itemsistema_pessoacast(id_pessoa, id_item) VALUES($1,$2)`, [id_pessoa, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function linkItemGenero(id_genero, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO itemsistema_genero(id_genero, id_item) VALUES($1,$2)`, [id_genero, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function linkItemCompanhia(id_companhia, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO itemsistema_companhia(id_companhia, id_item) VALUES($1,$2)`, [id_companhia, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function linkSerieEmissora(id_emissora, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO serie_emissora(id_emissora, id_item) VALUES($1,$2)`, [id_emissora, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            //error code 23505 means primary key already exists
+            if(err.code == 23505)
+                return 1
+            else
+                return 2
+        }
+    }
+
+    async function linkSerieCriador(id_criador, id_item)
+    {
+        try{
+            await db.query(`INSERT INTO serie_criador(id_criador, id_item) VALUES($1,$2)`, [id_criador, id_item])
             return 0
         }
         catch(err)
@@ -264,5 +352,8 @@ module.exports = {
     createProvider,
     createSeason,
     createList,
-    createReview
+    createReview,
+    like,
+    unlike,
+    linkItemPlataforma,
 }
