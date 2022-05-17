@@ -10,11 +10,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -26,7 +22,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            return 2
+            return err.code
         }
     }
 
@@ -38,11 +34,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -54,7 +46,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            return 2
+            return err.code
         }
     }
 
@@ -66,11 +58,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -82,11 +70,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -97,11 +81,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -132,11 +112,7 @@ const db = require('../config/_dbconfig')
         catch(err)
         {
             await db.query('ROLLBACK')
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -148,11 +124,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -164,11 +136,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -179,11 +147,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -195,11 +159,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -211,11 +171,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -227,7 +183,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            return 2
+            return err.code
         }
     }
 
@@ -239,7 +195,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            return 2
+            return err.code
         }
     }
 
@@ -251,11 +207,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -267,11 +219,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -283,11 +231,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -299,11 +243,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -315,11 +255,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -331,11 +267,7 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
@@ -347,15 +279,95 @@ const db = require('../config/_dbconfig')
         }
         catch(err)
         {
-            //error code 23505 means primary key already exists
-            if(err.code == 23505)
-                return 1
-            else
-                return 2
+            return err.code
         }
     }
 
+    async function removeOneLinkItemPlataforma(id_plataforma, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM itemsistema_plataforma WHERE id_plataforma = $1 AND id_item = $2`, [id_plataforma, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
 
+    async function removeOneLinkItemCast(id_pessoa, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM itemsistema_pessoacast WHERE id_pessoa = $1 AND id_item = $2`, [id_pessoa, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+    async function removeOneLinkItemGenero(id_genero, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM itemsistema_genero WHERE id_genero = $1 AND id_item = $2`, [id_genero, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+    async function removeOneLinkItemCompanhia(id_companhia, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM itemsistema_companhia WHERE id_plataforma = $1 AND id_item = $2`, [id_companhia, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+    async function removeOneLinkItemList(id_lista, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM lista_item WHERE id_lista = $1 AND id_item = $2`, [id_lista, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+    async function removeOneLinkSerieEmissora(id_emissora, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM serie_emissora WHERE id_emissora = $1 AND id_item = $2`, [id_emissora, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+    async function removeOneLinkSerieCriador(id_criador, id_item)
+    {
+        try{
+            await db.query(`DELETE FROM serie_criador WHERE id_criador = $1 AND id_item = $2`, [id_criador, id_item])
+            return 0
+        }
+        catch(err)
+        {
+            return err.code
+        }
+    }
+
+//implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
     createUser,
@@ -376,5 +388,13 @@ module.exports = {
     linkItemCompanhia,
     linkItemGenero,
     linkSerieEmissora,
-    linkSerieCriador
+    linkSerieCriador,
+    linkItemList,
+    removeOneLinkItemCast,
+    removeOneLinkItemCompanhia,
+    removeOneLinkItemGenero,
+    removeOneLinkItemList,
+    removeOneLinkItemPlataforma,
+    removeOneLinkSerieCriador,
+    removeOneLinkSerieEmissora
 }
