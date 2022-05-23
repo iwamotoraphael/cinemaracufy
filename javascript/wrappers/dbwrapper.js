@@ -85,11 +85,11 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createItem(nome_item, id_tmdb, poster_item, tipo)
+    async function createItem(nome_item, poster_item, tipo)
     {
         try{
             await db.query(`BEGIN`)
-            let id = await db.query(`INSERT INTO itemsistema(nome_item, id_tmdb, poster_item, tipo) VALUES($1, $2, $3, $4) RETURNING id_item`, [nome_item, id_tmdb, poster_item, tipo])
+            let id = await db.query(`INSERT INTO itemsistema(nome_item, poster_item, tipo) VALUES($1, $2, $3) RETURNING id_item`, [nome_item,  poster_item, tipo])
 
             id = id.rows[0].id_item
             
@@ -367,6 +367,8 @@ const db = require('../config/_dbconfig')
         }
     }
 
+
+    
 //implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
