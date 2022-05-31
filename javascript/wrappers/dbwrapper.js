@@ -74,9 +74,9 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createUser(nome, id_avatar, hash_senha){
+    async function createUser(nome, id_avatar, login, hash_senha){
         try{
-            await db.query(`INSERT INTO usuario(nome_usuario, hash_senha, id_avatar) VALUES($1, $2, $3)`, [nome, hash_senha, id_avatar])
+            await db.query(`INSERT INTO usuario(nome_usuario, hash_senha, id_avatar, login_usuario) VALUES($1, $2, $3, $4)`, [nome, hash_senha, id_avatar, login])
             return 0
         }
         catch(err)
@@ -166,7 +166,7 @@ const db = require('../config/_dbconfig')
     async function createReview(id_usuario, id_item, nota, comentario, data)
     {
         try{
-            await db.query(`INSERT INTO avaliacao(id_usuario, id_item, nota, comentario, data) VALUES($1,$2, $3, $4, $5)`, [id_usuario, id_item, nota, comentario, data])
+            await db.query(`INSERT INTO avaliacao(id_usuario, id_item, nota, comentario, data) VALUES($1, $2, $3, $4, $5)`, [id_usuario, id_item, nota, comentario, data])
             return 0
         }
         catch(err)

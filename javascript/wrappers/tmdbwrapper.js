@@ -22,12 +22,22 @@ async function getMovieDetails(id)
 
 async function getMovieCredits(id)
 {
-    let details = await api.movie.getCredits({
+    let details = await api.movie.getWatchProviders({
         pathParameters: {
           movie_id: id,
         },
       })
     return details
+}
+
+async function getMovieProviders(id)
+{
+    let wp = await api.movie.getWatchProviders({
+      pathParameters: {
+        movie_id: id,
+      },
+    })
+  return wp
 }
 
 async function getTVDetails(id)
@@ -50,10 +60,22 @@ async function getTVCredits(id)
     return details
 }
 
+async function getTVProviders(id)
+{
+    let wp = await api.tv.getWatchProviders({
+      pathParameters: {
+        tv_id: id,
+      },
+    })
+  return wp
+}
+
 module.exports = {
   multiSearch,
   getMovieDetails,
   getMovieCredits,
   getTVDetails,
-  getTVCredits
+  getTVCredits,
+  getMovieProviders,
+  getTVProviders,
 };
