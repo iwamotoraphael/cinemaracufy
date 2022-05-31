@@ -1,32 +1,33 @@
 const api = require('./wrappers/tmdbwrapper')
 const dbw = require('./wrappers/dbwrapper')
+const db = require('./config/_dbconfig')
 
 async function main(){
     try{
-        let filmes = []
+        let filmes = [526896]
         let series = []
 
-        let rp = await api.getTVProviders(92749)
-        console.log(rp.data.results.BR.flatrate)
-
-        /*
+        /**/
         for(let i = 0; i<filmes.length; i++)
         {
             let resp = await api.getMovieDetails(filmes[i])
             let ret = await dbw.createItem(resp.data.title, 'https://image.tmdb.org/t/p/original'+resp.data.poster_path, resp.data.episode_run_time == null)
             console.log(ret)
+        }
+/*
+            let company = resp.data.production_companies
+            let cast = await api.getMovieCredits(filmes[i]).cast
             
-            for
-                await dbw.createCompany()
-                await dbw.linkItemCompanhia()
+            for(let i = 0; i<company.length; i++)
+            {
+                let test = await db.query('SELECT EXISTS(SELECT nome_companhia FROM companhia WHERE nome_companhia = $1)', [company[i].name])
 
-            for 
-                await dbw.createCast()
-                await dbw.linkItemCast()
-
-            
-            await dbw.createProvider()
-            await dbw.linkItemPlataforma()
+                if(test.rows[0].exists == false)
+                {
+                    await dbw.createCompany(company[i].name, 'https://www.themoviedb.org/t/p/h15'+company[i].logo_path)
+                    await dbw.linkItemCompanhia(id_companhia, id_item)
+                }
+            }
             
         }
 
@@ -36,10 +37,7 @@ async function main(){
             let ret = await dbw.createItem(resp.data.name, 'https://image.tmdb.org/t/p/original'+resp.data.poster_path, resp.data.episode_run_time == null)
             console.log(ret) 
         }
-        
-        console.log(resp)
 */
-
         /*
         for(let j = 6 ; j < 8; j++)
         {

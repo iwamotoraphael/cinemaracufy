@@ -4,73 +4,73 @@ const db = require('../config/_dbconfig')
     {
         try{
             
-            await db.query(`INSERT INTO emissora(nome_emissora, logo_emissora) VALUES($1, $2)`, [nome, foto])
-            return 0
+            let id_emissora = await db.query(`INSERT INTO emissora(nome_emissora, logo_emissora) VALUES($1, $2) RETURNING id_emissora`, [nome, foto])
+            return {code: 0, id: id_emissora}
             
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
     async function createCast(nome, foto)
     {
         try{
-            await db.query(`INSERT INTO pessoacast(nome_cast, foto_pessoa) VALUES($1, $2)`, [nome, foto])
-            return 0
+            let id_pessoa = await db.query(`INSERT INTO pessoacast(nome_cast, foto_pessoa) VALUES($1, $2) RETURNING id_pessoa`, [nome, foto])
+            return {code: 0, id: id_pessoa}
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
     async function createGenre(nome)
     {
         try{
-            await db.query(`INSERT INTO genero(nome_genero) VALUES($1)`, [nome])
-            return 0
+            let id_genero = await db.query(`INSERT INTO genero(nome_genero) VALUES($1) RETURNING id_genero`, [nome])
+            return {code: 0, id: id_genero}
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
     async function createCreator(nome, foto)
     {
         try{
-            await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES($1, $2)`, [nome, foto])
-            return 0
+            let id_genero = await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES($1, $2)`, [nome, foto])
+            return {code: 0, id: id_genero}
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
     async function createProvider(nome, foto)
     {
         try{
-            await db.query(`INSERT INTO plataforma(nome_plataforma, logo_plataforma) VALUES($1, $2)`, [nome, foto])
-            return 0
+            let id_plataforma = await db.query(`INSERT INTO plataforma(nome_plataforma, logo_plataforma) VALUES($1, $2) RETURNING id_plataforma`, [nome, foto])
+            return {code: 0, id: id_plataforma}
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
     async function createCompany(nome, foto)
     {
         try{
-            await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES($1, $2)`, [nome, foto])
-            return 0
+            let id_companhia = await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES($1, $2)`, [nome, foto])
+            return {code: 0, id: id_companhia}
         }
         catch(err)
         {
-            return err.code
+            return {code: err.code, id: null}
         }
     }
 
@@ -91,23 +91,23 @@ const db = require('../config/_dbconfig')
             await db.query(`BEGIN`)
             let id = await db.query(`INSERT INTO itemsistema(nome_item, poster_item, tipo) VALUES($1, $2, $3) RETURNING id_item`, [nome_item,  poster_item, tipo])
 
-            id = id.rows[0].id_item
+            id_item = id.rows[0].id_item
             
 
             if(tipo)
                 {
-                    if(await createMovie(id) == 2)
+                    if(await createMovie(id_item) == 2)
                         return 2
                 }
             else
                 {
-                    if(await createSerie(id) == 2)
+                    if(await createSerie(id_item) == 2)
                         return 2
                 }
             
             await db.query('COMMIT')
             
-            return 0
+            return {code: 0, id: id_item}
         }
         catch(err)
         {
@@ -154,12 +154,12 @@ const db = require('../config/_dbconfig')
     async function createList(id_usuario, nome_lista)
     {
         try{
-            await db.query(`INSERT INTO lista(nome_lista, id_usuario) VALUES($1,$2)`, [nome_lista, id_usuario])
-            return 0
+            let id_lista = await db.query(`INSERT INTO lista(nome_lista, id_usuario) VALUES($1,$2) RETURNING id_lista`, [nome_lista, id_usuario])
+            return {code: 0, id: id_lista}
         }
         catch(err)
         {
-            return err.code
+            return {code: 0, id: null}
         }
     }
 
