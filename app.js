@@ -24,11 +24,13 @@ app.use(express.json())
 app.use("/css", express.static(__dirname+"/css"))
 app.use("/handlebars", express.static(__dirname+"/handlebars"))
 app.use(("/javascript"), express.static(__dirname+"/javascript"))
+app.use("/img", express.static(__dirname+"/img"))
 
 //Sessão
 app.use(session({
     name: 'session',
     secret:'itsmorbintime',
+    saveUnitialized: false,
 
     maxAge: 1000*60*60 //1 hora
     
@@ -36,7 +38,8 @@ app.use(session({
 
 //Routes
 app.get("/",function(req, res){
-    res.render('index')
+    ///res.render('index')
+    res.sendFile(__dirname + "/html/index.html")
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
