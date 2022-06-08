@@ -370,7 +370,7 @@ const db = require('../config/_dbconfig')
     async function search(query_text){
         let qt
 
-        if(query_text == '')
+        if(query_text.length === 0)
             return null
         else
             qt = query_text.replace(/ /g,"_")
