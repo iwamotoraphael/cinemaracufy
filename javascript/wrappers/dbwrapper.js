@@ -375,7 +375,7 @@ const db = require('../config/_dbconfig')
         else
             qt = query_text.replace(/ /g,"_")
 
-        let data = db.query(`SELECT nome_item, id_item, poster_item, tipo FROM itemsistema 
+        let data = await db.query(`SELECT nome_item, id_item, poster_item, tipo FROM itemsistema 
                             WHERE to_tsvector(unaccent(nome_item)) @@ to_tsquery(unaccent($1))`, [qt])
 
         return data.rows

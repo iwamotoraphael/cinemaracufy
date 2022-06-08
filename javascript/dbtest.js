@@ -4,16 +4,21 @@ const db = require('./config/_dbconfig')
 
 async function main(){
     try{
+        
+        let test = await dbw.search('x')
+        console.log(test)
+        
+        /*
         let filmes = [526896]
         let series = []
 
-        /**/
+        
         for(let i = 0; i<filmes.length; i++)
         {
             let resp = await api.getMovieDetails(filmes[i])
             let ret = await dbw.createItem(resp.data.title, 'https://image.tmdb.org/t/p/original'+resp.data.poster_path, resp.data.episode_run_time == null)
             console.log(ret)
-        }
+        }*/
 /*
             let company = resp.data.production_companies
             let cast = await api.getMovieCredits(filmes[i]).cast

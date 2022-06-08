@@ -43,7 +43,6 @@ app.get("/",async function(req, res){
 
 app.get("/busca",async function(req, res){
     let itens = await db.search(req.query.text)
-    console.log(itens)
     res.render('busca',{itens: itens})
 })
 
