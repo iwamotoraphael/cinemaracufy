@@ -20,34 +20,34 @@ body {
     margin: auto;
   }
   
-  .musica {
+  .item {
     padding: 10px 5px 5px 5px;
     width: 140px;
     min-height: 150px;
     max-height: 200px;
-    border: 2px solid var(--cor2);
+    border: 2px solid var(--branco);
     border-radius: 10px;
   }
   
-  .musica:hover {
-    background-color: #b1b9d6;
+  .item:hover {
+    background-color: var(--rosaEscuro);
     transition: 0.3s;
   }
   
-  .musica-capa {
+  .item-capa {
     border: 5px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
     margin: auto;
     display: flex;
   }
   
-  .musica-nome {
+  .item-nome {
     font-weight: 600;
     font-size: 0.85em;
     text-align: center;
   }
   
-  .musica-artista {
+  .item-lancamento {
     font-size: 0.8em;
     text-align: center;
   }

@@ -38,8 +38,7 @@ app.use(session({
 
 //Routes
 app.get("/",function(req, res){
-    ///res.render('index')
-    res.sendFile(__dirname + "/html/index.html")
+    res.render('index')
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
