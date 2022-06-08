@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
 
 :root {
-  --branco: #f3f3f3;
-  --rosa: #da5858;
+  --branco: #f3f3f3c7;
+  --rosaClaro: #da5858;
+  --rosaEscuro: #da585888;
   --vermelho: #b02929;
   --cinza: #919295;
-  --cinzaMedio: #282b2e;
+  --cinzaMedio: #2f3136;
   --cinzaEscuro: #222222;
 }
 
@@ -25,27 +26,39 @@ html {
 }
 
 h1 {
-  font-family: "Major Mono Display", sans-serif;
+  font-family: 'Unica One', cursive;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 4px var(--rosaClaro);
+  color: var(--branco);
+  text-align: left;
+  padding-left: 10px;
+}
+
+h2 {
+  font-family: 'Unica One', cursive;
   font-size: 3.5em;
-  margin-bottom: 20px;
-  padding-top: 110px;
-  text-shadow: 1px 1px 4px var(--rosa);
+  padding-top: 50px;
+  text-shadow: 1px 1px 4px var(--rosaClaro);
   color: var(--vermelho);
   text-align: center;
-  margin-top: 10px;
+}
+
+#titulo-central {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 a {
   text-decoration: none;
-  color: var(--rosa);
+  color: var(--branco);
 }
 
 a:visited {
-  color: var(--rosa);
+  color: var(--branco);
 }
 
 a:hover {
-  color: var(--rosa);
+  color: var(--cinza);
 }
 
 body {
@@ -55,18 +68,22 @@ body {
 }
 
 header {
-  /* background-image: linear-gradient(var(--cor4), var(--cor2)); */
-  background-color: var(--cinzaMedio);
+  background-color: var(--rosaEscuro);
   padding: 20px;
-  height: 360px;
-  text-align: center;
+  height: 50px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
+  display: flex;
+  align-items:center;
 }
 
 footer {
-  background-color: var(--cinzaMedio);
+  background-color: var(--rosaEscuro);
   color: white;
   padding: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 img#img-github {
@@ -95,7 +112,7 @@ h2#githubs {
 
 #btn-login {
   overflow: hidden;
-  background-color: var(--rosa);
+  background-color: var(--rosaEscuro);
   border-radius: 5px;
   margin: auto;
   border: none;
@@ -112,14 +129,14 @@ button {
 }
 
 #btn-login:hover {
-  background-color: #eb7c7c;
+  background-color: var(--vermelho);
 }
 
 button.active {
   background-color: #ccc;
 }
 
-.texto-pagina {
+.texto-principal {
   margin-bottom: 20px;
   color: white;
 }
@@ -135,7 +152,7 @@ button.active {
 }
 
 .index-conteudo {
-  background-color: var(--cinzaMedio);
+  background-color: var(--cinza);
   border: 10px;
   padding: 25px;
   border-radius: 10px;
@@ -185,8 +202,8 @@ button.active {
 }
 
 .index-titulo {
-  color: var(--cor4);
-  text-shadow: 2px 2px 2px rgba(255, 254, 254, 0.39);
+  color: var(--cinzaMedio);
+  text-shadow: 2px 2px 2px var(--rosaEscuro);
   margin-bottom: 10px;
   text-align: center;
   text-decoration: underline solid #b1b9d6;
@@ -200,8 +217,9 @@ button.active {
 
 @media (max-width: 664px) {
   .index-titulo {
-    font-size: 2.08vw;
+    font-size: 1.8vw;
    }
+
 }
 
 @media (max-width: 646px) {
@@ -217,12 +235,18 @@ button.active {
   }
 
   .index-titulo {
-    font-size: 6vw;
+    font-size: 4vw;
   }
 
   .index-descricao {
     font-size: 1.1em;
    }
+
+   
+   footer {
+    position: static;
+    margin-top: 50px;
+  }
 }
 
  @media (max-width: 366px) {

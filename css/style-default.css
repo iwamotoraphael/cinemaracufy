@@ -1,16 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
 
 :root {
-  --cor1: #000000;
-  --cor2: #14213d;
-  --cor3: #29354f;
-  --cor4: #435781;
-  --cor5: #969db6;
-  --cor6: #9cb1ff;
-  --cor7: #fdb94b;
-  --cor8: #ffffff;
-  --cor9: #7b7ba3;
+  --branco: #f3f3f3c7;
+  --rosaClaro: #da5858;
+  --rosaEscuro: #da585888;
+  --vermelho: #b02929;
+  --cinza: #919295;
+  --cinzaMedio: #2f3136;
+  --cinzaEscuro: #222222;
 }
 
 * {
@@ -19,36 +17,31 @@
 }
 
 *::selection {
-  background: var(--cor5);
+  background: var(--cinza);
   color: white;
 }
 
 a {
   text-decoration: none;
-  color: var(--cor5);
+  color: var(--branco);
 }
 
 a:visited {
-  color: var(--cor5);
+  color: var(--branco);
 }
 
 a:hover {
-  color: var(--cor6);
-}
-
-a.musica-link {
-  text-decoration: none;
-  color: black;
+  color: var(--cinza);
 }
 
 body {
-  background-color: var(--cor4);
+  background-color: var(--cinzaEscuro);
   font-family: "Poppins", sans-serif;
   font-weight: 400;
 }
 
 .navbar {
-  background-color: black;
+  background-color: var(--rosaEscuro);
   padding: 20px;
   position: relative;
   display: flex;
@@ -57,10 +50,12 @@ body {
 }
 
 .navbar > h1 {
-  color: var(--cor7);
-  font-family: "Major Mono Display", sans-serif;
-  font-size: 2.5em;
-  padding-bottom: 7px;
+  font-family: 'Unica One', cursive;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 4px var(--rosaClaro);
+  color: var(--branco);
+  text-align: left;
+  justify-content:left;
 }
 
 .navbar-links {
@@ -88,7 +83,8 @@ body {
 }
 
 a#menu-atual {
-  color: var(--cor7);
+  color: var(--cinzaEscuro);
+  font-weight: 600;
 }
 
 a#menu-atual:hover {
@@ -96,7 +92,7 @@ a#menu-atual:hover {
 }
 
 .navbar-links li a:hover {
-  background-color: var(--cor6);
+  background-color: var(--rosaClaro);
   color: black;
   border-radius: 7px;
   transition: 0.3s;
@@ -170,7 +166,7 @@ input {
 }
 
 footer {
-  background-color: black;
+  background-color: var(--rosaEscuro);
   color: white;
   padding: 20px;
 }
@@ -197,7 +193,7 @@ ul {
 
 h2#githubs {
   font-size: 1.3em;
-  color: var(--cor8);
+  color: var(--branco);
 }
 
 #icon-busca {
@@ -226,10 +222,10 @@ h2#githubs {
 
 .titulo-pagina {
   font-weight: 600;
-  color: var(--cor4);
+  color: var(--branco);
   text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.39);
   font-size: 1.6em;
-  background-color: #b1b9d6;
+  background-color: var(--rosaEscuro);
   border-radius: 10px;
   text-align: center;
   margin-bottom: 20px;
@@ -250,7 +246,7 @@ h2#githubs {
 }
 
 #container {
-  background-color: var(--cor5);
+  background-color: var(--cinza);
   border-radius: 10px;
   width: 1200px;
   margin: 20px auto;
@@ -264,13 +260,14 @@ footer {
 
 .tab {
   overflow: hidden;
-  background-color: var(--cor9);
+  background-color: var(--cinzaMedio);
   border-radius: 5px;
   margin: auto;
 }
 
 .tab button {
-  background-color: var(--cor9);
+  background-color: var(--cinzaMedio);
+  color: var(--branco);
   border: none;
   outline: none;
   cursor: pointer;
@@ -284,7 +281,7 @@ button p {
 }
 
 .tab button:hover {
-  background-color: #b1b9d6;
+  background-color: var(--rosaClaro);
 }
 
 .tab button.active {
