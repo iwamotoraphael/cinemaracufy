@@ -41,4 +41,9 @@ app.get("/",function(req, res){
     res.render('index')
 })
 
+app.get("/busca",function(req, res){
+    let itens = await db.search(req.query.text)
+    res.render('busca',{itens: itens})
+})
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})

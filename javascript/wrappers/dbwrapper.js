@@ -368,8 +368,15 @@ const db = require('../config/_dbconfig')
     }
 
     async function search(query_text){
-        let data = db.query(`SELECT nome_item FROM itemsistema 
-                            WHERE to_tsvector(unaccent(nome_item)) @@ to_tsquery(unaccent($1))`, [query_text])
+        let qt
+
+        if(query_text == '')
+            return null
+        else
+            qt = query_text.replace(/ /g,"_")
+
+        let data = db.query(`SELECT nome_item, id_item, poster_item, tipo FROM itemsistema 
+                            WHERE to_tsvector(unaccent(nome_item)) @@ to_tsquery(unaccent($1))`, [qt])
 
         return data.rows
     }
