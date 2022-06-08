@@ -37,11 +37,11 @@ app.use(session({
 }))
 
 //Routes
-app.get("/",function(req, res){
+app.get("/",async function(req, res){
     res.render('index')
 })
 
-app.get("/busca",function(req, res){
+app.get("/busca",async function(req, res){
     let itens = await db.search(req.query.text)
     res.render('busca',{itens: itens})
 })
