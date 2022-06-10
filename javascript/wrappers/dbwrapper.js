@@ -85,7 +85,7 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createItem(nome_item, poster_item, tipo)
+    async function createItem(nome_item, poster_item, tipo, orcamento, arrecadacao, duracao, categoria)
     {
         try{
             await db.query(`BEGIN`)
@@ -96,12 +96,12 @@ const db = require('../config/_dbconfig')
 
             if(tipo)
                 {
-                    if(await createMovie(id_item) == 2)
+                    if(await createMovie(id_item, orcamento, arrecadacao, duracao) == 2)
                         return 2
                 }
             else
                 {
-                    if(await createSerie(id_item) == 2)
+                    if(await createSerie(id_item, categoria) == 2)
                         return 2
                 }
             
@@ -116,10 +116,10 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createMovie(id)
+    async function createMovie(id, orcamento, arrecadacao, duracao)
     {
         try{
-            await db.query(`INSERT INTO filme(id_item) VALUES($1)`, [id])
+            await db.query(`INSERT INTO filme(id_item, orcamento, arrecadacao, duracao) VALUES($1, $2, $3, $4)`, [id, orcamento, arrecadacao, duracao])
             return 0
         }
         catch(err)
@@ -128,10 +128,10 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createSerie(id)
+    async function createSerie(id, categoria)
     {
         try{
-            await db.query(`INSERT INTO serie(id_item) VALUES($1)`, [id])
+            await db.query(`INSERT INTO serie(id_item, categoria) VALUES($1, $2)`, [id, categoria])
             return 0
         }
         catch(err)
@@ -380,7 +380,7 @@ const db = require('../config/_dbconfig')
 
         return data.rows
     }
-    
+
 //implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
