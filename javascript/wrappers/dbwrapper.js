@@ -5,7 +5,7 @@ const db = require('../config/_dbconfig')
         try{
             
             let id_emissora = await db.query(`INSERT INTO emissora(nome_emissora, logo_emissora) VALUES($1, $2) RETURNING id_emissora`, [nome, foto])
-            return {code: 0, id: id_emissora}
+            return {code: 0, id: id_emissora.rows[0].id_emissora}
             
         }
         catch(err)
@@ -18,7 +18,7 @@ const db = require('../config/_dbconfig')
     {
         try{
             let id_pessoa = await db.query(`INSERT INTO pessoacast(nome_cast, foto_pessoa) VALUES($1, $2) RETURNING id_pessoa`, [nome, foto])
-            return {code: 0, id: id_pessoa}
+            return {code: 0, id: id_pessoa.rows[0].id_pessoa}
         }
         catch(err)
         {
@@ -30,7 +30,7 @@ const db = require('../config/_dbconfig')
     {
         try{
             let id_genero = await db.query(`INSERT INTO genero(nome_genero) VALUES($1) RETURNING id_genero`, [nome])
-            return {code: 0, id: id_genero}
+            return {code: 0, id: id_genero.rows[0].id_genero}
         }
         catch(err)
         {
@@ -41,8 +41,8 @@ const db = require('../config/_dbconfig')
     async function createCreator(nome, foto)
     {
         try{
-            let id_genero = await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES($1, $2)`, [nome, foto])
-            return {code: 0, id: id_genero}
+            let id_criador = await db.query(`INSERT INTO criador(nome_criador, foto_criador) VALUES($1, $2) RETURNING id_criador`, [nome, foto])
+            return {code: 0, id: id_criador.rows[0].id_criador}
         }
         catch(err)
         {
@@ -54,7 +54,7 @@ const db = require('../config/_dbconfig')
     {
         try{
             let id_plataforma = await db.query(`INSERT INTO plataforma(nome_plataforma, logo_plataforma) VALUES($1, $2) RETURNING id_plataforma`, [nome, foto])
-            return {code: 0, id: id_plataforma}
+            return {code: 0, id: id_plataforma.rows[0].id_plataforma}
         }
         catch(err)
         {
@@ -65,8 +65,8 @@ const db = require('../config/_dbconfig')
     async function createCompany(nome, foto)
     {
         try{
-            let id_companhia = await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES($1, $2)`, [nome, foto])
-            return {code: 0, id: id_companhia}
+            let id_companhia = await db.query(`INSERT INTO companhia(nome_companhia, logo_companhia) VALUES($1, $2) RETURNING id_companhia`, [nome, foto])
+            return {code: 0, id: id_companhia.rows[0].id_companhia}
         }
         catch(err)
         {
@@ -85,11 +85,11 @@ const db = require('../config/_dbconfig')
         }
     }
 
-    async function createItem(nome_item, poster_item, tipo, orcamento, arrecadacao, duracao, categoria)
+    async function createItem(nome_item, poster_item,sinopse, lancamento, tipo, orcamento, arrecadacao, duracao, categoria)
     {
         try{
             await db.query(`BEGIN`)
-            let id = await db.query(`INSERT INTO itemsistema(nome_item, poster_item, tipo) VALUES($1, $2, $3) RETURNING id_item`, [nome_item,  poster_item, tipo])
+            let id = await db.query(`INSERT INTO itemsistema(nome_item, poster_item, tipo, sinopse, lancamento) VALUES($1, $2, $3, $4, $5) RETURNING id_item`, [nome_item,  poster_item, tipo, sinopse, lancamento])
 
             id_item = id.rows[0].id_item
             
@@ -97,12 +97,12 @@ const db = require('../config/_dbconfig')
             if(tipo)
                 {
                     if(await createMovie(id_item, orcamento, arrecadacao, duracao) == 2)
-                        return 2
+                    return {code: 2, id: -1}
                 }
             else
                 {
                     if(await createSerie(id_item, categoria) == 2)
-                        return 2
+                        return {code: 2, id: -1}
                 }
             
             await db.query('COMMIT')
@@ -112,7 +112,7 @@ const db = require('../config/_dbconfig')
         catch(err)
         {
             await db.query('ROLLBACK')
-            return err.code
+            return {code: err.code, id: -1}
         }
     }
 

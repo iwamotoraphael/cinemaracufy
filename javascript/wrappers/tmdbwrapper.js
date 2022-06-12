@@ -22,7 +22,7 @@ async function getMovieDetails(id)
 
 async function getMovieCredits(id)
 {
-    let details = await api.movie.getWatchProviders({
+    let details = await api.movie.getCredits({
         pathParameters: {
           movie_id: id,
         },
