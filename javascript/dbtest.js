@@ -277,11 +277,26 @@ async function generateReviews(){
     
 }
 
+async function generateLikes(){
+    let user_ids = await db.query('SELECT id_usuario FROM usuario')
+    let review_ids = await (await db.query('SELECT id_avaliacao FROM avaliacao')).rows
+    let size = Math.ceil(review_ids.length/60)
+    for(let i = 0; i<user_ids.rowCount; i++)
+    {
+        let start = (Math.ceil(Math.random()*(review_ids.length-size)))
+        for(let j = start; j<(start+size); j++)
+        {
+            await dbw.like(user_ids.rows[i].id_usuario, review_ids[j].id_avaliacao)
+        }
+    }
+
+}
+
 async function main(){
     try{ 
         let filmes = []
         let series = []    
-        let n = 20      
+        let n = 0      
 
         //await movies(filmes)
         //await tv(series)
@@ -290,7 +305,7 @@ async function main(){
 
         //await generateReviews()
 
-
+        await generateLikes()
   
     } 
     catch(err)
