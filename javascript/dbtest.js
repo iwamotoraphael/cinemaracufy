@@ -1,6 +1,7 @@
 const api = require('./wrappers/tmdbwrapper')
 const dbw = require('./wrappers/dbwrapper')
 const db = require('./config/_dbconfig')
+const { json } = require('express')
 
 async function movies(filmes){
     for(let i = 0; i<filmes.length; i++)
@@ -259,18 +260,36 @@ async function users(n){
     }
 }
 
+async function generateReviews(){
+    let user_ids = await db.query('SELECT id_usuario FROM usuario')
+    let item_ids = await db.query('SELECT id_item FROM itemsistema')
+    let rawDate = new Date()
+    let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+rawDate.getDate()
+
+    for(let j = 0; j<item_ids.rowCount; j++)
+    {
+        for(let i = 0; i<user_ids.rowCount; i++)
+        {
+            dbw.createReview(user_ids.rows[i].id_usuario, item_ids.rows[i].id_item, Math.trunc(Math.random()*10), 'comentario', date)
+        }
+    }
+
+    
+}
+
 async function main(){
     try{ 
         let filmes = []
         let series = []    
         let n = 20      
 
-        await movies(filmes)
-        await tv(series)
+        //await movies(filmes)
+        //await tv(series)
+
+        //users(n)
+
+        generateReviews()
   
-   
-        //let rawDate = new Date()
-        //let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+rawDate.getDate()
     } 
     catch(err)
     {
