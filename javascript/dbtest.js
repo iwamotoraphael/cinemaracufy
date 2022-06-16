@@ -2,13 +2,8 @@ const api = require('./wrappers/tmdbwrapper')
 const dbw = require('./wrappers/dbwrapper')
 const db = require('./config/_dbconfig')
 
-async function main(){
-    try{
-        let filmes = []
-        let series = [120089]
-
-        
-        for(let i = 0; i<filmes.length; i++)
+async function movies(filmes){
+    for(let i = 0; i<filmes.length; i++)
         {
             let resp = await api.getMovieDetails(filmes[i])
             let ret = await dbw.createItem(resp.data.title, 'https://image.tmdb.org/t/p/original'+resp.data.poster_path, resp.data.overview.substring(0,500), resp.data.release_date, resp.data.episode_run_time == null, resp.data.budget, resp.data.revenue, resp.data.runtime, null)
@@ -35,8 +30,8 @@ async function main(){
             }
             
             let cast = await (await api.getMovieCredits(filmes[i])).data.cast
-            
-            for(let j = 0; j<cast.length; j++)
+
+            for(let j = 0; j<Math.min(cast.length, 20); j++)
             {
                 let test = await db.query('SELECT id_pessoa FROM pessoacast WHERE nome_cast = $1', [cast[j].name])
 
@@ -71,46 +66,50 @@ async function main(){
 
             let providers = (await api.getMovieProviders(filmes[i])).data.results.BR
 
-            if(providers.buy != undefined)
+            if(providers != undefined)
             {
-                for(let j = 0; j<providers.buy.length; j++)
+                if(providers.buy != undefined)
                 {
-                    let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.buy[j].provider_name])
+                    for(let j = 0; j<providers.buy.length; j++)
+                    {
+                        let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.buy[j].provider_name])
 
-                    if(test.rowCount == 0)
-                    {
-                        let id_plataforma = await (await dbw.createProvider(providers.buy[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.buy[j].logo_path)).id
-                        await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        if(test.rowCount == 0)
+                        {
+                            let id_plataforma = await (await dbw.createProvider(providers.buy[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.buy[j].logo_path)).id
+                            await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        }
+                        else
+                        {
+                            await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
+                        } 
                     }
-                    else
-                    {
-                        await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
-                    } 
                 }
-            }
 
-            if(providers.flatrate != undefined)
-            {
-                for(let j = 0; j<providers.flatrate.length; j++)
+                if(providers.flatrate != undefined)
                 {
-                    let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.flatrate[j].provider_name])
+                    for(let j = 0; j<providers.flatrate.length; j++)
+                    {
+                        let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.flatrate[j].provider_name])
 
-                    if(test.rowCount == 0)
-                    {
-                        let id_plataforma = await (await dbw.createProvider(providers.flatrate[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.flatrate[j].logo_path)).id
-                        await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        if(test.rowCount == 0)
+                        {
+                            let id_plataforma = await (await dbw.createProvider(providers.flatrate[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.flatrate[j].logo_path)).id
+                            await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        }
+                        else
+                        {
+                            await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
+                        } 
                     }
-                    else
-                    {
-                        await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
-                    } 
                 }
             }
 
         }
-          
+}
 
-        for(let i = 0; i<series.length; i++)
+async function tv(series){
+    for(let i = 0; i<series.length; i++)
         {
             let resp = await api.getTVDetails(series[i])
             let ret = await dbw.createItem(resp.data.name, 'https://image.tmdb.org/t/p/original'+resp.data.poster_path, resp.data.overview.substring(0,500), resp.data.first_air_date, resp.data.episode_run_time == null, null, null, null, resp.data.type)
@@ -138,7 +137,7 @@ async function main(){
             
             let cast = await (await api.getTVCredits(series[i])).data.cast
             
-            for(let j = 0; j<cast.length; j++)
+            for(let j = 0; j<Math.min(cast.length, 20); j++)
             {
                 let test = await db.query('SELECT id_pessoa FROM pessoacast WHERE nome_cast = $1', [cast[j].name])
 
@@ -173,92 +172,105 @@ async function main(){
 
             let providers = (await api.getTVProviders(series[i])).data.results.BR
 
-            if(providers.buy != undefined)
+            if(providers != undefined)
             {
-                for(let j = 0; j<providers.buy.length; j++)
+                if(providers.buy != undefined)
                 {
-                    let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.buy[j].provider_name])
+                    for(let j = 0; j<providers.buy.length; j++)
+                    {
+                        let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.buy[j].provider_name])
 
-                    if(test.rowCount == 0)
-                    {
-                        let id_plataforma = await (await dbw.createProvider(providers.buy[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.buy[j].logo_path)).id
-                        await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        if(test.rowCount == 0)
+                        {
+                            let id_plataforma = await (await dbw.createProvider(providers.buy[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.buy[j].logo_path)).id
+                            await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        }
+                        else
+                        {
+                            await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
+                        } 
                     }
-                    else
-                    {
-                        await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
-                    } 
                 }
-            }
 
-            if(providers.flatrate != undefined)
-            {
-                for(let j = 0; j<providers.flatrate.length; j++)
+                if(providers.flatrate != undefined)
                 {
-                    let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.flatrate[j].provider_name])
+                    for(let j = 0; j<providers.flatrate.length; j++)
+                    {
+                        let test = await db.query('SELECT id_plataforma FROM plataforma WHERE nome_plataforma = $1', [providers.flatrate[j].provider_name])
 
-                    if(test.rowCount == 0)
-                    {
-                        let id_plataforma = await (await dbw.createProvider(providers.flatrate[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.flatrate[j].logo_path)).id
-                        await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        if(test.rowCount == 0)
+                        {
+                            let id_plataforma = await (await dbw.createProvider(providers.flatrate[j].provider_name, 'https://www.themoviedb.org/t/p/original'+providers.flatrate[j].logo_path)).id
+                            await dbw.linkItemPlataforma(id_plataforma, ret.id)
+                        }
+                        else
+                        {
+                            await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
+                        } 
                     }
-                    else
-                    {
-                        await dbw.linkItemPlataforma(test.rows[0].id_plataforma, ret.id)
-                    } 
                 }
             }
 
             let networks = resp.data.networks
 
-            for(let j = 0; j<networks.length; j++)
+            if(networks != undefined)
             {
-                let test = await db.query(`SELECT id_emissora FROM emissora WHERE nome_emissora = $1`,[networks[j]])
-                if(test.rowCount == 0)
+                for(let j = 0; j<networks.length; j++)
                 {
-                    let id_emissora = await (await dbw.createNetwork(networks[j].name, 'https://www.themoviedb.org/t/p/h30/'+networks[j].logo_path)).id
-                    await dbw.linkSerieEmissora(id_emissora, ret.id)
+                    let test = await db.query(`SELECT id_emissora FROM emissora WHERE nome_emissora = $1`,[networks[j]])
+                    if(test.rowCount == 0)
+                    {
+                        let id_emissora = await (await dbw.createNetwork(networks[j].name, 'https://www.themoviedb.org/t/p/h30/'+networks[j].logo_path)).id
+                        await dbw.linkSerieEmissora(id_emissora, ret.id)
+                    }
+                    else
+                    {
+                        await dbw.linkSerieEmissora(test.rows[0].id_emissora, ret.id)
+                    } 
                 }
-                else
-                {
-                    await dbw.linkSerieEmissora(test.rows[0].id_emissora, ret.id)
-                } 
             }
 
             let creators = resp.data.created_by
 
-            for(let j = 0; j<creators.length; j++)
+            if(creators != undefined)
             {
-                let test = await db.query(`SELECT id_criador FROM criador WHERE nome_criador = $1`,[creators[j]])
-                if(test.rowCount == 0)
+                for(let j = 0; j<creators.length; j++)
                 {
-                    let id_criador = await (await dbw.createCreator(creators[j].name, 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/'+creators[j].profile_path)).id
-                    await dbw.linkSerieCriador(id_criador, ret.id)
+                    let test = await db.query(`SELECT id_criador FROM criador WHERE nome_criador = $1`,[creators[j]])
+                    if(test.rowCount == 0)
+                    {
+                        let id_criador = await (await dbw.createCreator(creators[j].name, 'https://www.themoviedb.org/t/p/w300_and_h450_bestv2/'+creators[j].profile_path)).id
+                        await dbw.linkSerieCriador(id_criador, ret.id)
+                    }
+                    else
+                    {
+                        await dbw.linkSerieEmissora(test.rows[0].id_criador, ret.id)
+                    } 
                 }
-                else
-                {
-                    await dbw.linkSerieEmissora(test.rows[0].id_criador, ret.id)
-                } 
             }
         }
+}
 
-        /*
-        for(let j = 6 ; j < 8; j++)
-        {
-            for(let i = 13; i<18; i++)
-            {
-                let rawDate = new Date()
-                let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+20
-                let resp = await dbw.createReview(j,i,10-j, 'teste', date)
-                console.log(resp)
-            }
-        }
-             
-            let rawDate = new Date()
-            let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+rawDate.getDate()
-            let resp = await dbw.createReview(4,17,10, '', date)
-            console.log(resp)
-        */
+async function users(n){
+    let curnum = await (await db.query(`SELECT MAX(id_usuario) FROM usuario`)).rows[0].max
+    for(let i = 1; i<=n; i++)
+    {
+        await dbw.createUser('usuario'+(curnum+i),1,'login'+(curnum+i),'argonhash'+(curnum+i))
+    }
+}
+
+async function main(){
+    try{ 
+        let filmes = []
+        let series = []    
+        let n = 20      
+
+        await movies(filmes)
+        await tv(series)
+  
+   
+        //let rawDate = new Date()
+        //let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+rawDate.getDate()
     } 
     catch(err)
     {
