@@ -261,8 +261,8 @@ async function users(n){
 }
 
 async function generateReviews(){
-    let user_ids = await db.query('SELECT id_usuario FROM usuario')
-    let item_ids = await db.query('SELECT id_item FROM itemsistema')
+    let user_ids = await db.query('SELECT id_usuario FROM usuario EXCEPT (SELECT id_usuario from avaliacao GROUP BY id_usuario) ')
+    let item_ids = await db.query('SELECT id_item FROM itemsistema EXCEPT (SELECT id_item from avaliacao GROUP BY id_item) ')
     let rawDate = new Date()
     let date = rawDate.getFullYear()+"-"+(parseInt(rawDate.getMonth())+1)+"-"+rawDate.getDate()
 
@@ -270,7 +270,7 @@ async function generateReviews(){
     {
         for(let i = 0; i<user_ids.rowCount; i++)
         {
-            dbw.createReview(user_ids.rows[i].id_usuario, item_ids.rows[i].id_item, Math.trunc(Math.random()*10), 'comentario', date)
+            await dbw.createReview(user_ids.rows[i].id_usuario, item_ids.rows[j].id_item, Math.trunc(Math.random()*10), 'comentario', date)
         }
     }
 
@@ -286,9 +286,11 @@ async function main(){
         //await movies(filmes)
         //await tv(series)
 
-        //users(n)
+        //await users(n)
 
-        generateReviews()
+        //await generateReviews()
+
+
   
     } 
     catch(err)
