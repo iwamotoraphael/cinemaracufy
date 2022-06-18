@@ -22,54 +22,64 @@
   justify-content: center;
 }
 
-.dados-musica, .dados-artista {
+.dados-itemsistema, .dados-companhia {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dado-musica {
+.dados-companhia {
+  margin-bottom: 10px;
+}
+
+.dado-itemsistema {
   padding-right: 20px;
 }
 
 #dado-foto {
-  width: 200px;
-  height: 200px;
+  width: 27%;
+  height: 27%;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
   margin: auto 10px auto auto;
   justify-content: center;
 
 }
 
-#dado-nome, #dado-nome-artista {
+#dado-nome, #dado-nome-companhia {
   font-weight: 800;
   font-size: 1.3em;
 }
 
-.dado-artista {
+.dado-ano {
   padding-right: 50px;
 }
 
-#dado-nome-album {
-  font-size: 1.1em;
+.dado-sinopse {
+  font-size: 0.9em;
+  text-align: justify;
 }
 
-#dado-foto-artista {
-  width: 150px;
-  height: 150px;
+#dado-foto-companhia {
+  width: 20%;
+  height: 20%;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
   margin: auto;
   justify-content: center;
 }
 
-#dado-genero-titulo, #player-titulo {
+.dado-generos {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#dado-genero-titulo {
     font-weight: 800;
     font-size: 1.1em;
 }
 
 .dado-genero-nome {
     background-color: var(--cinzaMedio);
-    color: #b1b9d6;
+    color: var(--branco);
     font-size: 0.8em;
     border-radius: 10px;
     padding: 5px;
@@ -118,9 +128,9 @@ iframe {
   margin: 20px;
 }
 
-#conteudo-artista {
+#info-itemsistema {
   margin-top: 20px;
-  height: 250px;
+  height: 330px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -142,7 +152,7 @@ iframe {
   font-size: 1.1em;
 }
 
-.user-review-data {
+.user-review-data, .review-data-cast {
   background-color: var(--cinza);
   padding: 25px;
   border-radius: 10px;
@@ -215,7 +225,7 @@ iframe {
   font-size: 0.9em;
 }
 
-#like button, #analise, #apagar button {
+#like button, #analise, #apagar button, #lista {
   background-color: var(--cinzaMedio);
   color: var(--branco);
   font-family: "Poppins", sans-serif;
@@ -230,11 +240,11 @@ iframe {
   transition: 0.3s;
 }
 
-#like button:hover, #analise:hover, #apagar button:hover  {
+#like button:hover, #analise:hover, #apagar button:hover, #lista:hover  {
   background-color: var(--rosaClaro);
 }
 
-#like button.active, #analise.active, #apagar button.active {
+#like button.active, #analise.active, #apagar button.active, #lista.active {
   background-color: #ccc;
 }
 
@@ -281,8 +291,8 @@ button p {
   overflow-x: hidden;
 }
 
-.dado-musica-circulo {
-  background-color: var(--cor9);
+.dado-temporada-circulo {
+  background-color: var(--rosaEscuro);
   height: 30px;
   width: 30px;
   display: flex;
@@ -290,36 +300,60 @@ button p {
   margin: 8px;
 }
 
-.dado-musica-numero {
+.dado-temporada-numero {
   font-weight: 600;
   font-size: 1.2em;
   text-align: center;
 }
 
-.dado-musica-nome {
+.dado-temporada-nome {
   font-weight: 600;
   font-size: 0.85em;
 }
 
-#dado-musica-span {
+.dado-temporada-span {
   display: flex;
   flex-direction: column;
   margin: 15px;
 }
 
-#dado-musica-span a {
-  color: black;
-}
 
-#dado-musica-span a:hover, #dado-musica-span a.active {
-  color: var(--cor4);
-}
-
-.dado-musica-album {
+.dado-temporada {
   display: flex;
   flex-direction: row;
   margin: 10px;
 }
+
+#cast {
+  border-radius: 10px;
+  border-color: var(--cor6);
+  border-width: 2px;
+  max-width: 1080px;
+  max-height: 390px;
+  overflow-y: scroll;
+  display: grid;
+  grid-gap: 2px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pessoa-cast {
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid var(--branco);
+  justify-content: center;
+}
+
+.cast-foto {
+  width: 80%;
+  height: 80%;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
+}
+
 
   /* RESPONSIVIDADE */
 
@@ -334,11 +368,28 @@ button p {
     .review-data, .user-review-data, .user-review-history, #conteudo-reviews-feitas {
       width: 85vw;
     }
+
+    #cast {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pessoa-cast {
+      height: 150px;
+      width: 150px;
+    }
   }
 
   @media (max-width: 714px) {
     input {
       width: 270px;
+    }
+
+    #cast {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .pessoa-cast {
+      width: 500px;
     }
   }
 
@@ -353,11 +404,7 @@ button p {
       width: 75vw;
     }
   }
-  @media (max-width: 480px) {
-    #dado-foto, #dado-foto-artista {
-      width: 40vw;
-      height: 40vw;
-    }
+  @media (max-width: 480px) {    
 
     #dado-nome, #dado-nome-artista {
       font-size: 1.1em;

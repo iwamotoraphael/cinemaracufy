@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineMaracufy | ItemSistema</title>
-    <link rel="stylesheet" href="../css/style-default.css">
-    <link rel="stylesheet" href="../css/style-itemsistema.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,-25" />
-    <link rel="shortcut icon" href="../img/favicon-theaters.svg" type="image/x-icon">
-    <script src="../js/menu.js" defer></script>
-    
-</head>
-<body id="itemSistema">
+<link rel="stylesheet" href="../css/style-itemsistema.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,-25" />
+<link rel="shortcut icon" href="../img/favicon-theaters.svg" type="image/x-icon">
+
+<body id="filme">
     <nav class="navbar">
         <h1>CineMaracufy</h1>
         <a href="#" class="botao-menu">
@@ -44,37 +34,104 @@
     
     <div class="review-wrapper">
         <div class="review-data">
-            <h2 class="titulo-pagina" id="review-nome">Música</h2>
-            <div id="conteudo-musica"></div>
+            <h2 class="titulo-pagina" id="review-nome">Item do sistema</h2>
+            <div id="conteudo-itemsistema">
+                <div class="dados-itemsistema">
+                    <img id="dado-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
+                    <div class="dado-itemsistema">
+                        <p id="dado-nome">Nome do item</p>
+                        <p class="dado-ano">Ano de lançamento</p>
+                        <button id="lista" type="submit">Adicionar à minha lista</button>
+                    </div>
+                </div>
+                <p class="dado-sinopse">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nisi vero, ipsum accusamus libero recusandae vel, consequatur ad, odit minus omnis officiis perferendis rerum molestiae amet doloremque provident exercitationem expedita.</p>
+            </div>
             
         </div>
         <div class="review-data">
-            <h2 class="titulo-pagina">Artista</h2>
-            <div class="tab">
-                <button id="artista-info"><p>Informações</p></button>
-                <button id="artistas-similares"><p>Artistas similares</p></button>
+            <h2 class="titulo-pagina">Informações</h2>
+            <div id="info-itemsistema">
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Orçamento:</p>
+                    <span class="dado-genero-nome">XXX</span>
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Arrecadação:</p>
+                    <span class="dado-genero-nome">XXX</span>
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Duração:</p>
+                    <span class="dado-genero-nome">XXX</span>
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Gêneros:</p>
+                    <span class="dado-genero-nome">nome</span>
+                    <span class="dado-genero-nome">nome</span>
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Plataformas:</p>
+                    <span class="dado-genero-nome">nome</span>
+                    <span class="dado-genero-nome">nome</span>
+                </div>
+
+                <div class="dados-companhia">
+                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">Companhia</p>
+                        <p>Nome da companhia</p>
+                    </div>  
+                </div>
+                <div class="dados-companhia">
+                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">Companhia</p>
+                        <p>Nome da companhia</p>
+                    </div>  
+                </div>
+
             </div>
-            <div id="conteudo-artista"></div>
         </div>
     </div>
 
     <div class="review-wrapper">
-        <div class="review-data">
-            <h2 class="titulo-pagina">Atributos</h2>
-            <div id="conteudo-atributos">
+       <div class="user-review-data">
+            <h2 class="titulo-pagina">Cast</h2>
+            <div id="cast">
+                
+                <div class="pessoa-cast">
+                    <div class="conteudo-cast">
+                        <div>Nome</div>
+                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                    </div>
+                </div>
+
+                <div class="pessoa-cast">
+                    <div class="conteudo-cast">
+                        <div>Nome</div>
+                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                    </div>
+                </div>
+
+                <div class="pessoa-cast">
+                    <div class="conteudo-cast">
+                        <div>Nome</div>
+                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                    </div>
+                </div>
+
+                <div class="pessoa-cast">
+                    <div class="conteudo-cast">
+                        <div>Nome</div>
+                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                    </div>
+                </div>
 
             </div>
-        </div>
-
-        <div class="review-data">
-            <h2 class="titulo-pagina">Álbum</h2>
-            <div class="tab-album">
-                <button id="album-faixas"><p>Faixas</p></button>
-                <button id="album-player"><p>Player</p></button>
-            </div>
-            <div id="conteudo-album"></div>
-            
-        </div>
+       </div>
     </div>
 
     <div class="review-wrapper">
@@ -110,7 +167,7 @@
             <div id="conteudo-reviews-feitas">
                 {{#each analises}}
                 <div class="review-usuario">
-                    <img class="review-capa-album" src="{{url_foto}}">
+                    <img class="review-capa-album" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
                     <div class="review-span">
                         <span class="review-nome-usuario">{{nome}}</span>
                         <span class="review-date">{{data}}<br/></span>

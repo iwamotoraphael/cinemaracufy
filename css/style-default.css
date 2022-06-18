@@ -31,7 +31,7 @@ a:visited {
 }
 
 a:hover {
-  color: var(--cinza);
+  color: var(--rosaClaro);
 }
 
 body {
