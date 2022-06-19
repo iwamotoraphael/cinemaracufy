@@ -4,7 +4,7 @@
   padding: 25px;
   border-radius: 10px;
   width: 500px;
-  height: 750px;
+  height: 350px;
   margin: 15px 15px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
 }
@@ -40,28 +40,28 @@
   border: 2px solid var(--branco);
 }
 
-.review-capa-album {
+.review-capa-itemsistema {
   width: 100px;
   height: 100px;
   margin-right: 15px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
 }
 
-.review-nome-musica {
+.review-nome-itemsistema {
   font-weight: 600;
   font-size: 0.9em;
   padding-top: 8px;
 }
 
-.review-nome-musica a {
+.review-nome-itemsistema a {
   color: black;
 }
 
-.review-nome-musica a:hover, .review-nome-musica a.active {
+.review-nome-itemsistema a:hover, .review-nome-itemsistema a.active {
   color: var(--branco);
 }
 
-.review-nome-artista {
+.review-itemsistema-ano {
   font-size: 0.8em;
 }
 
@@ -142,60 +142,21 @@
   height: 50px;
 }
 
-#topartists {
-  overflow-y: scroll;
-  height: 350px;
-}
-
-.dado-artista-circulo {
-  background-color: var(--cor9);
-  height: 30px;
-  width: 30px;
-  display: flex;
-  flex-direction: column;
-  margin: 8px;
-}
-
-.dado-artista-numero {
-  font-weight: 600;
-  font-size: 1.2em;
-  text-align: center;
-}
-
-.dado-artista-foto {
-  width: 64px;
-  height: 64px;
-  border: 5px;
-  margin-left: 5px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
-}
-
-.dado-artista-nome {
-  font-weight: 600;
-  font-size: 0.85em;
-  padding-top: 8px;
-}
-
-#dado-artista-span {
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
-}
-
-.dado-artista {
-  display: flex;
-  flex-direction: row;
-  margin: 20px;
-}
-
-#toptracks {
+#listas {
   margin-top: 20px;
-  height: 640px;
+  height: 290px;
   overflow-y: scroll;
 }
 
-.dado-musica-circulo {
-  background-color: var(--cor9);
+.lista {
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #ffffff54;
+  margin-bottom: 10px;
+}
+
+.dado-itemlista-circulo {
+  background-color: var(--rosaEscuro);
   height: 30px;
   width: 30px;
   display: flex;
@@ -203,13 +164,13 @@
   margin: 8px;
 }
 
-.dado-musica-numero {
+.dado-itemlista-numero {
   font-weight: 600;
   font-size: 1.2em;
   text-align: center;
 }
 
-.dado-musica-capa {
+.dado-itemlista-capa {
   width: 64px;
   height: 64px;
   border: 5px;
@@ -217,30 +178,30 @@
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
 }
 
-.dado-musica-nome {
+.dado-itemlista-nome {
   font-weight: 600;
   font-size: 0.85em;
 }
 
-#dado-musica-span a {
+.dado-itemlista-span a {
   color: black;
 }
 
-#dado-musica-span a:hover, #dado-musica-span a.active {
+.dado-itemlista-span a:hover, .dado-itemlista-span a.active {
   color: var(--branco);
 }
 
-.dado-musica-artista {
+.dado-itemlista-ano {
   font-size: 0.8em;
 }
 
-#dado-musica-span {
+.dado-itemlista-span {
   display: flex;
   flex-direction: column;
   margin: 15px;
 }
 
-.dado-musica {
+.dado-itemlista {
   display: flex;
   flex-direction: row;
   margin: 20px;
@@ -309,7 +270,7 @@
     height: 323px;
   }
     
-  #toptracks {
+  #listas {
     height: 620px;
   }
 }
