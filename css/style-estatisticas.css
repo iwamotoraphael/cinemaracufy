@@ -39,13 +39,13 @@
     justify-content: center;
   }
 
-  #destaque-musicas, #destaque-artistas, #destaque-usuarios {
+  #destaque-filmes, #destaque-series, #destaque-usuarios {
     margin-top: 20px;
     height: 320px;
     overflow-y: scroll;
   }
 
-  .destaque-musica, .destaque-artista, .destaque-usuario {
+  .destaque-filme, .destaque-serie, .destaque-usuario {
     max-width: 250px;
     display: flex;
     flex-direction: row;
@@ -57,14 +57,14 @@
   }
 
   .destaque-usuario-total {
-    max-width: 1000px;
+    max-width: 250px;
     display: flex;
     flex-direction: row;
     margin: 20px;
   }
 
-  .destaque-musica-numero, .destaque-artista-numero, .destaque-usuario-numero {
-    background-color: var(--cor9);
+  .destaque-filme-numero, .destaque-serie-numero, .destaque-usuario-numero, .destaque-genero-numero {
+    background-color: var(--rosaEscuro);
     height: 30px;
     width: 30px;
     display: flex;
@@ -75,7 +75,7 @@
     text-align: center;
   }
   
-  .destaque-musica-capa, .destaque-artista-foto, .destaque-usuario-foto {
+  .destaque-filme-capa, .destaque-serie-foto, .destaque-usuario-foto {
     width: 50px;
     height: 50px;
     border: 5px;
@@ -84,29 +84,29 @@
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
   }
   
-  .destaque-musica-nome, .destaque-artista-nome, .destaque-usuario-nome {
+  .destaque-filme-nome, .destaque-serie-nome, .destaque-usuario-nome, .destaque-genero-nome {
     font-weight: 600;
     font-size: 0.85em;
   }
 
-  .destaque-musica-nome a {
+  .destaque-filme-nome a {
     color: black;
   }
 
-  .destaque-musica-nome a:hover, .destaque-musica-nome a.active {
-    color: var(--cor4);
+  .destaque-filme-nome a:hover, .destaque-filme-nome a.active {
+    color: var(--branco);
   }
   
-  .destaque-musica-artista, .destaque-artista-genero {
+  .destaque-filme-ano, .destaque-serie-ano {
     font-size: 0.8em;
   }
 
-  .destaque-musica-nota, .destaque-artista-nota, .destaque-usuario-curtidas {
+  .destaque-filme-nota, .destaque-serie-nota, .destaque-usuario-curtida, .destaque-genero-nota {
     font-weight: 600;
     font-size: 0.8em;
   }
   
-  #destaque-musica-span, #destaque-artista-span, #destaque-usuario-span {
+  #destaque-filme-span, #destaque-serie-span, #destaque-usuario-span, #destaque-genero-span {
     display: flex;
     flex-direction: column;
     margin: 15px;
@@ -126,7 +126,7 @@
 
   #destaque-usuarios-total {
     margin-top: 20px;
-    height: 500px;
+    height: 400px;
     overflow-y: scroll;
   }
 
@@ -137,10 +137,10 @@
     flex-direction: row;
     margin: 20px;
     padding: 25px;
-    border: 2px solid var(--cor4);
+    border: 2px solid var(--branco);
   }
 
-  .review-capa-album {
+  .review-capa-itemsistema {
     width: 100px;
     height: 100px;
     margin-right: 15px;
@@ -162,21 +162,21 @@
     font-size: 0.8em;
   }
 
-  .review-nome-musica {
+  .review-nome-itemsistema {
     font-weight: 600;
     font-size: 0.9em;
     padding-top: 8px;
   }
 
-  .review-nome-musica a {
+  .review-nome-itemsistema a {
     color: black;
   }
 
-  .review-nome-musica a:hover, .review-nome-musica a.active {
-    color: var(--cor4);
+  .review-nome-itemsistema a:hover, .review-nome-itemsistema a.active {
+    color: var(--branco);
   }
 
-  .review-nome-artista {
+  .review-itemsistema-ano {
     font-size: 0.8em;
   }
 
@@ -185,26 +185,17 @@
   }
 
 
-  #musicas-mais-bem-avaliadas, #musicas-mais-populares, #artistas-mais-bem-avaliados, #artistas-mais-populares {
+  #filmes-mais-bem-avaliados, #filmes-mais-populares, #series-mais-bem-avaliadas, #series-mais-populares, #generos-mais-populares {
     margin-top: 20px;
     height: 400px;
     overflow-y: scroll;
   }
 
-  .musica-avaliada, .artista-avaliado {
+  .filme-avaliado, .serie-avaliada, .genero-avaliado {
     max-width: 400px;
     display: flex;
     flex-direction: row;
     margin: 20px;
-  }
-
-  #generos-mais-populares {
-    margin-top: 20px;
-    height: 300px;
-    overflow-y: scroll;
-    display: grid;
-    grid-gap: 2px;
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .destaque-genero {
@@ -215,7 +206,7 @@
   }
 
   .destaque-genero-numero {
-    background-color: var(--cor9);
+    background-color: var(--rosaEscuro);
     height: 30px;
     width: 30px;
     display: flex;
@@ -227,7 +218,7 @@
   }
 
   .destaque-genero-foto {
-    background-color: var(--cor4);
+    background-color: var(--branco);
     width: 50px;
     height: 50px;
     border: 5px;
@@ -284,7 +275,7 @@
   }
 
   @media (max-width: 410px) {
-    #destaque-musicas, #destaque-artistas, #destaque-usuarios, #ultimas-reviews, #reviews-mais-populares, #musicas-mais-bem-avaliadas, #musicas-mais-populares, #artistas-mais-bem-avaliados, #artistas-mais-populares {
+    #destaque-filmes, #destaque-series, #destaque-usuarios, #ultimas-reviews, #reviews-mais-populares, #filmes-mais-bem-avaliados, #musicas-mais-populares, #series-mais-bem-avaliadas, #series-mais-populares {
       height: 60%;
     }
   }
