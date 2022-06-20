@@ -52,4 +52,19 @@ app.get("/busca",async function(req, res){
     res.render('busca',{itens: itens})
 })
 
+app.get("/filme",async function(req, res){
+    let data
+    if(Object.keys(req.query).length === 0)
+        id = null
+    else
+        data = await db.getMovieData(req.query.id)
+
+    res.render('filme', {
+        nome: data.nome_item,
+        
+    })
+})
+
+
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})

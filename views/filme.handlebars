@@ -39,8 +39,8 @@
                 <div class="dados-itemsistema">
                     <img id="dado-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
                     <div class="dado-itemsistema">
-                        <p id="dado-nome">Nome do item</p>
-                        <p class="dado-ano">Ano de lançamento</p>
+                        <p id="dado-nome">{{nome}}</p>
+                        <p class="dado-ano">{{lancamento}}</p>
                         <button id="lista" type="submit">Adicionar à minha lista</button>
                     </div>
                 </div>
@@ -51,19 +51,17 @@
         <div class="review-data">
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Orçamento:</p>
-                    <span class="dado-genero-nome">XXX</span>
+                <div class="dado-orcamento">
+                    <p id="dado-genero-titulo">Orçamento:{{orcamento}}</p>
                 </div>
 
                 <div class="dado-generos">
-                    <p id="dado-genero-titulo">Arrecadação:</p>
-                    <span class="dado-genero-nome">XXX</span>
+                    <p id="dado-genero-titulo">Arrecadação:{{arrecadacao}}</p>
                 </div>
 
                 <div class="dado-generos">
                     <p id="dado-genero-titulo">Duração:</p>
-                    <span class="dado-genero-nome">XXX</span>
+                    <span class="dado-genero-nome">{{duracao}}</span>
                 </div>
 
                 <div class="dado-generos">

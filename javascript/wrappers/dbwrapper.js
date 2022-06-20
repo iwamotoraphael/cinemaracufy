@@ -381,6 +381,35 @@ const db = require('../config/_dbconfig')
         return data.rows
     }
 
+    async function getMovieData(id){
+        let data = await db.query(
+        `SELECT id_item, nome_item, lancamento, poster_item, sinopse, plataformas, casts, generos, companhias, orcamento, arrecadacao, duracao FROM
+
+        (SELECT id_item, 
+        json_agg(json_build_object('nome_plataforma',  nome_plataforma, 'logo_plataforma', logo_plataforma)) plataformas FROM
+        (SELECT id_plataforma, id_item FROM itemsistema_plataforma WHERE id_item = $1) i INNER JOIN plataforma USING(id_plataforma)
+        GROUP BY id_item) plat
+        
+        LEFT JOIN (SELECT id_item, 
+        json_agg(json_build_object('nome_cast',  nome_cast, 'foto_pessoa', foto_pessoa)) casts FROM
+        (SELECT id_pessoa, id_item FROM itemsistema_pessoacast WHERE id_item = $1) i INNER JOIN pessoacast USING(id_pessoa)
+        GROUP BY id_item) pes USING(id_item)
+        
+        LEFT JOIN (SELECT id_item, array_agg(nome_genero) generos FROM
+        (SELECT id_genero, id_item FROM itemsistema_genero WHERE id_item = $1) i INNER JOIN genero USING(id_genero)
+        GROUP BY id_item) gen USING(id_item)
+        
+        LEFT JOIN (SELECT id_item, 
+        json_agg(json_build_object('nome_companhia',  nome_companhia, 'logo_companhia', logo_companhia)) companhias FROM
+        (SELECT id_companhia, id_item FROM itemsistema_companhia WHERE id_item = $1) i INNER JOIN companhia USING(id_companhia)
+        GROUP BY id_item) comp USING(id_item)
+        
+        LEFT JOIN filme USING(id_item)
+        LEFT JOIN itemsistema USING(id_item)`,[id])
+
+        return data.rows[0] || null
+    }
+
 //implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
@@ -412,4 +441,5 @@ module.exports = {
     removeOneLinkSerieCriador,
     removeOneLinkSerieEmissora,
     search,
+    getMovieData,
 }

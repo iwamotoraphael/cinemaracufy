@@ -305,7 +305,7 @@ async function main(){
 
         //await generateReviews()
 
-        await generateLikes()
+        //await generateLikes()
   
     } 
     catch(err)
