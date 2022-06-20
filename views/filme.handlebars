@@ -37,7 +37,7 @@
             <h2 class="titulo-pagina" id="review-nome">Item do sistema</h2>
             <div id="conteudo-itemsistema">
                 <div class="dados-itemsistema">
-                    <img id="dado-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
+                    <img id="dado-foto" src="{{foto}}" alt="Capa do item do sistema">
                     <div class="dado-itemsistema">
                         <p id="dado-nome">{{nome}}</p>
                         <p class="dado-ano">{{lancamento}}</p>
@@ -52,44 +52,39 @@
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
                 <div class="dado-orcamento">
-                    <p id="dado-genero-titulo">Orçamento:{{orcamento}}</p>
+                    <p id="dado-orcamento-titulo">Orçamento:{{orcamento}}</p>
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Arrecadação:{{arrecadacao}}</p>
+                <div class="dado-arrecadacao">
+                    <p id="dado-arrecadacao-titulo">Arrecadação:{{arrecadacao}}</p>
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Duração:</p>
-                    <span class="dado-genero-nome">{{duracao}}</span>
+                <div class="dado-duracao">
+                    <p id="dado-duracao-titulo">Duração:{{duracao}}</p>
                 </div>
 
                 <div class="dado-generos">
                     <p id="dado-genero-titulo">Gêneros:</p>
-                    <span class="dado-genero-nome">nome</span>
-                    <span class="dado-genero-nome">nome</span>
+                    {{#each generos}}
+                    <span class="dado-genero-nome">{{this}}</span>
+                    {{/each}}
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Plataformas:</p>
-                    <span class="dado-genero-nome">nome</span>
-                    <span class="dado-genero-nome">nome</span>
+                <div class="dado-plataformas">
+                    <p id="dado-plataforma-titulo">Plataformas:</p>
+                    {{#each plataformas}}
+                    <span class="dado-plataforma-nome">{{nome_plataforma}}</span>
+                    {{/each}}
                 </div>
 
+                {{#each companhias}}   
                 <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+                    <img id="dado-foto-companhia" src="{{logo_companhia}}" alt="">
                     <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Companhia</p>
-                        <p>Nome da companhia</p>
+                        <p id="dado-nome-companhia">{{nome_companhia}}</p>
                     </div>  
                 </div>
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Companhia</p>
-                        <p>Nome da companhia</p>
-                    </div>  
-                </div>
+                {{/each}}
 
             </div>
         </div>
@@ -99,35 +94,14 @@
        <div class="user-review-data">
             <h2 class="titulo-pagina">Cast</h2>
             <div id="cast">
-                
+                {{#each cast}}
                 <div class="pessoa-cast">
                     <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                        <div>{{nome_cast}}</div>
+                        <img class="cast-foto" src="{{foto_pessoa}}">
                     </div>
                 </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
+                {{/each}}
             </div>
        </div>
     </div>
