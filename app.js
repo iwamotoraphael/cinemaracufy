@@ -60,8 +60,7 @@ app.get("/filme",async function(req, res){
         data = await db.getMovieData(req.query.id)
 
     res.render('filme', {
-        nome: data.nome_item,
-        
+        nome: data.nome_item
     })
 })
 
