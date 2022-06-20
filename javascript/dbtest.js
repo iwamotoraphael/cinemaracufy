@@ -38,7 +38,7 @@ async function movies(filmes){
 
                 if(test.rowCount == 0)
                 {
-                    let id_pessoa = await (await dbw.createCast(cast[j].name, 'https://www.themoviedb.org/t/p/w138_and_h175_face'+cast[j].logo_path)).id
+                    let id_pessoa = await (await dbw.createCast(cast[j].name, 'https://www.themoviedb.org/t/p/w138_and_h175_face'+cast[j].profile_path)).id
                     await dbw.linkItemCast(id_pessoa, ret.id)
                 }
                 else
@@ -306,7 +306,10 @@ async function main(){
         //await generateReviews()
 
         //await generateLikes()
-  
+        
+        let resp = await api.getMovieDetails(526896)
+        let cast = await (await api.getMovieCredits(526896)).data.cast
+        console.log(resp.data.production_companies)
     } 
     catch(err)
     {
