@@ -6,7 +6,7 @@ async function main(){
     try{
 
         let resp = await dbw.getMovieData(110)
-        console.log(resp)
+        console.log(resp.lancamento.toLocaleString().split(' ')[0])
 
     } 
     catch(err)

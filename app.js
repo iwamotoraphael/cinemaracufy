@@ -62,7 +62,7 @@ app.get("/filme",async function(req, res){
     res.render('filme', {
         nome: data.nome_item,
         foto: data.poster_item,
-        lancamento: data.lancamento.split('T')[0],
+        lancamento: data.lancamento.toLocaleString().split(' ')[0],
         orcamento: data.orcamento,
         arrecadacao: data.arrecadacao,
         duracao: data.duracao,
