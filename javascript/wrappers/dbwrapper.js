@@ -381,6 +381,24 @@ const db = require('../config/_dbconfig')
         return data.rows
     }
 
+    async function getUserReviews(id){
+        let data = await db.query(`SELECT u.nome_usuario, u.id_usuario, a.nota, a.comentario, a.data, a.id_item, l.likes 
+        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
+        WHERE id_usuario = $1`, [id])
+
+        return data.rows
+    }
+
+    async function getItemReviews(id){
+        let data = await db.query(`SELECT u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, l.likes 
+        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
+        WHERE id_item = $1`, [id])
+
+        return data.rows
+    }
+
     async function getMovieData(id){
         let data = await db.query(
         `SELECT id_item, nome_item, lancamento, poster_item, sinopse, plataformas, casts, generos, companhias, orcamento, arrecadacao, duracao FROM
@@ -442,4 +460,6 @@ module.exports = {
     removeOneLinkSerieEmissora,
     search,
     getMovieData,
+    getUserReviews,
+    getItemReviews
 }

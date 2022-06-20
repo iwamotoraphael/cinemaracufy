@@ -52,26 +52,26 @@
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
                 <div class="dado-orcamento">
-                    <p id="dado-orcamento-titulo">Orçamento:{{orcamento}}</p>
+                    <p id="dado-orcamento-titulo">Orçamento: {{orcamento}}</p>
                 </div>
 
                 <div class="dado-arrecadacao">
-                    <p id="dado-arrecadacao-titulo">Arrecadação:{{arrecadacao}}</p>
+                    <p id="dado-arrecadacao-titulo">Arrecadação: {{arrecadacao}}</p>
                 </div>
 
                 <div class="dado-duracao">
-                    <p id="dado-duracao-titulo">Duração:{{duracao}}</p>
+                    <p id="dado-duracao-titulo">Duração: {{duracao}}</p>
                 </div>
 
                 <div class="dado-generos">
-                    <p id="dado-genero-titulo">Gêneros:</p>
+                    <p id="dado-genero-titulo">Gêneros: </p>
                     {{#each generos}}
                     <span class="dado-genero-nome">{{this}}</span>
                     {{/each}}
                 </div>
 
                 <div class="dado-generos">
-                    <p id="dado-genero-titulo">Plataformas:</p>
+                    <p id="dado-genero-titulo">Plataformas: </p>
                     {{#each plataformas}}
                     <span class="dado-genero-nome">{{nome_plataforma}}</span>
                     {{/each}}
@@ -109,8 +109,8 @@
     <div class="review-wrapper">
         <div class="user-review-data">
             <h2 class="titulo-pagina">Review</h2>
-            <div id="titulo-avaliar-musica"></div>
-            <form action="/musica/?id={{idm}}" method="post" autocomplete="off">
+            <div id="titulo-avaliar-item"></div>
+            <form action="/filme/?id={{idm}}" method="post" autocomplete="off">
                 <p>Nota (0 - 10)</p>
                 <div class="inputwrapper">
                     <div>
