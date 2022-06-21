@@ -108,4 +108,8 @@ app.get("/estatísticas", async function(req, res){
     res.render('estatisticas')
 })
 
+app.get("/perfil", async function(req, res){
+    res.render('perfil')
+})
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
