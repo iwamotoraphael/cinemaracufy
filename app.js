@@ -104,6 +104,8 @@ app.get("/serie",async function(req, res){
     })
 })
 
-
+app.get("/estatísticas", async function(req, res){
+    res.render('estatisticas')
+})
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
