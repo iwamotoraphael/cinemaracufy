@@ -16,7 +16,7 @@ async function main(){
         
         */
 
-        let data = await dbw.getTVData(117)
+        let data = await dbw.getItemReviews(124, 23)
         console.log(data)
     } 
     catch(err)

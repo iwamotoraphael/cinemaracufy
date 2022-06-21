@@ -141,14 +141,14 @@
                 <div class="review-usuario">
                     <img class="review-capa-album" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
                     <div class="review-span">
-                        <span class="review-nome-usuario">{{nome}}</span>
+                        <span class="review-nome-usuario">{{nome_usuario}}</span>
                         <span class="review-date">{{data}}<br/></span>
                         <span class="review-nota">⭐	Avaliação: </span>
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas: </span>
-                        <span class="review-curtidas-dadas">{{relevancia}}</span>
+                        <span class="review-curtidas-dadas">{{likes}}</span>
 
-                        <span class="review-curtir"><form id="like" action="/like/?id={{id_musica}}" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit">{{#if curtida}}👎 Descurtir{{else}}👍 Curtir{{/if}}</button></form></span>
+                        <span class="review-curtir"><form id="like" action="/like/?id={{id_item}}" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit">{{#if curtida}}👎 Descurtir{{else}}👍 Curtir{{/if}}</button></form></span>
 
                         {{#if apagar}}<span class="review-apagar"><form id="apagar" action="/delete" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><input type="hidden" id="idm" name="idm" value="{{id_musica}}"><button type="submit">Apagar</button></form></span>{{/if}}
 

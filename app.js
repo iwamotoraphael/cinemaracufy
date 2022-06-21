@@ -57,7 +57,11 @@ app.get("/filme",async function(req, res){
     if(Object.keys(req.query).length === 0)
         id = null
     else
+    {
         data = await db.getMovieData(req.query.id)
+        reviews = await db.getItemReviews(req.query.id)
+    }
+        
 
     res.render('filme', {
         nome: data.nome_item,
@@ -70,7 +74,8 @@ app.get("/filme",async function(req, res){
         plataformas: data.plataformas,
         companhias: data.companhias,
         cast: data.casts,
-        sinopse: data.sinopse
+        sinopse: data.sinopse,
+        analises: reviews
     })
 })
 
@@ -79,8 +84,10 @@ app.get("/serie",async function(req, res){
     if(Object.keys(req.query).length === 0)
         id = null
     else
+    {
         data = await db.getTVData(req.query.id)
-
+        reviews = await db.getItemReviews(req.query.id)
+    }
     res.render('series', {
         nome: data.nome_item,
         foto: data.poster_item,
@@ -92,7 +99,8 @@ app.get("/serie",async function(req, res){
         emissoras: dataemissoras,
         categoria:data.categoria,
         criadores: data.criadores,
-        sinopse: data.sinopse
+        sinopse: data.sinopse,
+        analises: reviews
     })
 })
 

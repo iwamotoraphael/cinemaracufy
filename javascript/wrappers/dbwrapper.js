@@ -382,21 +382,30 @@ const db = require('../config/_dbconfig')
     }
 
     async function getUserReviews(id){
-        let data = await db.query(`SELECT u.nome_usuario, u.id_usuario, a.nota, a.comentario, a.data, a.id_item, l.likes 
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
         FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
-        WHERE id_usuario = $1`, [id])
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		INNER JOIN avatar USING(id_avatar)
+        WHERE id_usuario = $1`, [id]).rows
 
-        return data.rows
+        return data
     }
 
-    async function getItemReviews(id){
-        let data = await db.query(`SELECT u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, l.likes 
+    async function getItemReviews(id, id_usuario){
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
         FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		INNER JOIN avatar USING(id_avatar)
         WHERE id_item = $1`, [id])
 
-        return data.rows
+        let reviews = data.rows
+
+        for(review of reviews){
+            let curtida = await db.query(`SELECT EXISTS(SELECT id_usuario from curtidas WHERE id_usuario = $1 AND id_avaliacao = $2)`, [id_usuario, review.id_avaliacao])
+            review.curtida = curtida.rows[0].exists
+        }
+
+        return reviews
     }
 
     async function getMovieData(id){
