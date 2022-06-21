@@ -4,7 +4,7 @@ const db = require('./config/_dbconfig')
 
 async function main(){
     try{
-
+        /*
         let atores = await db.query('SELECT nome_cast FROM pessoacast')
         for(let i = 0; i<atores.rowCount; i++)
         {
@@ -13,9 +13,11 @@ async function main(){
             await db.query(`UPDATE pessoacast SET foto_pessoa = $1 WHERE nome_cast = $2`,[link, atores.rows[i].nome_cast])
         }
         
-        /*
+        
         */
 
+        let data = await dbw.getTVData(117)
+        console.log(data)
     } 
     catch(err)
     {

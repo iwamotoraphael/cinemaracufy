@@ -69,7 +69,30 @@ app.get("/filme",async function(req, res){
         generos: data.generos,
         plataformas: data.plataformas,
         companhias: data.companhias,
-        cast: data.casts
+        cast: data.casts,
+        sinopse: data.sinopse
+    })
+})
+
+app.get("/serie",async function(req, res){
+    let data
+    if(Object.keys(req.query).length === 0)
+        id = null
+    else
+        data = await db.getTVData(req.query.id)
+
+    res.render('series', {
+        nome: data.nome_item,
+        foto: data.poster_item,
+        lancamento: data.lancamento.toLocaleString().split(' ')[0],
+        generos: data.generos,
+        plataformas: data.plataformas,
+        companhias: data.companhias,
+        cast: data.casts,
+        emissoras: dataemissoras,
+        categoria:data.categoria,
+        criadores: data.criadores,
+        sinopse: data.sinopse
     })
 })
 

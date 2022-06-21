@@ -39,12 +39,12 @@
                 <div class="dados-itemsistema">
                     <img id="dado-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
                     <div class="dado-itemsistema">
-                        <p id="dado-nome">Nome do item</p>
-                        <p class="dado-ano">Ano de lançamento</p>
+                        <p id="dado-nome">{{nome}}</p>
+                        <p class="dado-ano">{{lancamento}}</p>
                         <button id="lista" type="submit">Adicionar à minha lista</button>
                     </div>
                 </div>
-                <p class="dado-sinopse">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla nisi vero, ipsum accusamus libero recusandae vel, consequatur ad, odit minus omnis officiis perferendis rerum molestiae amet doloremque provident exercitationem expedita.</p>
+                <p class="dado-sinopse">{{dado-sinopse}}</p>
             </div>
             
         </div>
@@ -53,31 +53,26 @@
             <div id="info-itemsistema">
                 <div class="dado-generos">
                     <p id="dado-genero-titulo">Gêneros:</p>
-                    <span class="dado-genero-nome">nome</span>
-                    <span class="dado-genero-nome">nome</span>
+                    {{#each generos}}
+                    <span class="dado-genero-nome">{{this}}</span>
+                    {{/each}}
                 </div>
 
                 <div class="dado-generos">
                     <p id="dado-genero-titulo">Plataformas:</p>
-                    <span class="dado-genero-nome">nome</span>
-                    <span class="dado-genero-nome">nome</span>
+                    {{#each plataformas}}
+                    <span class="dado-genero-nome">{{nome_plataforma}}</span>
+                    {{/each}}
                 </div>
 
                 <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+                    {{#each}}
+                    <img id="dado-foto-companhia" src="{{poster_companhia}}" alt="">
                     <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Companhia</p>
-                        <p>Nome da companhia</p>
+                        <p id="dado-nome-companhia">{{nome_companhia}}</p>
                     </div>  
+                    {{/each}}
                 </div>
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Companhia</p>
-                        <p>Nome da companhia</p>
-                    </div>  
-                </div>
-
             </div>
         </div>
     </div>
@@ -86,90 +81,39 @@
        <div class="user-review-data">
             <h2 class="titulo-pagina">Cast</h2>
             <div id="cast">
-                
+                {{#each cast}}
                 <div class="pessoa-cast">
                     <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                        <div>{{nome_cast}}</div>
+                        <img class="cast-foto" src="{{foto_pessoa}}">
                     </div>
                 </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
-                <div class="pessoa-cast">
-                    <div class="conteudo-cast">
-                        <div>Nome</div>
-                        <img class="cast-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
-                    </div>
-                </div>
-
+                {{/each}}
             </div>
        </div>
     </div>
 
     <div class="review-wrapper">
         <div class="review-data">
-            <h2 class="titulo-pagina" id="review-nome">Temporadas</h2>
-            <div id="conteudo-temporadas">
-                <div class="dado-temporada">
-                    <div class="dado-temporada-circulo">
-                        <p class="dado-temporada-numero">1</p>
-                    </div>
-                    <div class="dado-temporada-span">
-                        <p class="dado-temporada-nome">Nome</p>
-                    </div>
-                </div>
-
-                <div class="dado-temporada">
-                    <div class="dado-temporada-circulo">
-                        <p class="dado-temporada-numero">2</p>
-                    </div>
-                    <div class="dado-temporada-span">
-                        <p class="dado-temporada-nome">Nome</p>
-                    </div>
-                </div>
-                
-            </div>
-            
-        </div>
-        <div class="review-data">
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
+                {{#each emissoras}}
+                <div class="dados-companhia">
+                    <img id="dado-foto-companhia" src="{{logo_emissora}}" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">{{nome_emissora}}</p>
+                    </div>  
+                </div>
+                {{/each}}
 
+                {{#each criadores}}
                 <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+                    <img id="dado-foto-companhia" src="{{foto_criador}}" alt="">
                     <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Emissora</p>
-                        <p>Nome da emissora</p>
+                        <p id="dado-nome-companhia">{{nome_criador}}</p>
                     </div>  
                 </div>
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Emissora</p>
-                        <p>Nome da emissora</p>
-                    </div>  
-                </div>
-
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">Criador</p>
-                        <p>Nome do criador</p>
-                    </div>  
-                </div>
+                {{/each}}
 
             </div>
         </div>
