@@ -104,7 +104,7 @@ app.get("/serie",async function(req, res){
     })
 })
 
-app.get("/estatísticas", async function(req, res){
+app.get("/estatisticas", async function(req, res){
     res.render('estatisticas')
 })
 
