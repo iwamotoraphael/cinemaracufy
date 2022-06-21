@@ -476,6 +476,29 @@ const db = require('../config/_dbconfig')
         return data.rows[0]
     }
 
+    async function getPopularUsers(){
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(l.likes) likes
+        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		INNER JOIN avatar USING(id_avatar)
+        GROUP BY u.nome_usuario, link_avatar
+        ORDER BY likes DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getActiveUsers(){
+        let data = await db.query(`SELECT nome_usuario, link_avatar, reviews FROM
+        (SELECT id_usuario, COUNT(*) reviews FROM avaliacao GROUP BY id_usuario) s1
+        INNER JOIN usuario USING(id_usuario)
+        INNER JOIN avatar USING(id_avatar)
+        ORDER BY reviews, nome_usuario DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
 //implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
@@ -510,5 +533,7 @@ module.exports = {
     getMovieData,
     getUserReviews,
     getItemReviews,
-    getTVData
+    getTVData,
+    getPopularUsers,
+    getActiveUsers
 }

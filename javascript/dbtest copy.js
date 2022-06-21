@@ -16,7 +16,7 @@ async function main(){
         
         */
 
-        let data = await dbw.getItemReviews(124, 23)
+        let data = await dbw.getPopularUsers()
         console.log(data)
     } 
     catch(err)

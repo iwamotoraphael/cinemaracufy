@@ -307,7 +307,7 @@ async function main(){
 
         //await generateLikes()
         
-        let resp = await api.getMovieDetails(526896)
+        let resp = await dbw.getPopularUsers(526896)
         let cast = await (await api.getMovieCredits(526896)).data.cast
         console.log(resp.data.production_companies)
     } 
