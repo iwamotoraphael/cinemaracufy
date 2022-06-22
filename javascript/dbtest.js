@@ -307,9 +307,8 @@ async function main(){
 
         //await generateLikes()
         
-        let resp = await dbw.getPopularUsers(526896)
-        let cast = await (await api.getMovieCredits(526896)).data.cast
-        console.log(resp.data.production_companies)
+        let resp = await dbw.getMovieData(110)
+        console.log(resp)
     } 
     catch(err)
     {

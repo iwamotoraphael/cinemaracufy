@@ -411,11 +411,13 @@ const db = require('../config/_dbconfig')
     async function getMovieData(id){
         let data = await db.query(
         `SELECT id_item, nome_item, lancamento, poster_item, sinopse, plataformas, casts, generos, companhias, orcamento, arrecadacao, duracao FROM
-
+		
+		(SELECT id_item, orcamento, arrecadacao, duracao FROM filme WHERE id_item = $1)s1 LEFT JOIN
+		
         (SELECT id_item, 
         json_agg(json_build_object('nome_plataforma',  nome_plataforma, 'logo_plataforma', logo_plataforma)) plataformas FROM
         (SELECT id_plataforma, id_item FROM itemsistema_plataforma WHERE id_item = $1) i INNER JOIN plataforma USING(id_plataforma)
-        GROUP BY id_item) plat
+        GROUP BY id_item) plat USING(id_item)
         
         LEFT JOIN (SELECT id_item, 
         json_agg(json_build_object('nome_cast',  nome_cast, 'foto_pessoa', foto_pessoa)) casts FROM
@@ -431,7 +433,6 @@ const db = require('../config/_dbconfig')
         (SELECT id_companhia, id_item FROM itemsistema_companhia WHERE id_item = $1) i INNER JOIN companhia USING(id_companhia)
         GROUP BY id_item) comp USING(id_item)
         
-        LEFT JOIN filme USING(id_item)
         LEFT JOIN itemsistema USING(id_item)`,[id])
 
         return data.rows[0]
@@ -440,10 +441,12 @@ const db = require('../config/_dbconfig')
     async function getTVData(id){
         let data = await db.query(`SELECT id_item, nome_item, lancamento, poster_item, sinopse, plataformas, casts, generos, companhias, emissoras, categoria, criadores FROM
 
+		(SELECT id_item, categoria FROM serie WHERE id_item = $1) s1 LEFT JOIN
+		
         (SELECT id_item, 
         json_agg(json_build_object('nome_plataforma',  nome_plataforma, 'logo_plataforma', logo_plataforma)) plataformas FROM
         (SELECT id_plataforma, id_item FROM itemsistema_plataforma WHERE id_item = $1) i INNER JOIN plataforma USING(id_plataforma)
-        GROUP BY id_item) plat
+        GROUP BY id_item) plat USING(id_item)
         
         LEFT JOIN (SELECT id_item, 
         json_agg(json_build_object('nome_cast',  nome_cast, 'foto_pessoa', foto_pessoa)) casts FROM
@@ -469,8 +472,6 @@ const db = require('../config/_dbconfig')
         (SELECT id_criador, id_item FROM serie_criador WHERE id_item = $1) i INNER JOIN criador USING(id_criador)
         GROUP BY id_item) crs USING(id_item)
         
-        LEFT JOIN serie USING(id_item)
-        
         LEFT JOIN itemsistema USING(id_item)`, [id])
 
         return data.rows[0]
@@ -493,7 +494,7 @@ const db = require('../config/_dbconfig')
         (SELECT id_usuario, COUNT(*) reviews FROM avaliacao GROUP BY id_usuario) s1
         INNER JOIN usuario USING(id_usuario)
         INNER JOIN avatar USING(id_avatar)
-        ORDER BY reviews DESC, nome_usuario DESC
+        ORDER BY reviews , nome_usuario DESC
         LIMIT 10`)
 
         return data.rows
