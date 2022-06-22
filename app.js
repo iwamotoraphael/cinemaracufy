@@ -96,7 +96,7 @@ app.get("/serie",async function(req, res){
         plataformas: data.plataformas,
         companhias: data.companhias,
         cast: data.casts,
-        emissoras: dataemissoras,
+        emissoras: data.emissoras,
         categoria:data.categoria,
         criadores: data.criadores,
         sinopse: data.sinopse,
