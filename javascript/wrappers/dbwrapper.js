@@ -493,11 +493,99 @@ const db = require('../config/_dbconfig')
         (SELECT id_usuario, COUNT(*) reviews FROM avaliacao GROUP BY id_usuario) s1
         INNER JOIN usuario USING(id_usuario)
         INNER JOIN avatar USING(id_avatar)
-        ORDER BY reviews, nome_usuario DESC
+        ORDER BY reviews DESC, nome_usuario DESC
         LIMIT 10`)
 
         return data.rows
     }
+
+    async function getBestItems(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, AVG(nota) nota FROM avaliacao GROUP BY id_item) s1 USING(id_item)
+        ORDER BY nota DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getPopularItems(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, COUNT(*) reviews FROM avaliacao  
+            GROUP BY id_item) s1 USING(id_item)
+        ORDER BY reviews DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getBestMovies(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, AVG(nota) nota FROM avaliacao 
+            WHERE id_item IN (SELECT id_item FROM filme) 
+            GROUP BY id_item) s1 USING(id_item)
+        ORDER BY nota DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getPopularMovies(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, COUNT(*) reviews FROM avaliacao 
+            WHERE id_item IN (SELECT id_item FROM filme)
+            GROUP BY id_item) s1 USING(id_item)
+        ORDER BY reviews DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getBestTV(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, AVG(nota) nota FROM avaliacao 
+            WHERE id_item IN (SELECT id_item FROM serie) 
+            GROUP BY id_item) s1 USING(id_item)
+        ORDER BY nota DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getPopularTV(){
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
+        itemsistema
+        INNER JOIN (
+            SELECT id_item, COUNT(*) reviews FROM avaliacao 
+            WHERE id_item IN (SELECT id_item FROM serie) 
+            GROUP BY id_item) s1 USING(id_item)
+        ORDER BY reviews DESC, id_item DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getBestReviews(){
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
+        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		INNER JOIN avatar USING(id_avatar)
+		ORDER BY l.likes DESC, a.data DESC, u.nome_usuario DESC
+		LIMIT 10`)
+
+        return data.rows
+    }
+
+
 
 //implementar exclusões totais, consultas de estatísticas
 
@@ -535,5 +623,12 @@ module.exports = {
     getItemReviews,
     getTVData,
     getPopularUsers,
-    getActiveUsers
+    getActiveUsers,
+    getBestItems,
+    getPopularItems,
+    getBestMovies,
+    getPopularMovies,
+    getBestTV,
+    getPopularTV,
+    getBestReviews
 }
