@@ -49,7 +49,7 @@ app.get("/busca",async function(req, res){
     else
         itens = await db.search(req.query.text)
 
-    res.render('busca',{itens: itens})
+    res.render('busca',{itens: itens, busca: req.query.text})
 })
 
 app.get("/filme",async function(req, res){
