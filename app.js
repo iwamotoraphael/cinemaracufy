@@ -88,7 +88,7 @@ app.get("/serie",async function(req, res){
         data = await db.getTVData(req.query.id)
         reviews = await db.getItemReviews(req.query.id)
     }
-    res.render('series', {
+    res.render('serie', {
         nome: data.nome_item,
         foto: data.poster_item,
         lancamento: data.lancamento.toLocaleString().split(' ')[0],
