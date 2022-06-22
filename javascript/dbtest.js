@@ -307,7 +307,7 @@ async function main(){
 
         //await generateLikes()
         
-        let resp = await dbw.getMovieData(110)
+        let resp = await dbw.getTVData(112)
         console.log(resp)
     } 
     catch(err)
