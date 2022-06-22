@@ -586,6 +586,17 @@ const db = require('../config/_dbconfig')
         return data.rows
     }
 
+    async function getPopularGenres(){
+        let data = await db.query(`SELECT g.nome_genero, COUNT(a.id_avaliacao) as avaliacoes
+        FROM avaliacao a INNER JOIN itemsistema_genero ig ON a.id_item = ig.id_item
+        INNER JOIN genero g ON ig.id_genero = g.id_genero
+        GROUP BY(g.nome_genero)
+        ORDER BY(avaliacoes) DESC
+        LIMIT 10`)
+
+        return data.rows
+    }
+
 
 
 //implementar exclusões totais, consultas de estatísticas
@@ -631,5 +642,6 @@ module.exports = {
     getPopularMovies,
     getBestTV,
     getPopularTV,
-    getBestReviews
+    getBestReviews,
+    getPopularGenres
 }
