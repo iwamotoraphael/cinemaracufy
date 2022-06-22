@@ -42,6 +42,7 @@
         </div>
         <div id="conteudo-busca">
             {{#each itens}}
+            {{if tipo}}
             <a href="https://cinemaracufy.herokuapp.com/filme/?id={{id_item}}" class="item-link">
                 <div class="item">
                     <img class="item-capa" src="{{poster_item}}" alt="Poster">
@@ -49,6 +50,15 @@
                     <p class="item-lancamento">{{lancamento}}</p>
                 </div>
             </a>
+            {{else}}
+            <a href="https://cinemaracufy.herokuapp.com/serie/?id={{id_item}}" class="item-link">
+                <div class="item">
+                    <img class="item-capa" src="{{poster_item}}" alt="Poster">
+                    <p class="item-nome">{{nome_item}}</p>
+                    <p class="item-lancamento">{{lancamento}}</p>
+                </div>
+            </a>
+            {{/if}}
             {{/each}}
         </div>
         
