@@ -27,7 +27,7 @@ async function main(){
     
         let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
 
-        console.log(data[0])
+        console.log(data[1])
     } 
     catch(err)
     {
