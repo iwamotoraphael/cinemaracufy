@@ -106,14 +106,14 @@ app.get("/serie",async function(req, res){
 
 app.get("/estatisticas", async function(req, res){
    
-    let bestMovies = dbw.getBestMovies()
-    let popularMovies = dbw.getPopularMovies()
-    let bestTV =  dbw.getBestTV()
-    let popularTV = dbw.getPopularTV()
-    let bestReviews = dbw.getBestReviews()
-    let lastReviews = dbw.getLastReviews()
-    let bestUsers = dbw.getPopularUsers()
-    let bestGenres = dbw.getPopularGenres()
+    let bestMovies = db.getBestMovies()
+    let popularMovies = db.getPopularMovies()
+    let bestTV =  db.getBestTV()
+    let popularTV = db.getPopularTV()
+    let bestReviews = db.getBestReviews()
+    let lastReviews = db.getLastReviews()
+    let bestUsers = db.getPopularUsers()
+    let bestGenres = db.getPopularGenres()
 
     let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
     
