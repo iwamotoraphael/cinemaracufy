@@ -576,8 +576,10 @@ const db = require('../config/_dbconfig')
     }
 
     async function getBestReviews(){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
-        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes, i.nome_item 
+        FROM usuario u 
+		INNER JOIN avaliacao a USING(id_usuario)
+		INNER JOIN itemsistema i USING(id_item)
         INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		INNER JOIN avatar USING(id_avatar)
 		ORDER BY l.likes DESC, a.data DESC, u.nome_usuario DESC
@@ -593,6 +595,17 @@ const db = require('../config/_dbconfig')
         GROUP BY(g.nome_genero)
         ORDER BY(avaliacoes) DESC
         LIMIT 10`)
+
+        return data.rows
+    }
+
+    async function getLastReviews(){
+        let data = await db.query(`SELECT id_avaliacao, nome_usuario, poster_item, nota, comentario, data, curtidas FROM 
+        usuario 
+        INNER JOIN avaliacao USING(id_usuario) 
+        INNER JOIN itemsistema USING(id_item)
+        INNER JOIN (SELECT id_avaliacao, COUNT(*) curtidas FROM curtidas GROUP BY id_avaliacao)s1 USING (id_avaliacao)
+        ORDER BY data DESC, id_avaliacao DESC LIMIT 50`)
 
         return data.rows
     }
@@ -643,5 +656,7 @@ module.exports = {
     getBestTV,
     getPopularTV,
     getBestReviews,
-    getPopularGenres
+    getPopularGenres,
+    getLastReviews,
+    getBestItems
 }

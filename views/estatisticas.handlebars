@@ -31,83 +31,27 @@
             </ul>
           </div>
     </nav>
-    
-    <div class="estatisticas-wrapper">
-        <div class="estatisticas-data-3">
-            <h2 class="titulo-pagina">Filmes em destaque</h2>
-            <p class="texto-pagina">Filmes mais bem avaliados na última semana.</p>
-            <div id="destaque-filmes">
-                
-                <div class="destaque-filme">
-                    <div class="destaque-filme-numero">1</div>
-                    <img class="destaque-filme-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do filme">
-                    <div class="destaque-filme-span">
-                        <p class="destaque-filme-nome"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome}}</a></p>
-                        <p class="destaque-filme-ano">{{ano}}</p>
-                        <p class="destaque-filme-nota">⭐ {{nota}}/10</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="estatisticas-data-3">
-            <h2 class="titulo-pagina">Séries em destaque</h2>
-            <p class="texto-pagina">Séries mais bem avaliadas na última semana.</p>
-            <div id="destaque-series">
-                
-                <div class="destaque-serie">
-                    <div class="destaque-serie-numero">1</div>
-                    <img class="destaque-serie-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do filme">
-                    <div class="destaque-serie-span">
-                        <p class="destaque-serie-nome">{{nome}}</p>
-                        <p class="destaque-serie-ano">{{ano}}</p>
-                        <p class="destaque-serie-nota">⭐ {{nota}}/10</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="estatisticas-data-3">
-            <h2 class="titulo-pagina">Usuários em destaque</h2>
-            <p class="texto-pagina">Usuários com mais curtidas em suas reviews realizadas na última semana.</p>
-            <div id="destaque-usuarios">
-                
-                <div class="destaque-usuario">
-                    <div class="destaque-usuario-numero">1</div>
-                    <img class="destaque-usuario-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Foto do usuário">
-                    <div class="destaque-usuario-span">
-                        <p class="destaque-usuario-nome">{{nome}}</p>
-                        <p class="destaque-usuario-curtidas">👍 {{likes}}</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-    </div>
 
     <div class="estatisticas-wrapper">
         <div class="estatisticas-data">
             <h2 class="titulo-pagina">Últimas reviews realizadas</h2>
             <div id="ultimas-reviews">
-                
+                {{#each ultimasreviews}}
                 <div class="review-usuario">
-                    <img class="review-capa-itemsistema" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
+                    <img class="review-capa-itemsistema" src="{{link_avatar}}" alt="Capa do item do sistema">
                     <div class="review-span">
-                        <span class="review-nome-usuario">{{nome}}</span>
+                        <span class="review-nome-usuario">{{nome_usuario}}</span>
                         <span class="review-date">{{data}}</span>
                         <span class="review-nota">⭐	Avaliação: </span>
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas:</span>
-                        <span class="review-curtidas-dadas">{{relevancia}} <br/></span>
-                        <span class="review-nome-itemsistema"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome_itemsistema}}</a></span>
-                        <span class="review-itemsistema-ano">{{ano}}</span>
+                        <span class="review-curtidas-dadas">{{likes}} <br/></span>
+                        <span class="review-nome-itemsistema">{{nome_item}}</span>
+                        <span class="review-itemsistema-ano">{{data}}</span>
                         <p class="review-conteudo"> {{comentario}}</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
 
@@ -118,17 +62,16 @@
             <h2 class="titulo-pagina">Filmes mais bem avaliados</h2>
             <p class="texto-pagina">Filmes com as maiores médias de avaliações recebidas na plataforma.</p>
             <div id="filmes-mais-bem-avaliados">
-                
+                {{#each filmesmaisbemavaliados}}
                 <div class="filme-avaliado">
-                    <div class="destaque-filme-numero">1</div>
-                    <img class="destaque-filme-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do filme">
+                    <div class="destaque-filme-numero">{{inc @index}}</div>
+                    <img class="destaque-filme-capa" src="{{poster_item}}" alt="Capa do filme">
                     <div class="destaque-filme-span">
-                        <p class="destaque-filme-nome"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome}}</a></p>
-                        <p class="destaque-filme-ano">{{ano}}</p>
+                        <p class="destaque-filme-nome"><a href="https://cinemaracufy.herokuapp.com/filme/?id={{id_item}}" target="_blank">{{nome_item}}</a></p>
                         <p class="destaque-filme-nota">⭐ {{nota}}/10</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
 
@@ -136,17 +79,16 @@
             <h2 class="titulo-pagina">Filmes mais populares</h2>
             <p class="texto-pagina">Filmes com as maiores quantidades de avaliações realizadas na plataforma.</p>
             <div id="filmes-mais-populares">
-        
+                {{#each filmesmaispopulares}}
                 <div class="filme-avaliado">
-                    <div class="destaque-filme-numero">1</div>
-                    <img class="destaque-filme-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do filme">
+                    <div class="destaque-filme-numero">{{inc @index}}</div>
+                    <img class="destaque-filme-capa" src="{{poster_item}}" alt="Capa do filme">
                     <div class="destaque-filme-span">
-                        <p class="destaque-filme-nome"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome}}</a></p>
-                        <p class="destaque-filme-ano">{{ano}}</p>
-                        <p class="destaque-filme-nota">⭐ {{popularidade}} avaliações</p>
+                        <p class="destaque-filme-nome"><a href="https://cinemaracufy.herokuapp.com/filme/?id={{id_item}}" target="_blank">{{nome_item}}</a></p>
+                        <p class="destaque-filme-nota">⭐ {{reviews}} avaliações</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
 
@@ -157,22 +99,21 @@
             <h2 class="titulo-pagina">Reviews mais populares</h2>
             <p class="texto-pagina">Reviews com as maiores quantidades de curtidas deixadas na plataforma.</p>
             <div id="reviews-mais-populares">
-                
+                {{#each reviewsmaispopulares}}
                 <div class="review-usuario">
-                    <img class="review-capa-itemsistema" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
+                    <img class="review-capa-itemsistema" src="{{link_avatar}}" alt="Capa do item do sistema">
                     <div class="review-span">
-                        <span class="review-nome-usuario">{{nome}}</span>
+                        <span class="review-nome-usuario">{{nome_usuario}}</span>
                         <span class="review-date">{{data}}</span>
                         <span class="review-nota">⭐	Avaliação: </span>
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas:</span>
-                        <span class="review-curtidas-dadas">{{relevancia}} <br/></span>
-                        <span class="review-nome-itemsistema"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome_itemsistema}}</a></span>
-                        <span class="review-itemsistema-ano">{{ano}}</span>
+                        <span class="review-curtidas-dadas">{{likes}} <br/></span>
+                        <span class="review-nome-itemsistema">{{nome_item}}</span>
                         <p class="review-conteudo"> {{comentario}}</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
 
@@ -183,17 +124,16 @@
             <h2 class="titulo-pagina">Séries mais bem avaliadas</h2>
             <p class="texto-pagina">Séries com as maiores médias de avaliações recebidas na plataforma.</p>
             <div id="series-mais-bem-avaliadas">
-                
+                {{#each seriesmaisbemavaliadas}}
                 <div class="serie-avaliada">
-                    <div class="destaque-serie-numero">1</div>
-                    <img class="destaque-serie-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa da série">
+                    <div class="destaque-serie-numero">{{inc @index}}</div>
+                    <img class="destaque-serie-foto" src="{{poster_item}}" alt="Capa da série">
                     <div class="destaque-serie-span">
-                        <p class="destaque-serie-nome">{{nome}}</p>
-                        <p class="destaque-serie-ano">{{ano}}</p>
+                        <a href="https://cinemaracufy.herokuapp.com/serie/?id={{id_item}}" target="_blank"></a><p class="destaque-serie-nome">{{nome_item}}</p></a>
                         <p class="destaque-serie-nota">⭐ {{nota}}/10</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
 
@@ -201,17 +141,16 @@
             <h2 class="titulo-pagina">Séries mais populares</h2>
             <p class="texto-pagina">Séries com as maiores quantidades de avaliações realizadas na plataforma.</p>
             <div id="series-mais-populares">
-                
+                {{#each seriesmaispopulares}}
                 <div class="serie-avaliada">
-                    <div class="destaque-serie-numero">1</div>
-                    <img class="destaque-serie-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa da série">
+                    <div class="destaque-serie-numero">{{inc @index}}</div>
+                    <img class="destaque-serie-foto" src="{{poster_item}}" alt="Capa da série">
                     <div class="destaque-serie-span">
-                        <p class="destaque-serie-nome">{{nome}}</p>
-                        <p class="destaque-serie-ano">{{ano}}</p>
-                        <p class="destaque-serie-nota">⭐ {{nreviews}} avaliações</p>
+                        <a href="https://cinemaracufy.herokuapp.com/filme/?id={{id_item}}" target="_blank"></a><p class="destaque-serie-nome">{{nome}}</p></a>
+                        <p class="destaque-serie-nota">⭐ {{reviews}} avaliações</p>
                     </div>
                 </div>
-                
+                {{/each}}
             </div>
         </div>
         </div>
@@ -221,16 +160,16 @@
                 <h2 class="titulo-pagina">Usuários mais populares</h2>
                 <p class="texto-pagina">Usuários com mais curtidas em suas reviews.</p>
                 <div id="destaque-usuarios-total">
-                    
+                    {{#each destaqueusuariostotal}}
                     <div class="destaque-usuario-total">
-                        <div class="destaque-usuario-numero">1</div>
-                        <img class="destaque-usuario-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Foto do usuário">
+                        <div class="destaque-usuario-numero">{{inc @index}}</div>
+                        <img class="destaque-usuario-foto" src="{{link_avatar}}" alt="Foto do usuário">
                         <div class="destaque-usuario-span">
-                            <p class="destaque-usuario-nome">{{nome}}</p>
+                            <p class="destaque-usuario-nome">{{nome_usuario}}</p>
                             <p class="destaque-usuario-curtidas">👍 {{likes}}</p>
                         </div>
                     </div>
-                    
+                    {{/each}}
                 </div>
             </div>
     
@@ -238,15 +177,15 @@
                 <h2 class="titulo-pagina">Gêneros mais populares</h2>
                 <p class="texto-pagina">Gêneros com as maiores quantidades de avaliações realizadas na plataforma.</p>
                 <div id="generos-mais-populares">
-                    
+                    {{#each generosmaispopulares}}
                     <div class="genero-avaliado">
-                        <div class="destaque-genero-numero">1</div>
+                        <div class="destaque-genero-numero">{{inc @index}}</div>
                         <div class="destaque-genero-span">
-                            <p class="destaque-genero-nome">{{nome}}</p>
-                            <p class="destaque-genero-nota">⭐ {{nreviews}} avaliações</p>
+                            <p class="destaque-genero-nome">{{nome_genero}}</p>
+                            <p class="destaque-genero-nota">⭐ {{avaliacoes}} avaliações</p>
                         </div>
                     </div>
-                    
+                    {{/each}}
                 </div>
             </div>
             </div>

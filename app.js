@@ -105,7 +105,31 @@ app.get("/serie",async function(req, res){
 })
 
 app.get("/estatisticas", async function(req, res){
-    res.render('estatisticas')
+   
+    let bestMovies = dbw.getBestMovies()
+    let popularMovies = dbw.getPopularMovies()
+    let bestTV =  dbw.getBestTV()
+    let popularTV = dbw.getPopularTV()
+    let bestReviews = dbw.getBestReviews()
+    let lastReviews = dbw.getLastReviews()
+    let bestUsers = dbw.getPopularUsers()
+    let bestGenres = dbw.getPopularGenres()
+
+    let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
+    
+    res.render('estatisticas',{
+        ultimasreviews: lastReviews,
+        filmesmaisbemavaliados: bestMovies,
+        filmesmaispopulares: popularMovies,
+        reviewsmaispopulares: bestReviews,
+        seriesmaisbemavaliadas: bestTV,
+        seriesmaispopulares: popularTV,
+        destaqueusuariostotal: bestUsers,
+        generosmaispopulares: bestGenres
+
+    })
+
+    
 })
 
 app.get("/perfil", async function(req, res){
