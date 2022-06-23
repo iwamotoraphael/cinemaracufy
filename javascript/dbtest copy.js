@@ -1,6 +1,6 @@
 const api = require('./wrappers/tmdbwrapper')
-const dbw = require('./wrappers/dbwrapper')
-const db = require('./config/_dbconfig')
+const db = require('./wrappers/dbwrapper')
+const dbw = require('./config/_dbconfig')
 
 async function main(){
     try{
@@ -16,17 +16,16 @@ async function main(){
         
         */
 
-        let bestMovies = dbw.getBestMovies()
-        let popularMovies = dbw.getPopularMovies()
-        let bestTV =  dbw.getBestTV()
-        let popularTV = dbw.getPopularTV()
-        let bestReviews = dbw.getBestReviews()
-        let popularGenres = dbw.getPopularGenres()
-        let lastReviews = dbw.getLastReviews()
-        let bestUsers = dbw.getPopularUsers()
-        let bestGenres = dbw.getPopularGenres()
+        let bestMovies = db.getBestMovies()
+        let popularMovies = db.getPopularMovies()
+        let bestTV =  db.getBestTV()
+        let popularTV = db.getPopularTV()
+        let bestReviews = db.getBestReviews()
+        let lastReviews = db.getLastReviews()
+        let bestUsers = db.getPopularUsers()
+        let bestGenres = db.getPopularGenres()
     
-        let data = await Promise.all([bestGenres, bestMovies, popularMovies, bestTV, popularTV, bestReviews, popularGenres, lastReviews, bestUsers])
+        let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
 
         console.log(data[0])
     } 
