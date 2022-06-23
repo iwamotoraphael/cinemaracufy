@@ -118,14 +118,14 @@ app.get("/estatisticas", async function(req, res){
     let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
     
     res.render('estatisticas',{
-        ultimasreviews: lastReviews,
-        filmesmaisbemavaliados: bestMovies,
-        filmesmaispopulares: popularMovies,
-        reviewsmaispopulares: bestReviews,
-        seriesmaisbemavaliadas: bestTV,
-        seriesmaispopulares: popularTV,
-        destaqueusuariostotal: bestUsers,
-        generosmaispopulares: bestGenres
+        ultimasreviews: data[0],
+        filmesmaisbemavaliados: data[1],
+        filmesmaispopulares: data[2],
+        reviewsmaispopulares: data[3],
+        seriesmaisbemavaliadas: data[4],
+        seriesmaispopulares: data[5],
+        destaqueusuariostotal: data[6],
+        generosmaispopulares: data[7]
 
     })
 
