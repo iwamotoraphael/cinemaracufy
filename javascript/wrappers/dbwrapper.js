@@ -524,7 +524,7 @@ const db = require('../config/_dbconfig')
     }
 
     async function getBestMovies(){
-        let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, TRUNC(nota,2) FROM
         itemsistema
         INNER JOIN (
             SELECT id_item, AVG(nota) nota FROM avaliacao 
@@ -550,7 +550,7 @@ const db = require('../config/_dbconfig')
     }
 
     async function getBestTV(){
-        let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
+        let data = await db.query(`SELECT id_item, nome_item, poster_item, TRUNC(nota,2) FROM
         itemsistema
         INNER JOIN (
             SELECT id_item, AVG(nota) nota FROM avaliacao 
