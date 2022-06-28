@@ -384,19 +384,19 @@ const argon = require('argon2')
 
     async function getUserReviews(id){
         let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
-        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
-		INNER JOIN avatar USING(id_avatar)
-        WHERE id_usuario = $1`, [id]).rows
+        FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		LEFT JOIN avatar USING(id_avatar)
+		WHERE id_usuario = $1`, [id]).rows
 
         return data
     }
 
     async function getItemReviews(id, id_usuario){
         let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
-        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
-		INNER JOIN avatar USING(id_avatar)
+        FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		LEFT JOIN avatar USING(id_avatar)
         WHERE id_item = $1`, [id])
 
         let reviews = data.rows
@@ -480,9 +480,9 @@ const argon = require('argon2')
 
     async function getPopularUsers(){
         let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(l.likes) likes
-        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
-		INNER JOIN avatar USING(id_avatar)
+        FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		LEFT JOIN avatar USING(id_avatar)
         GROUP BY u.nome_usuario, link_avatar
         ORDER BY likes DESC
         LIMIT 10`)
@@ -493,8 +493,8 @@ const argon = require('argon2')
     async function getActiveUsers(){
         let data = await db.query(`SELECT nome_usuario, link_avatar, reviews FROM
         (SELECT id_usuario, COUNT(*) reviews FROM avaliacao GROUP BY id_usuario) s1
-        INNER JOIN usuario USING(id_usuario)
-        INNER JOIN avatar USING(id_avatar)
+        LEFT JOIN usuario USING(id_usuario)
+        LEFT JOIN avatar USING(id_avatar)
         ORDER BY reviews , nome_usuario DESC
         LIMIT 10`)
 
@@ -504,7 +504,7 @@ const argon = require('argon2')
     async function getBestItems(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, nota FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, AVG(nota) nota FROM avaliacao GROUP BY id_item) s1 USING(id_item)
         ORDER BY nota DESC, id_item DESC
         LIMIT 10`)
@@ -515,7 +515,7 @@ const argon = require('argon2')
     async function getPopularItems(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, COUNT(*) reviews FROM avaliacao  
             GROUP BY id_item) s1 USING(id_item)
         ORDER BY reviews DESC, id_item DESC
@@ -527,7 +527,7 @@ const argon = require('argon2')
     async function getBestMovies(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, TRUNC(nota,2) nota FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, AVG(nota) nota FROM avaliacao 
             WHERE id_item IN (SELECT id_item FROM filme) 
             GROUP BY id_item) s1 USING(id_item)
@@ -540,7 +540,7 @@ const argon = require('argon2')
     async function getPopularMovies(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, COUNT(*) reviews FROM avaliacao 
             WHERE id_item IN (SELECT id_item FROM filme)
             GROUP BY id_item) s1 USING(id_item)
@@ -553,7 +553,7 @@ const argon = require('argon2')
     async function getBestTV(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, TRUNC(nota,2) nota FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, AVG(nota) nota FROM avaliacao 
             WHERE id_item IN (SELECT id_item FROM serie) 
             GROUP BY id_item) s1 USING(id_item)
@@ -566,7 +566,7 @@ const argon = require('argon2')
     async function getPopularTV(){
         let data = await db.query(`SELECT id_item, nome_item, poster_item, reviews FROM
         itemsistema
-        INNER JOIN (
+        LEFT JOIN (
             SELECT id_item, COUNT(*) reviews FROM avaliacao 
             WHERE id_item IN (SELECT id_item FROM serie) 
             GROUP BY id_item) s1 USING(id_item)
@@ -579,10 +579,10 @@ const argon = require('argon2')
     async function getBestReviews(){
         let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes, i.nome_item 
         FROM usuario u 
-		INNER JOIN avaliacao a USING(id_usuario)
-		INNER JOIN itemsistema i USING(id_item)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
-		INNER JOIN avatar USING(id_avatar)
+		LEFT JOIN avaliacao a USING(id_usuario)
+		LEFT JOIN itemsistema i USING(id_item)
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+		LEFT JOIN avatar USING(id_avatar)
 		ORDER BY l.likes DESC, a.data DESC, u.nome_usuario DESC
 		LIMIT 10`)
 
@@ -592,7 +592,7 @@ const argon = require('argon2')
     async function getPopularGenres(){
         let data = await db.query(`SELECT g.nome_genero, COUNT(a.id_avaliacao) as avaliacoes
         FROM avaliacao a INNER JOIN itemsistema_genero ig ON a.id_item = ig.id_item
-        INNER JOIN genero g ON ig.id_genero = g.id_genero
+        LEFT JOIN genero g ON ig.id_genero = g.id_genero
         GROUP BY(g.nome_genero)
         ORDER BY(avaliacoes) DESC
         LIMIT 10`)
@@ -603,9 +603,9 @@ const argon = require('argon2')
     async function getLastReviews(){
         let data = await db.query(`SELECT id_avaliacao, nome_usuario, poster_item, nota, comentario, data, curtidas FROM 
         usuario 
-        INNER JOIN avaliacao USING(id_usuario) 
-        INNER JOIN itemsistema USING(id_item)
-        INNER JOIN (SELECT id_avaliacao, COUNT(*) curtidas FROM curtidas GROUP BY id_avaliacao)s1 USING (id_avaliacao)
+        LEFT JOIN avaliacao USING(id_usuario) 
+        LEFT JOIN itemsistema USING(id_item)
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) curtidas FROM curtidas GROUP BY id_avaliacao)s1 USING (id_avaliacao)
         ORDER BY data DESC, id_avaliacao DESC LIMIT 50`)
 
         return data.rows
