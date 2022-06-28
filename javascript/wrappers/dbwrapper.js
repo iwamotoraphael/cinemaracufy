@@ -610,6 +610,12 @@ const db = require('../config/_dbconfig')
         return data.rows
     }
 
+    async function checkUserData(login, hashsenha){
+        let data = await db.query(`SELECT EXISTS(SELECT nome_usuario FROM usuario WHERE login_usuario = $1 AND hash_senha = $2)`, [login, hashsenha])
+
+        return data.rows[0].exists
+    }
+
 
 
 //implementar exclusões totais, consultas de estatísticas
@@ -658,5 +664,6 @@ module.exports = {
     getBestReviews,
     getPopularGenres,
     getLastReviews,
-    getBestItems
+    getBestItems,
+    checkUserData
 }

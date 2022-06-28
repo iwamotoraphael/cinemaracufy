@@ -15,19 +15,10 @@ async function main(){
         
         
         */
-
-        let bestMovies = db.getBestMovies()
-        let popularMovies = db.getPopularMovies()
-        let bestTV =  db.getBestTV()
-        let popularTV = db.getPopularTV()
-        let bestReviews = db.getBestReviews()
-        let lastReviews = db.getLastReviews()
-        let bestUsers = db.getPopularUsers()
-        let bestGenres = db.getPopularGenres()
     
-        let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
+        let data = await dbw.query(`SELECT EXISTS(SELECT nome_usuario FROM usuario WHERE login_usuario = $1 AND hash_senha = $2)`, ['nobuaki', '$argon2i$v=19$m=4096,t=3,p=1$4kIge8L3ap6xjbKKKQ8D6A$c26CPyKdxw137FCnt0gu2pczurSCD1tRNJ0Q5K95h7k'])
 
-        console.log(data[1])
+        console.log(data.rows[0].exists)
     } 
     catch(err)
     {

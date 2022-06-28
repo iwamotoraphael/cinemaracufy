@@ -165,10 +165,25 @@ app.post('/register', async function(req, res){
                 break
         }
 
-        res.render('registrar', {msg: db_response})
+        res.render('registrar', {msg: msg})
     }
-    catch{
+    catch(err){
+        console.log(err)
+    }
+})
 
+app.post('/login', async function(req, res){
+    try{
+        let hashSenha = await argon2.hash(req.body.senha)
+        let exists = await db.checkUserData(req.body.nome, hashSenha)
+
+        if(exists)
+            res.redirect('/busca')
+        else
+            res.render('index', {msg: 'Usuário ou senha inválido'})
+    }
+    catch(err){
+        console.log(err)
     }
 })
 
