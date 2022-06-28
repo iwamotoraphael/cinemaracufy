@@ -1,7 +1,9 @@
-const express = require('express')
-const db = require('./javascript/wrappers/dbwrapper')
-const session = require('cookie-session')
+const express = require('express');
+const db = require('./javascript/wrappers/dbwrapper');
+const session = require('cookie-session');
+const argon2 = require('argon2');
 const handlebars = require('express-handlebars');
+
 const app = express()
 const port = process.env.PORT || 5000
 
@@ -32,8 +34,7 @@ app.use(session({
     secret:'itsmorbintime',
     saveUnitialized: false,
 
-    maxAge: 1000*60*60 //1 hora
-    
+    maxAge: 1000*60*60*2 //2 horas
 }))
 
 //Routes
@@ -134,6 +135,28 @@ app.get("/estatisticas", async function(req, res){
 
 app.get("/perfil", async function(req, res){
     res.render('perfil')
+})
+
+app.get('/register', async function(req, res){
+    try{
+        res.render('registrar')
+    }
+    catch{
+
+    }
+})
+
+app.post('/register', async function(req, res){
+    try{
+        const hashSenha = await argon2.hash(req.body.senha)
+
+        let db_response = await db.createUser(req.body.nome, 1, req.body.login, hashSenha)
+
+        res.render('registrar',)
+    }
+    catch{
+
+    }
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})

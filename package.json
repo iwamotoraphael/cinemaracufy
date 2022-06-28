@@ -18,11 +18,12 @@
   },
   "homepage": "https://github.com/iwamotoraphael/cinemaracufy#readme",
   "dependencies": {
+    "argon2": "^0.28.5",
+    "cookie-parser": "^1.4.6",
     "cookie-session": "^2.0.0",
     "express": "^4.18.0",
     "express-handlebars": "^6.0.6",
     "node-themoviedb": "^0.2.8",
-    "nodemon": "^2.0.15",
     "pg": "^8.7.3"
   }
 }

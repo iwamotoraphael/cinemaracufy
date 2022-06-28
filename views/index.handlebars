@@ -11,7 +11,18 @@
     <div id="titulo-central">
         <h2>CineMaracufy</h2>
         <p class="texto-principal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, molestiae.</p>
-        <button class="btn btn-primary" id="btn-login">Login</button>
+        <form action="/login" method="POST">
+        <div>
+            <label for="Nome">Nome de usuário</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+        </div>
+        <button class="btn btn-primary" id="btn-login" type="submit">Login</button>
+        </form>
+        <a href="https://cinemaracufy.herokuapp.com/register">Registrar</a>
     </div>
     <div class="container">
         <div class="index-conteudo">
