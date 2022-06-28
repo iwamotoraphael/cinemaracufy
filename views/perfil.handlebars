@@ -92,14 +92,14 @@
             <div id="reviews-usuario"> 
                 {{#each reviews}}
                 <div class="review-usuario">
-                    <img class="review-capa-itemsistema" src="{{url_foto}}">
+                    <img class="review-capa-itemsistema" src="{{poster_item}}">
                     <div class="review-span">
-                        <span class="review-nome-itemsistema"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome}}</a></span>
-                        <span class="review-itemsistema-ano">{{ano}}<br/></span>
+                        <span class="review-nome-itemsistema">{{nome_usuario}}</span>
+                        <span class="review-itemsistema-ano">{{data}}<br/></span>
                         <span class="review-nota">⭐	Avaliação: </span>
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas:</span>
-                        <span class="review-curtidas-dadas">{{relevancia}}</span>
+                        <span class="review-curtidas-dadas">{{likes}}</span>
                         <p class="review-conteudo"> {{comentario}}</p>
                     </div>
                 </div>
