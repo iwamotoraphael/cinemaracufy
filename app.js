@@ -148,6 +148,7 @@ app.get('/register', async function(req, res){
 
 app.post('/register', async function(req, res){
     try{
+        const hashSenha = await argon2.hash(req.body.senha)
 
         let db_response = await db.createUser(req.body.nome, 1, req.body.login, hashSenha)
 
