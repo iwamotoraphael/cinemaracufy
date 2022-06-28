@@ -174,8 +174,7 @@ app.post('/register', async function(req, res){
 
 app.post('/login', async function(req, res){
     try{
-        let hashSenha = await argon2.hash(req.body.senha)
-        let exists = await db.checkUserData(req.body.nome, hashSenha)
+        let exists = await db.checkUserData(req.body.nome, req.body.senha)
 
         if(exists)
             res.redirect('/busca')

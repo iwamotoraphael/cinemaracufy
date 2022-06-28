@@ -1,4 +1,5 @@
 const db = require('../config/_dbconfig')
+const argon = require('argon2')
 
     async function createNetwork(nome, foto)
     {
@@ -610,10 +611,11 @@ const db = require('../config/_dbconfig')
         return data.rows
     }
 
-    async function checkUserData(login, hashsenha){
-        let data = await db.query(`SELECT EXISTS(SELECT nome_usuario FROM usuario WHERE login_usuario = $1 AND hash_senha = $2)`, [login, hashsenha])
+    async function checkUserData(login, senha){
+        let data = await dbw.query(`SELECT hash_senha FROM usuario WHERE login_usuario = $1`, [login])
+        let teste = await argon.verify(data.rows[0].hash_senha, senha)
 
-        return data.rows[0].exists
+        return teste
     }
 
 

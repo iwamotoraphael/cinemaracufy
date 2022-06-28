@@ -1,6 +1,7 @@
 const api = require('./wrappers/tmdbwrapper')
 const db = require('./wrappers/dbwrapper')
 const dbw = require('./config/_dbconfig')
+const argon = require('argon2')
 
 async function main(){
     try{
@@ -16,7 +17,9 @@ async function main(){
         
         */
     
-        let data = await dbw.query(`SELECT EXISTS(SELECT nome_usuario FROM usuario WHERE login_usuario = $1 AND hash_senha = $2)`, ['nobuaki', '$argon2i$v=19$m=4096,t=3,p=1$4kIge8L3ap6xjbKKKQ8D6A$c26CPyKdxw137FCnt0gu2pczurSCD1tRNJ0Q5K95h7k'])
+        let data = await dbw.query(`SELECT hash_senha FROM usuario WHERE login_usuario = 'nobuaki'`)
+        let teste = await argon.verify(data1.rows[0].hash_senha, 'senha')
+        console.log(teste)
 
         console.log(data.rows[0].exists)
     } 
