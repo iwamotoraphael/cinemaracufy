@@ -387,9 +387,9 @@ const argon = require('argon2')
         FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		LEFT JOIN avatar USING(id_avatar)
-		WHERE id_usuario = $1`, [id]).rows
+		WHERE id_usuario = $1`, [id])
 
-        return data
+        return data.rows
     }
 
     async function getItemReviews(id, id_usuario){

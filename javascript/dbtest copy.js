@@ -17,9 +17,9 @@ async function main(){
         
         */
     
-        let data = await db.checkUserData('nobuaki', 'morbintime')
+        let data = await db.getUserReviews(93)
 
-        console.log(data.exists+" "+data.id)
+        console.log(data)
     } 
     catch(err)
     {
