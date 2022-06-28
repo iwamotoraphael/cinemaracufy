@@ -152,7 +152,18 @@ app.post('/register', async function(req, res){
 
         let db_response = await db.createUser(req.body.nome, 1, req.body.login, hashSenha)
 
-        console.log(db_response)
+        let msg
+        switch(db_response){
+            case 23505: 
+                msg = 'Nome de usuário já utilizado.'
+                break
+            case 0:
+                msg = 'Usuário cadastrado com sucesso.'
+                break
+            default:
+                msg = 'Erro desconhecido.'
+                break
+        }
 
         res.render('registrar', {msg: db_response})
     }
