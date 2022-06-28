@@ -43,8 +43,6 @@ app.get("/",async function(req, res){
 })
 
 app.get("/busca",async function(req, res){
-    console.log(req.session.id)
-
     let itens
     
     if(Object.keys(req.query).length === 0)
@@ -137,6 +135,8 @@ app.get("/estatisticas", async function(req, res){
 
 app.get("/perfil", async function(req, res){
     let userreviews = await db.getUserReviews(req.session.id)
+    console.log(userreviews)
+    console.log(req.session.id)
     res.render('perfil',{reviews: userreviews})
 })
 
@@ -144,8 +144,8 @@ app.get('/register', async function(req, res){
     try{
         res.render('registrar')
     }
-    catch{
-
+    catch(err){
+        console.log(err)
     }
 })
 
