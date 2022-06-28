@@ -39,6 +39,7 @@ app.use(session({
 
 //Routes
 app.get("/",async function(req, res){
+    console.log(req.session.id)
     res.render('index')
 })
 
