@@ -39,11 +39,12 @@ app.use(session({
 
 //Routes
 app.get("/",async function(req, res){
-    console.log(req.session.id)
     res.render('index')
 })
 
 app.get("/busca",async function(req, res){
+    console.log(req.session.id)
+
     let itens
     
     if(Object.keys(req.query).length === 0)
