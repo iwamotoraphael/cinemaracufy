@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./javascript/wrappers/dbwrapper');
 const session = require('cookie-session');
+const argon2 = require('argon2');
 const handlebars = require('express-handlebars');
 
 const app = express()
