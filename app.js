@@ -152,7 +152,7 @@ app.post('/register', async function(req, res){
 
         let db_response = await db.createUser(req.body.nome, 1, req.body.login, hashSenha)
 
-        res.render('registrar',)
+        res.render('registrar', {msg: db_response})
     }
     catch{
 
