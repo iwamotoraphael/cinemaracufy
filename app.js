@@ -174,10 +174,12 @@ app.post('/register', async function(req, res){
 
 app.post('/login', async function(req, res){
     try{
-        let exists = await db.checkUserData(req.body.nome, req.body.senha)
+        let test = await db.checkUserData(req.body.nome, req.body.senha)
 
-        if(exists)
+        if(test.exists){
+            req.session.id = test.id
             res.redirect('/busca')
+        }
         else
             res.render('index', {msg: 'Usuário ou senha inválido'})
     }

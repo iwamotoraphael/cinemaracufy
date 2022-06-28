@@ -612,13 +612,11 @@ const argon = require('argon2')
     }
 
     async function checkUserData(login, senha){
-        let data = await db.query(`SELECT hash_senha FROM usuario WHERE login_usuario = $1`, [login])
+        let data = await db.query(`SELECT hash_senha, id_usuario FROM usuario WHERE login_usuario = $1`, [login])
         let teste = await argon.verify(data.rows[0].hash_senha, senha)
 
-        return teste
+        return {exists: teste, id: data.rows[0].id_usuario}
     }
-
-
 
 //implementar exclusões totais, consultas de estatísticas
 

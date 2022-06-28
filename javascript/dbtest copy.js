@@ -17,11 +17,9 @@ async function main(){
         
         */
     
-        let data = await dbw.query(`SELECT hash_senha FROM usuario WHERE login_usuario = 'nobuaki'`)
-        let teste = await argon.verify(data1.rows[0].hash_senha, 'senha')
-        console.log(teste)
+        let data = await db.checkUserData('nobuaki', 'morbintime')
 
-        console.log(data.rows[0].exists)
+        console.log(data.exists+" "+data.id)
     } 
     catch(err)
     {
