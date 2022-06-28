@@ -1,7 +1,6 @@
 const express = require('express');
 const db = require('./javascript/wrappers/dbwrapper');
 const session = require('cookie-session');
-const argon2 = require('argon2');
 const handlebars = require('express-handlebars');
 
 const app = express()
@@ -148,8 +147,6 @@ app.get('/register', async function(req, res){
 
 app.post('/register', async function(req, res){
     try{
-        const hashSenha = await argon2.hash(req.body.senha)
-
         let db_response = await db.createUser(req.body.nome, 1, req.body.login, hashSenha)
 
         res.render('registrar',)
