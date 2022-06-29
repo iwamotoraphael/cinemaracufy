@@ -188,7 +188,8 @@ app.post('/login', async function(req, res){
 })
 
 app.post('/like', async function(req, res){
-    
+    await db.like(req.session.id, req.body.idr)
+    res.send("<script>window.close();</script>")
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
