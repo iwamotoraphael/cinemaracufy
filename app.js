@@ -75,7 +75,8 @@ app.get("/filme",async function(req, res){
         companhias: data.companhias,
         cast: data.casts,
         sinopse: data.sinopse,
-        analises: reviews
+        analises: reviews,
+        id: req.query.id
     })
 })
 
@@ -100,7 +101,8 @@ app.get("/serie",async function(req, res){
         categoria:data.categoria,
         criadores: data.criadores,
         sinopse: data.sinopse,
-        analises: reviews
+        analises: reviews,
+        id: req.query.id
     })
 })
 
