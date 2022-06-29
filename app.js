@@ -62,7 +62,6 @@ app.get("/filme",async function(req, res){
         data = await db.getMovieData(req.query.id)
         reviews = await db.getItemReviews(req.query.id)
     }
-        
 
     res.render('filme', {
         nome: data.nome_item,
@@ -117,7 +116,7 @@ app.get("/estatisticas", async function(req, res){
     let bestGenres = db.getPopularGenres()
 
     let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
-    
+
     res.render('estatisticas',{
         ultimasreviews: data[0],
         filmesmaisbemavaliados: data[1],
@@ -186,6 +185,10 @@ app.post('/login', async function(req, res){
     catch(err){
         console.log(err)
     }
+})
+
+app.post('/like', async function(req, res){
+    
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
