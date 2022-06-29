@@ -615,7 +615,16 @@ const argon = require('argon2')
     }
 
     async function getUserData(id_usuario){
-        let data = await db.query(``)
+        let data = await db.query(`SELECT nome_usuario, link_avatar FROM usuario INNER JOIN avatar USING(id_avatar) WHERE id_usuario = $1`, [id_usuario])
+    }
+
+    async function getUserLists(id_usuario){
+        let data = await db.query(`SELECT l.nome_lista, json_agg(json_build_object('poster_item', i.poster_item, 'nome', i.nome_item, 'data', i.lancamento)) itens FROM 
+        lista l 
+        LEFT JOIN lista_item li USING(id_lista) 
+        LEFT JOIN itemsistema i USING(id_item)
+        WHERE l.id_usuario = $1
+        GROUP BY l.nome_lista`, [id_usuario])
     }
 
 module.exports = {
@@ -663,5 +672,7 @@ module.exports = {
     getPopularGenres,
     getLastReviews,
     getBestItems,
-    checkUserData
+    checkUserData,
+    getUserData,
+    getUserLists
 }

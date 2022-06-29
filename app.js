@@ -135,7 +135,9 @@ app.get("/estatisticas", async function(req, res){
 
 app.get("/perfil", async function(req, res){
     let userreviews = await db.getUserReviews(req.session.id)
-    res.render('perfil',{reviews: userreviews})
+    let userdata = await db.getUserData(req.session.id)
+    let userlists = await db.getUserLists(req.session.id)
+    res.render('perfil',{reviews: userreviews, nome: userdata.nome_usuario, link_avatar: userdata.link_avatar, listas:userlists})
 })
 
 app.get('/register', async function(req, res){
