@@ -393,7 +393,7 @@ const argon = require('argon2')
     }
 
     async function getItemReviews(id, id_usuario){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes 
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes 
         FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		LEFT JOIN avatar USING(id_avatar)
@@ -479,7 +479,7 @@ const argon = require('argon2')
     }
 
     async function getPopularUsers(){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(l.likes) likes
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(COALESCE(l.likes, 0) likes) likes
         FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		LEFT JOIN avatar USING(id_avatar)
@@ -577,7 +577,7 @@ const argon = require('argon2')
     }
 
     async function getBestReviews(){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, l.likes, i.nome_item 
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, i.nome_item 
         FROM usuario u 
 		LEFT JOIN avaliacao a USING(id_usuario)
 		LEFT JOIN itemsistema i USING(id_item)
