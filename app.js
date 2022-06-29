@@ -209,4 +209,10 @@ app.post('/serie', async function(req, res){
     res.redirect('/serie/?id='+req.query.id)
 })
 
+app.post('/lista', async function(req, res){
+    let msg = await db.createList(req.session.id, req.body.nome)
+
+    res.redirect('/perfil')
+})
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})

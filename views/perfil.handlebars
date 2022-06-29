@@ -47,6 +47,16 @@
         </div>
         <div class="profile-data">
             <h2 class="titulo-pagina">Listas</h2>
+            <form action="/lista" method="post" autocomplete="off">
+                <p>Nome (30 caracteres)</p>
+                <div class="inputwrapper">
+                    <div>
+                        <input type="textarea" id="nome" name="nome" maxlength="30" required>
+                    </div>
+                </div>
+                <br/>
+                <button id="analise" type="submit">Criar lista</button>
+            </form>
             <div id="listas">
                 {{#each listas}}
                 <div class="lista">
