@@ -616,6 +616,8 @@ const argon = require('argon2')
 
     async function getUserData(id_usuario){
         let data = await db.query(`SELECT nome_usuario, link_avatar FROM usuario INNER JOIN avatar USING(id_avatar) WHERE id_usuario = $1`, [id_usuario])
+
+        return data.rows
     }
 
     async function getUserLists(id_usuario){
@@ -625,6 +627,8 @@ const argon = require('argon2')
         LEFT JOIN itemsistema i USING(id_item)
         WHERE l.id_usuario = $1
         GROUP BY l.nome_lista`, [id_usuario])
+
+        return data.rows
     }
 
 module.exports = {
