@@ -127,7 +127,6 @@ app.get("/estatisticas", async function(req, res){
         seriesmaispopulares: data[5],
         destaqueusuariostotal: data[6],
         generosmaispopulares: data[7]
-
     })
 
     
