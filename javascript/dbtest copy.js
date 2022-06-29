@@ -24,7 +24,7 @@ async function main(){
             userlists[i].id_item = 170
         }
 
-        console.log(userlists)
+        console.log(userdata)
     } 
     catch(err)
     {
