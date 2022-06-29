@@ -393,13 +393,14 @@ const argon = require('argon2')
     }
 
     async function getItemReviews(id, id_usuario){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, COALESCE(e.ex, 0) curtida
-        FROM usuario u 
-		INNER JOIN avaliacao a USING(id_usuario)
-        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
-		LEFT JOIN (SELECT id_avaliacao, COUNT(*) ex FROM curtidas WHERE id_usuario = $2 GROUP BY id_avaliacao) e USING(id_avaliacao)
-		INNER JOIN avatar USING(id_avatar)
-        WHERE id_item = $1`, [id, id_usuario])
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, 
+        CASE WHEN e.ex is null THEN false ELSE true END curtida
+                FROM usuario u 
+                INNER JOIN avaliacao a USING(id_usuario)
+                LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
+                LEFT JOIN (SELECT id_avaliacao, COUNT(*) ex FROM curtidas WHERE id_usuario = $2 GROUP BY id_avaliacao) e USING(id_avaliacao)
+                INNER JOIN avatar USING(id_avatar)
+                WHERE id_item = $1`, [id, id_usuario])
 
         return data.rows
     }
