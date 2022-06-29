@@ -599,7 +599,7 @@ const argon = require('argon2')
     async function getLastReviews(){
         let data = await db.query(`SELECT id_avaliacao, nome_usuario, poster_item, nota, comentario, data, COALESCE(curtidas,0) curtidas FROM 
         usuario 
-        LEFT JOIN avaliacao USING(id_usuario) 
+        INNER JOIN avaliacao USING(id_usuario) 
         LEFT JOIN itemsistema USING(id_item)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) curtidas FROM curtidas GROUP BY id_avaliacao)s1 USING (id_avaliacao)
         ORDER BY data DESC, id_avaliacao DESC LIMIT 50`)
