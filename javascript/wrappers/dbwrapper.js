@@ -394,10 +394,11 @@ const argon = require('argon2')
 
     async function getItemReviews(id, id_usuario){
         let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes 
-        FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
+        FROM usuario u 
+		INNER JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
-		LEFT JOIN avatar USING(id_avatar)
-        WHERE id_item = $1`, [id])
+		INNER JOIN avatar USING(id_avatar)
+        WHERE id_item = 170`, [id])
 
         let reviews = data.rows
 
@@ -617,8 +618,6 @@ const argon = require('argon2')
 
         return {exists: teste, id: data.rows[0].id_usuario}
     }
-
-//implementar exclusões totais, consultas de estatísticas
 
 module.exports = {
     createUser,
