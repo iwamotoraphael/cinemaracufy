@@ -85,68 +85,6 @@
        </div>
     </div>
 
-    <div class="review-wrapper">
-        <div class="user-review-data">
-            <h2 class="titulo-pagina">Review</h2>
-            <div id="titulo-avaliar-item"></div>
-            <form action="/filme/?id={{id}}" method="post" autocomplete="off">
-                <p>Nota (0 - 10)</p>
-                <div class="inputwrapper">
-                    <div>
-                        <input type="number" id="nota" name="nota" min="0" max="10" required>
-                    </div>
-                </div>
-
-                <p>Comentário (até 500 caracteres)</p>
-                <div class="inputwrapper">
-                    <div>
-                        <input type="textarea" id="comentario" name="comentario" maxlength="500">
-                    </div>
-                </div>
-                <br/>
-                <button id="analise" type="submit">Enviar análise</button>
-            </form>
-            {{#if error}}<p id="erro">Erro na postagem</p>{{/if}}
-        </div>
-
-    </div>
-
-    <div class="review-wrapper">
-        <div class="user-review-history">
-            <h2 class="titulo-pagina">Histórico</h2>
-            <p>Reviews realizadas por outros usuários da plataforma.</p>
-            <div id="conteudo-reviews-feitas">
-                {{#each analises}}
-                <div class="review-usuario">
-                    <img class="review-capa-album" src="{{link_avatar}}">
-                    <div class="review-span">
-                        <span class="review-nome-usuario">{{nome_usuario}}</span>
-                        <span class="review-date">{{data}}<br/></span>
-                        <span class="review-nota">⭐	Avaliação: </span>
-                        <span class="review-nota-dada">{{nota}}/10</span>
-                        <span class="review-nota">👍 Curtidas: </span>
-                        <span class="review-curtidas-dadas">{{likes}}</span>
-                        <span class="review-curtir">
-                        {{#if curtida}}
-                        <form id="like" action="/unlike" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👎 Descurtir</button></form></span>
-                        {{else}}
-                        <form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👍 Curtir</button></form>
-                        {{/if}}
-                        </span>
-
-                        {{#if apagar}}<span class="review-apagar"><form id="apagar" action="/delete" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><input type="hidden" id="idm" name="idm" value="{{id_musica}}"><button type="submit">Apagar</button></form></span>{{/if}}
-
-                        <p class="review-conteudo"> {{comentario}}</p>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-        </div>
-
-    </div>
-
-    
-
     <footer>    
         <nav>
         

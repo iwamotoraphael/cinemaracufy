@@ -232,7 +232,10 @@ app.post('/listas', async function(req, res){
     }
 
     res.render('listas', {
-        listas: lists
+        listas: lists,
+        nome: req.body.nome,
+        lancamento: req.body.lancamento,
+        sinopse: req.body.sinopse
     })
 })
 
