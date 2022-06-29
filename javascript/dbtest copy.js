@@ -17,9 +17,10 @@ async function main(){
         
         */
     
-        let data = await db.getBestReviews()
+        let userdata = await db.getUserData(93)
+        let userlists = await db.getUserLists(93)
 
-        console.log(data)
+        console.log(userlists[0].itens)
     } 
     catch(err)
     {
