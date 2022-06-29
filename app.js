@@ -60,7 +60,6 @@ app.get("/filme",async function(req, res){
     else
     {
         data = await db.getMovieData(req.query.id)
-        console.log(req.session.id)
         reviews = await db.getItemReviews(req.query.id, req.session.id)
     }
 
@@ -88,7 +87,6 @@ app.get("/serie",async function(req, res){
     {
         data = await db.getTVData(req.query.id)
         reviews = await db.getItemReviews(req.query.id, req.session.id)
-        console.log(req.session.id)
     }
     res.render('serie', {
         nome: data.nome_item,
@@ -191,6 +189,11 @@ app.post('/login', async function(req, res){
 
 app.post('/like', async function(req, res){
     await db.like(req.session.id, req.body.idr)
+    res.send("<script>window.close();</script>")
+})
+
+app.post('/unlike', async function(req, res){
+    await db.unlike(req.session.id, req.body.idr)
     res.send("<script>window.close();</script>")
 })
 
