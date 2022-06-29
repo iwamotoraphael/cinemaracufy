@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="../css/style-itemsistema.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,0,-25" />
+<link rel="shortcut icon" href="../img/favicon-theaters.svg" type="image/x-icon">
+
+<body id="filme">
+    <nav class="navbar">
+        <h1>CineMaracufy</h1>
+        <a href="#" class="botao-menu">
+            <span class="barra"></span>
+            <span class="barra"></span>
+            <span class="barra"></span>
+          </a>
+          <div class="navbar-links">
+            <ul>
+                <li><a href="https://cinemaracufy.herokuapp.com/busca/">
+                    <img src="../img/search.png" alt="icon-busca" id="icon-busca">
+                    Busca
+                </a></li>
+                <li><a href="https://cinemaracufy.herokuapp.com/estatisticas">
+                    <img src="../img/trending.png" alt="icon-estatisticas" id="icon-estatisticas">
+                    Estatísticas
+                </a></li>
+                <li><a href="https://cinemaracufy.herokuapp.com/perfil">
+                    <img src="../img/user.png" alt="icon-perfil" id="icon-perfil">
+                    Perfil
+                </a></li>
+                <li><a href="https://cinemaracufy.herokuapp.com">
+                    <img src="../img/logout.png" alt="icon-sair" id="icon-sair">
+                    Sair
+                </a></li>
+            </ul>
+          </div>
+    </nav>
+    
+    <div class="review-wrapper">
+        <div class="review-data">
+            <h2 class="titulo-pagina" id="review-nome">Filme</h2>
+            <div id="conteudo-itemsistema">
+                <div class="dados-itemsistema">
+                    <img id="dado-foto" src="{{foto}}" alt="Capa do item do sistema">
+                    <div class="dado-itemsistema">
+                        <p id="dado-nome">{{nome}}</p>
+                        <p class="dado-ano">{{lancamento}}</p>
+                        <button id="lista" type="submit">Adicionar à minha lista</button>
+                    </div>
+                </div>
+                <p class="dado-sinopse">{{sinopse}}</p>
+            </div>
+            
+        </div>
+        <div class="review-data">
+            <h2 class="titulo-pagina">Informações</h2>
+            <div id="info-itemsistema">
+                <div class="dado-orcamento">
+                    <p id="dado-orcamento-titulo">Orçamento: {{orcamento}}</p>
+                </div>
+
+                <div class="dado-arrecadacao">
+                    <p id="dado-arrecadacao-titulo">Arrecadação: {{arrecadacao}}</p>
+                </div>
+
+                <div class="dado-duracao">
+                    <p id="dado-duracao-titulo">Duração: {{duracao}}</p>
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Gêneros: </p>
+                    {{#each generos}}
+                    <span class="dado-genero-nome">{{this}}</span>
+                    {{/each}}
+                </div>
+
+                <div class="dado-generos">
+                    <p id="dado-genero-titulo">Plataformas: </p>
+                    {{#each plataformas}}
+                    <span class="dado-genero-nome">{{nome_plataforma}}</span>
+                    {{/each}}
+                </div>
+
+                {{#each companhias}}   
+                <div class="dados-companhia">
+                    <img id="dado-foto-companhia" src="{{logo_companhia}}" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">{{nome_companhia}}</p>
+                    </div>  
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="review-wrapper">
+       <div class="user-review-data">
+            <h2 class="titulo-pagina">Cast</h2>
+            <div id="cast">
+                {{#each cast}}
+                <div class="pessoa-cast">
+                    <div class="conteudo-cast">
+                        <div>{{nome_cast}}</div>
+                        <img class="cast-foto" src="{{foto_pessoa}}">
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+       </div>
+    </div>
+
+    <div class="review-wrapper">
+        <div class="user-review-data">
+            <h2 class="titulo-pagina">Review</h2>
+            <div id="titulo-avaliar-item"></div>
+            <form action="/filme/?id={{id}}" method="post" autocomplete="off">
+                <p>Nota (0 - 10)</p>
+                <div class="inputwrapper">
+                    <div>
+                        <input type="number" id="nota" name="nota" min="0" max="10" required>
+                    </div>
+                </div>
+
+                <p>Comentário (até 500 caracteres)</p>
+                <div class="inputwrapper">
+                    <div>
+                        <input type="textarea" id="comentario" name="comentario" maxlength="500">
+                    </div>
+                </div>
+                <br/>
+                <button id="analise" type="submit">Enviar análise</button>
+            </form>
+            {{#if error}}<p id="erro">Erro na postagem</p>{{/if}}
+        </div>
+
+    </div>
+
+    <div class="review-wrapper">
+        <div class="user-review-history">
+            <h2 class="titulo-pagina">Histórico</h2>
+            <p>Reviews realizadas por outros usuários da plataforma.</p>
+            <div id="conteudo-reviews-feitas">
+                {{#each analises}}
+                <div class="review-usuario">
+                    <img class="review-capa-album" src="{{link_avatar}}">
+                    <div class="review-span">
+                        <span class="review-nome-usuario">{{nome_usuario}}</span>
+                        <span class="review-date">{{data}}<br/></span>
+                        <span class="review-nota">⭐	Avaliação: </span>
+                        <span class="review-nota-dada">{{nota}}/10</span>
+                        <span class="review-nota">👍 Curtidas: </span>
+                        <span class="review-curtidas-dadas">{{likes}}</span>
+                        <span class="review-curtir">
+                        {{#if curtida}}
+                        <form id="like" action="/unlike" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👎 Descurtir</button></form></span>
+                        {{else}}
+                        <form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👍 Curtir</button></form>
+                        {{/if}}
+                        </span>
+
+                        {{#if apagar}}<span class="review-apagar"><form id="apagar" action="/delete" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><input type="hidden" id="idm" name="idm" value="{{id_musica}}"><button type="submit">Apagar</button></form></span>{{/if}}
+
+                        <p class="review-conteudo"> {{comentario}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+    </div>
+
+    
+
+    <footer>    
+        <nav>
+        
+            <a href="https://github.com/luizabm/maracufy-BD1" class="githubprojeto" target="_blank">
+                <h2 id="githubs">Github</h2>
+                <img src="../img/github-white.png" alt="logo github" id="img-github">
+            </a>
+        
+            <ul>
+                <li> <a href="https://github.com/ahmadkamel7" target="_blank"> Ahmad Kamel Abdouni</a> </li>
+                <li> <a href="https://github.com/sm-gian" target="_blank"> Gianlucca Siqueira Maiellaro</a> </li>
+                <li> <a href="https://github.com/luizabm" target="_blank"> Luiza Borghi de Mello</a> </li>
+                <li> <a href="https://github.com/iwamotoraphael" target="_blank"> Raphael Nobuaki Iwamoto</a> </li>
+            </ul>
+        </nav>
+        </footer>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/main.js"></script><!--defer-->
+
+</body>
