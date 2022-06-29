@@ -151,6 +151,7 @@ app.get('/register', async function(req, res){
 })
 
 app.post('/linkitem', async function(req, res){
+    console.log(req.body.id_lista+' '+req.body.id_item)
     await db.linkItemList(req.body.id_lista, req.body.id_item)
 
     res.redirect('/perfil')

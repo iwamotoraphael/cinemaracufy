@@ -20,11 +20,13 @@ async function main(){
         let userdata = await db.getUserData(93)
         let userlists = await db.getUserLists(93)
 
+        let data = await db.linkItemList(12, 110)
+
         for(i in userlists){
             userlists[i].id_item = 170
         }
 
-        console.log(userdata)
+        console.log(data)
     } 
     catch(err)
     {
