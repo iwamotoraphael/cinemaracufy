@@ -235,7 +235,8 @@ app.post('/listas', async function(req, res){
         listas: lists,
         nome: req.body.nome,
         lancamento: req.body.lancamento,
-        sinopse: req.body.sinopse
+        sinopse: req.body.sinopse,
+        foto: req.body.foto
     })
 })
 
