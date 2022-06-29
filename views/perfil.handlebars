@@ -60,7 +60,7 @@
             <div id="listas">
                 {{#each listas}}
                 <div class="lista">
-                    <h3 class="titulo-pagina-2">{{nome}}</h2>
+                    <h3 class="titulo-pagina-2">{{nome_lista}}</h2>
                     {{#each itens}}
                     <div class="dado-itemlista">
                         <div class="dado-itemlista-circulo">
@@ -68,9 +68,7 @@
                         </div>
                         <img class="dado-itemlista-capa" src="{{poster_item}}" alt="Capa do item do sistema">
                         <div class="dado-itemlista-span">
-                            <a href="">
                                 <p class="dado-itemlista-nome">{{nome}}</p>
-                            </a>
                             <p class="dado-itemlista-ano">{{data}}</p>
                         </div>
                         {{/each}}

@@ -20,7 +20,7 @@ async function main(){
         let userdata = await db.getUserData(93)
         let userlists = await db.getUserLists(93)
 
-        console.log(userlists[0].itens)
+        console.log(userlists[0])
     } 
     catch(err)
     {

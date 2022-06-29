@@ -384,7 +384,7 @@ const argon = require('argon2')
 
     async function getUserReviews(id){
         let data = await db.query(`SELECT poster_item, nome_item,u.nome_usuario, a.nota, a.comentario, a.data, a.id_avaliacao, COALESCE(l.likes, 0) likes
-        FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
+        FROM usuario u INNER JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		LEFT JOIN itemsistema USING(id_item)
 		WHERE id_usuario = $1`, [id])
