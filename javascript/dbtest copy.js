@@ -17,16 +17,7 @@ async function main(){
         
         */
     
-        let bestMovies = db.getBestMovies()
-        let popularMovies = db.getPopularMovies()
-        let bestTV =  db.getBestTV()
-        let popularTV = db.getPopularTV()
-        let bestReviews = db.getBestReviews()
-        let lastReviews = db.getLastReviews()
-        let bestUsers = db.getPopularUsers()
-        let bestGenres = db.getPopularGenres()
-    
-        let data = await Promise.all([lastReviews, bestMovies, popularMovies, bestReviews, bestTV, popularTV, bestUsers, bestGenres])
+        let data = await db.getItemReviews(170, 93)
 
         console.log(data)
     } 

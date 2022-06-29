@@ -147,11 +147,13 @@
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas: </span>
                         <span class="review-curtidas-dadas">{{likes}}</span>
+                        <span class="review-curtir">
                         {{#if curtida}}
-                        <span class="review-curtir"><form id="unlike" action="/unlike" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👎 Descurtir</button></form></span>
+                        <form id="unlike" action="/unlike" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👎 Descurtir</button></form></span>
                         {{else}}
-                        <span class="review-curtir"><form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👍 Curtir</button></form></span>
+                        <form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👍 Curtir</button></form>
                         {{/if}}
+                        </span>
 
                         {{#if apagar}}<span class="review-apagar"><form id="apagar" action="/delete" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><input type="hidden" id="idm" name="idm" value="{{id_musica}}"><button type="submit">Apagar</button></form></span>{{/if}}
 
