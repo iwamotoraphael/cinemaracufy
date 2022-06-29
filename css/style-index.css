@@ -77,7 +77,7 @@ header {
 }
 
 footer {
-  background-color: var(--vermelho);
+  background-color: var(--rosaEscuro);
   color: white;
   padding: 20px;
   position: absolute;

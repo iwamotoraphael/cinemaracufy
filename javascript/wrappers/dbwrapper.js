@@ -573,7 +573,7 @@ const argon = require('argon2')
     }
 
     async function getBestReviews(){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, i.nome_item 
+        let data = await db.query(`SELECT u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, i.nome_item, i.poster_item 
         FROM usuario u 
 		INNER JOIN avaliacao a USING(id_usuario)
 		INNER JOIN itemsistema i USING(id_item)

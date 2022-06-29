@@ -17,7 +17,7 @@ async function main(){
         
         */
     
-        let data = await db.getItemReviews(170, 93)
+        let data = await db.getBestReviews()
 
         console.log(data)
     } 
