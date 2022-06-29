@@ -19,7 +19,7 @@ async function main(){
     
         let data = await db.getItemReviews(170, 93)
 
-        console.log(data)
+        console.log(data[0].curtida)
     } 
     catch(err)
     {

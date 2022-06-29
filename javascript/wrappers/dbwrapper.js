@@ -393,21 +393,15 @@ const argon = require('argon2')
     }
 
     async function getItemReviews(id, id_usuario){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes 
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, a.nota, a.comentario, a.data, a.id_item, a.id_avaliacao, COALESCE(l.likes, 0) likes, COALESCE(e.ex, 0) curtida
         FROM usuario u 
 		INNER JOIN avaliacao a USING(id_usuario)
-        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
+        LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao)
+		LEFT JOIN (SELECT id_avaliacao, COUNT(*) ex FROM curtidas WHERE id_usuario = $2 GROUP BY id_avaliacao) e USING(id_avaliacao)
 		INNER JOIN avatar USING(id_avatar)
-        WHERE id_item = $1`, [id])
+        WHERE id_item = 1`, [id, id_usuario])
 
-        let reviews = data.rows
-
-        for(review of reviews){
-            let curtida = await db.query(`SELECT EXISTS(SELECT id_usuario from curtidas WHERE id_usuario = $1 AND id_avaliacao = $2)`, [id_usuario, review.id_avaliacao])
-            review.curtida = curtida.rows[0].exists
-        }
-
-        return reviews
+        return data.rows
     }
 
     async function getMovieData(id){
