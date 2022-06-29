@@ -138,9 +138,7 @@ app.get("/perfil", async function(req, res){
     let userdata = db.getUserData(req.session.id)
     let userlists = db.getUserLists(req.session.id)
 
-    let data = await Promise.all([userreviews, userdata, userlists])
-
-    res.render('perfil',{reviews: data[0], nome: data[1][0].nome_usuario, link_avatar: data[2][0].link_avatar, listas:userlists})
+    res.render('perfil',{reviews: userreviews, nome: userdata[0].nome_usuario, link_avatar: userdata[0].link_avatar, listas:userlists})
 })
 
 app.get('/register', async function(req, res){
