@@ -148,7 +148,7 @@
                         <span class="review-nota">👍 Curtidas: </span>
                         <span class="review-curtidas-dadas">{{likes}}</span>
                         <span class="review-curtir">
-                        {{#if curtida == 1}}
+                        {{#if curtida}}
                         <form id="unlike" action="/unlike" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👎 Descurtir</button></form></span>
                         {{else}}
                         <form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">👍 Curtir</button></form>
