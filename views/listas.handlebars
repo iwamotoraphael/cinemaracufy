@@ -48,13 +48,6 @@
             
         </div>
         <div class="review-data">
-            <h2 class="titulo-pagina">Informações</h2>
-            
-        </div>
-    </div>
-
-    <div class="review-wrapper">
-       <div class="user-review-data">
             <h2 class="titulo-pagina">Listas</h2>
             <div id="listas">
                 {{#each listas}}
@@ -65,24 +58,10 @@
                         <input type="hidden" value={{id_item}} id="id_item" name="id_item">
                         <button id="analise" type="submit">Adicionar à lista</button>
                     </form>
-                    {{#each itens}}
-                    <div class="dado-itemlista">
-                        <div class="dado-itemlista-circulo">
-                            <p class="dado-itemlista-numero">{{inc @index}}</p>
-                        </div>
-                        <img class="dado-itemlista-capa" src="{{poster_item}}" alt="Capa do item do sistema">
-                        <div class="dado-itemlista-span">
-                            <a href="">
-                                <p class="dado-itemlista-nome">{{nome}}</p>
-                            </a>
-                            <p class="dado-itemlista-ano">{{data}}</p>
-                        </div>
-                        {{/each}}
-                    </div>
                 </div>
                 {{/each}}
             </div>
-       </div>
+        </div>
     </div>
 
     <footer>    
