@@ -41,7 +41,10 @@
                     <div class="dado-itemsistema">
                         <p id="dado-nome">{{nome}}</p>
                         <p class="dado-ano">{{lancamento}}</p>
-                        <button id="lista" type="submit">Adicionar à minha lista</button>
+                        <form action="/listas" method="post">
+                            <input type="hidden" value={{id_item}} id="id_item" name="id_item">
+                            <button id="analise" type="submit">Adicionar à minha lista</button>
+                        </form>
                     </div>
                 </div>
                 <p class="dado-sinopse">{{sinopse}}</p>

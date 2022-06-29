@@ -221,6 +221,10 @@
   width: 347px;
 }
 
+.inputwrapper input {
+  width: 350;
+}
+
 /* RESPONSIVIDADES */
 
 @media (max-width: 1158px) {

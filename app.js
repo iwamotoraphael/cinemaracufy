@@ -134,10 +134,13 @@ app.get("/estatisticas", async function(req, res){
 })
 
 app.get("/perfil", async function(req, res){
-    let userreviews = await db.getUserReviews(req.session.id)
-    let userdata = await db.getUserData(req.session.id)
-    let userlists = await db.getUserLists(req.session.id)
-    res.render('perfil',{reviews: userreviews, nome: userdata[0].nome_usuario, link_avatar: userdata[0].link_avatar, listas:userlists})
+    let userreviews = db.getUserReviews(req.session.id)
+    let userdata = db.getUserData(req.session.id)
+    let userlists = db.getUserLists(req.session.id)
+
+    let data = await Promise.all([userreviews, userdata, userlists])
+
+    res.render('perfil',{reviews: data[0], nome: data[1][0].nome_usuario, link_avatar: data[2][0].link_avatar, listas:userlists})
 })
 
 app.get('/register', async function(req, res){
@@ -147,6 +150,12 @@ app.get('/register', async function(req, res){
     catch(err){
         console.log(err)
     }
+})
+
+app.post('/linkitem', async function(req, res){
+    await db.linkItemList(req.body.id_lista, req.body.id_item)
+
+    res.redirect('/perfil')
 })
 
 app.post('/register', async function(req, res){
@@ -215,6 +224,18 @@ app.post('/lista', async function(req, res){
     let msg = await db.createList(req.session.id, req.body.nome)
 
     res.redirect('/perfil')
+})
+
+app.posts('/listas', async function(req, res){
+    let lists = await db.getUserLists(req.session.id)
+
+    for(i in lists){
+        lists[i].id_item = req.body.id_item
+    }
+
+    res.render('listas', {
+        listas: lists
+    })
 })
 
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})

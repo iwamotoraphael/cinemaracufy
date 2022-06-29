@@ -59,7 +59,12 @@
             <div id="listas">
                 {{#each listas}}
                 <div class="lista">
-                    <h3 class="titulo-pagina-2">{{nome}}</h2>
+                    <h3 class="titulo-pagina-2">{{nome_lista}}</h2>
+                    <form action="/linkitem" method="post">
+                        <input type="hidden" value={{id_lista}} id="id_lista" name="id_lista">
+                        <input type="hidden" value={{id_item}} id="id_item" name="id_item">
+                        <button id="analise" type="submit">Adicionar à lista</button>
+                    </form>
                     {{#each itens}}
                     <div class="dado-itemlista">
                         <div class="dado-itemlista-circulo">
