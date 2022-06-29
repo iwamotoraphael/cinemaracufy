@@ -479,7 +479,7 @@ const argon = require('argon2')
     }
 
     async function getPopularUsers(){
-        let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(COALESCE(l.likes, 0) likes) likes
+        let data = await db.query(`SELECT link_avatar,u.nome_usuario, SUM(COALESCE(l.likes, 0)) likes
         FROM usuario u LEFT JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		LEFT JOIN avatar USING(id_avatar)
