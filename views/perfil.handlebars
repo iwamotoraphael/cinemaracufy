@@ -38,8 +38,8 @@
             <div id="userdata">
                 <div class="dados">
                     <div class="nomefoto-profile">
-                        <p id="dado-nome">Nome do usuário</p>
-                        <img id="dado-foto" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Foto do usuário">
+                        <p id="dado-nome">{{nome}}</p>
+                        <img id="dado-foto" src="{{link_avatar}}" alt="Foto do usuário">
                     </div>
                 </div>
             </div>
@@ -48,38 +48,25 @@
         <div class="profile-data">
             <h2 class="titulo-pagina">Listas</h2>
             <div id="listas">
+                {{#each listas}}
                 <div class="lista">
-                    <h3 class="titulo-pagina-2">Nome da lista</h2>
+                    <h3 class="titulo-pagina-2">{{nome}}</h2>
+                    {{#each itens}}
                     <div class="dado-itemlista">
                         <div class="dado-itemlista-circulo">
-                            <p class="dado-itemlista-numero">1</p>
+                            <p class="dado-itemlista-numero">{{inc @index}}</p>
                         </div>
-                        <img class="dado-itemlista-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
+                        <img class="dado-itemlista-capa" src="{{poster_item}}" alt="Capa do item do sistema">
                         <div class="dado-itemlista-span">
                             <a href="">
-                                <p class="dado-itemlista-nome">Nome</p>
+                                <p class="dado-itemlista-nome">{{nome}}</p>
                             </a>
-                            <p class="dado-itemlista-ano">Ano</p>
+                            <p class="dado-itemlista-ano">{{data}}</p>
                         </div>
+                        {{/each}}
                     </div>
                 </div>
-
-                <div class="lista">
-                    <h3 class="titulo-pagina-2">Nome da lista</h2>
-                    <div class="dado-itemlista">
-                        <div class="dado-itemlista-circulo">
-                            <p class="dado-itemlista-numero">1</p>
-                        </div>
-                        <img class="dado-itemlista-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
-                        <div class="dado-itemlista-span">
-                            <a href="">
-                                <p class="dado-itemlista-nome">Nome</p>
-                            </a>
-                            <p class="dado-itemlista-ano">Ano</p>
-                        </div>
-                    </div>
-                </div>
-                
+                {{/each}}
             </div>
         </div>
     </div>
@@ -107,25 +94,6 @@
             </div> 
         </div>
     </div>
-
-    <div class="profile-wrapper">
-        <div class="atividade">
-            <h2 class="titulo-pagina-2">Curtidas</h2>
-            <div id="curtidas-usuario">
-                {{#each likes}}
-                <div class="curtida-usuario">
-                    <img class="curtida-foto" src="{{url_foto}}">
-                    <div class="curtidas-span">
-                        <p class="review-nome-itemsistema"><a href="https://maracufy.herokuapp.com/musica/?id={{id_musica}}" target="_blank">{{nome}}</a></p>
-                        <p class="review-itemsistema-ano">{{ano}}</p>
-                        <p class="curtidas-conteudo"> {{curtidor}} curtiu sua review!</p>
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-        </div>
-    </div>
-
 
     <footer>    
         <nav>

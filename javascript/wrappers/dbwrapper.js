@@ -597,7 +597,7 @@ const argon = require('argon2')
     }
 
     async function getLastReviews(){
-        let data = await db.query(`SELECT id_avaliacao, nome_usuario, poster_item, nota, comentario, data, curtidas FROM 
+        let data = await db.query(`SELECT id_avaliacao, nome_usuario, poster_item, nota, comentario, data, COALESCE(curtidas,0) curtidas FROM 
         usuario 
         LEFT JOIN avaliacao USING(id_usuario) 
         LEFT JOIN itemsistema USING(id_item)
@@ -612,6 +612,10 @@ const argon = require('argon2')
         let teste = await argon.verify(data.rows[0].hash_senha, senha)
 
         return {exists: teste, id: data.rows[0].id_usuario}
+    }
+
+    async function getUserData(id_usuario){
+        let data = await db.query(``)
     }
 
 module.exports = {
