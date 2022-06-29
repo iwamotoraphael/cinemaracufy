@@ -398,7 +398,7 @@ const argon = require('argon2')
 		INNER JOIN avaliacao a USING(id_usuario)
         LEFT JOIN (SELECT id_avaliacao, COUNT(*) likes FROM curtidas GROUP BY id_avaliacao) l USING(id_avaliacao) 
 		INNER JOIN avatar USING(id_avatar)
-        WHERE id_item = 170`, [id])
+        WHERE id_item = $1`, [id])
 
         let reviews = data.rows
 
