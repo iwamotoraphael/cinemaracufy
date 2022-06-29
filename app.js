@@ -60,8 +60,8 @@ app.get("/filme",async function(req, res){
     else
     {
         data = await db.getMovieData(req.query.id)
+        console.log(req.session.id)
         reviews = await db.getItemReviews(req.query.id, req.session.id)
-        console.log(reviews)
     }
 
     res.render('filme', {
@@ -88,7 +88,7 @@ app.get("/serie",async function(req, res){
     {
         data = await db.getTVData(req.query.id)
         reviews = await db.getItemReviews(req.query.id, req.session.id)
-        console.log(reviews)
+        console.log(req.session.id)
     }
     res.render('serie', {
         nome: data.nome_item,
