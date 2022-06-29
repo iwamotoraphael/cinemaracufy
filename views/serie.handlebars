@@ -152,14 +152,14 @@
             <div id="conteudo-reviews-feitas">
                 {{#each analises}}
                 <div class="review-usuario">
-                    <img class="review-capa-album" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg">
+                    <img class="review-capa-album" src="{{link_avatar}}">
                     <div class="review-span">
-                        <span class="review-nome-usuario">{{nome}}</span>
+                        <span class="review-nome-usuario">{{nome_usuario}}</span>
                         <span class="review-date">{{data}}<br/></span>
                         <span class="review-nota">⭐	Avaliação: </span>
                         <span class="review-nota-dada">{{nota}}/10</span>
                         <span class="review-nota">👍 Curtidas: </span>
-                        <span class="review-curtidas-dadas">{{relevancia}}</span>
+                        <span class="review-curtidas-dadas">{{likes}}</span>
 
                         <span class="review-curtir"><form id="like" action="/like" method="post"><input type="hidden" id="idr" name="idr" value="{{id_avaliacao}}"><button type="submit" formtarget="_blank">{{#if curtida}}👎 Descurtir{{else}}👍 Curtir{{/if}}</button></form></span>
 
