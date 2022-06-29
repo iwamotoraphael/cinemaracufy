@@ -197,4 +197,14 @@ app.post('/unlike', async function(req, res){
     res.send("<script>window.close();</script>")
 })
 
+app.post('/filme', async function(req, res){
+    await db.createReview(req.session.id, req.query.id, req.body.nota, req.body.comentario, new Date())
+    res.redirect('/filme/?id='+req.query.id)
+})
+
+app.post('/serie', async function(req, res){
+    await db.createReview(req.session.id, req.query.id, req.body.nota, req.body.comentario, new Date())
+    res.redirect('/serie/?id='+req.query.id)
+})
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
