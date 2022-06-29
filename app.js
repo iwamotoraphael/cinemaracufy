@@ -226,7 +226,7 @@ app.post('/lista', async function(req, res){
     res.redirect('/perfil')
 })
 
-app.posts('/listas', async function(req, res){
+app.post('/listas', async function(req, res){
     let lists = await db.getUserLists(req.session.id)
 
     for(i in lists){
