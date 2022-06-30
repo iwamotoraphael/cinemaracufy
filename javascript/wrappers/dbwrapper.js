@@ -621,7 +621,7 @@ const argon = require('argon2')
     }
 
     async function getUserLists(id_usuario){
-        let data = await db.query(`SELECT l.id_lista, l.nome_lista, json_agg(json_build_object('poster_item', i.poster_item, 'nome', i.nome_item, 'data', i.lancamento)) itens FROM 
+        let data = await db.query(`SELECT l.id_lista, l.nome_lista, json_agg(json_build_object('poster_item', i.poster_item, 'nome', i.nome_item, 'data', i.lancamento, 'id_item', i.id_item,'id_lista', l.id_lista)) itens FROM 
         lista l 
         LEFT JOIN lista_item li USING(id_lista) 
         LEFT JOIN itemsistema i USING(id_item)

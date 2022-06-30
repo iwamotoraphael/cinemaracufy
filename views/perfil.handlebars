@@ -71,6 +71,11 @@
                                 <p class="dado-itemlista-nome">{{nome}}</p>
                             <p class="dado-itemlista-ano">{{data}}</p>
                         </div>
+                        <form action="/unlinkitem" method="post">
+                            <input type="hidden" value={{id_lista}} id="id_lista" name="id_lista">
+                            <input type="hidden" value={{id_item}} id="id_item" name="id_item">
+                            <button id="analise" type="submit">Remover</button>
+                        </form>
                         {{/each}}
                     </div>
                 </div>

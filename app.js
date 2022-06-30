@@ -241,4 +241,10 @@ app.post('/listas', async function(req, res){
     })
 })
 
+app.post('/unlinkitem', async function(req, res){
+    await db.removeOneLinkItemList(req.body.id_lista, req.body.id_item)
+
+    res.redirect('/perfil')
+})
+
 app.listen(port, ()=>{console.info("servidor rodando na porta: "+port)})
