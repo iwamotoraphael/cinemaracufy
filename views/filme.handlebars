@@ -58,29 +58,32 @@
         <div class="review-data">
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
-                <div class="dado-orcamento">
-                    <p id="dado-orcamento-titulo">Orçamento: {{orcamento}}</p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Orçamento: </p>
+                    <span class="dado-info-nome">{{orcamento}}</span>
                 </div>
 
-                <div class="dado-arrecadacao">
-                    <p id="dado-arrecadacao-titulo">Arrecadação: {{arrecadacao}}</p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Arrecadação: </p>
+                    <span class="dado-info-nome">{{arrecadacao}}</span>
                 </div>
 
-                <div class="dado-duracao">
-                    <p id="dado-duracao-titulo">Duração: {{duracao}}</p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Duração: </p>
+                    <span class="dado-info-nome">{{duracao}}</span>
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Gêneros: </p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Gêneros: </p>
                     {{#each generos}}
-                    <span class="dado-genero-nome">{{this}}</span>
+                    <span class="dado-info-nome">{{this}}</span>
                     {{/each}}
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Plataformas: </p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Plataformas: </p>
                     {{#each plataformas}}
-                    <span class="dado-genero-nome">{{nome_plataforma}}</span>
+                    <span class="dado-info-nome">{{nome_plataforma}}</span>
                     {{/each}}
                 </div>
 

@@ -55,7 +55,7 @@
 }
 
 .dado-sinopse {
-  font-size: 0.9em;
+  font-size: 0.8em;
   text-align: justify;
 }
 
@@ -67,17 +67,17 @@
   justify-content: center;
 }
 
-.dado-generos {
+.dado-info {
   margin-bottom: 15px;
   text-align: center;
 }
 
-#dado-genero-titulo {
+#dado-info-titulo {
     font-weight: 800;
     font-size: 1.1em;
 }
 
-.dado-genero-nome {
+.dado-info-nome {
     background-color: var(--cinzaMedio);
     color: var(--branco);
     font-size: 0.8em;
