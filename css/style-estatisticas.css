@@ -89,11 +89,11 @@
     font-size: 0.85em;
   }
 
-  .destaque-filme-nome a {
+  .destaque-filme-nome a, .destaque-serie-nome a {
     color: black;
   }
 
-  .destaque-filme-nome a:hover, .destaque-filme-nome a.active {
+  .destaque-filme-nome a:hover, .destaque-filme-nome a.active, .destaque-serie-nome a:hover, .destaque-serie-nome a.active {
     color: var(--branco);
   }
   
