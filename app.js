@@ -232,6 +232,8 @@ app.post('/listas', async function(req, res){
         lists[i].id_item = req.body.id_item
     }
 
+    console.log(req.body.nome)
+
     res.render('listas', {
         listas: lists,
         nome: req.body.nome,

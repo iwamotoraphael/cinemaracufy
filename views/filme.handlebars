@@ -43,10 +43,10 @@
                         <p class="dado-ano">{{lancamento}}</p>
                         <form action="/listas" method="post">
                             <input type="hidden" value={{id}} id="id_item" name="id_item">
-                            <input type="hidden" value={{nome}} id="nome" name="nome">
+                            <input type="hidden" value="{{nome}}" id="nome" name="nome">
                             <input type="hidden" value={{lancamento}} id="lancamento" name="lancamento">
-                            <input type="hidden" value={{sinopse}} id="sinopse" name="sinopse">
-                            <input type="hidden" value={{foto}} id="foto" name="foto">
+                            <input type="hidden" value="{{sinopse}}" id="sinopse" name="sinopse">
+                            <input type="hidden" value="{{foto}}" id="foto" name="foto">
                             <button id="analise" type="submit">Adicionar à minha lista</button>
                         </form>
                     </div>
