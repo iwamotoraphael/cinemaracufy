@@ -74,40 +74,6 @@
   font-size: 0.8em;
 }
 
-#curtidas-usuario {
-  border-radius: 10px;
-  border-color: var(--cor6);
-  border-width: 2px;
-  width: 1080px;
-  max-height: 390px;
-  overflow-y: scroll;
-  display: grid;
-  grid-gap: 2px;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.curtida-usuario {
-  border-radius: 10px;
-  width: 420px;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  margin: 20px;
-  padding: 25px;
-  border: 2px solid var(--branco);
-}
-
-.curtida-foto {
-  width: 80px;
-  height: 80px;
-  margin-right: 15px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
-}
-
-.curtidas-span {
-  margin-top: 12px;
-}
-
 .profile-data > div > p{
   color: var(--cor2);
   margin: 10px 0px;
@@ -121,11 +87,6 @@
   justify-content: center;
 }
 
-.resto-profile{
-  padding-top: 30px;
-  margin: 45px 15px;
-}
-
 #dado-nome {
   font-weight: 800;
   font-size: 1.5em;
@@ -137,14 +98,9 @@
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
 }
 
-#logo-spotify {
-  width: 50px;
-  height: 50px;
-}
-
 #listas {
-  margin-top: 20px;
-  height: 290px;
+  margin-top: 10px;
+  height: 130px;
   overflow-y: scroll;
 }
 
@@ -153,6 +109,29 @@
   border-radius: 10px;
   background-color: #ffffff54;
   margin-bottom: 10px;
+}
+
+#analise {
+  background-color: var(--cinzaMedio);
+  color: var(--branco);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 6px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#analise:hover  {
+  background-color: var(--rosaClaro);
+}
+
+#analise.active {
+  background-color: #ccc;
 }
 
 .dado-itemlista-circulo {
@@ -212,23 +191,14 @@
   flex-flow: row nowrap;
 }
 
-#logo-spotify {
-  margin: 0;
-  padding: 0;
-}
-
-.tab {
-  width: 347px;
-}
-
 .inputwrapper input {
-  width: 350;
+  width: 96%;
 }
 
 /* RESPONSIVIDADES */
 
 @media (max-width: 1158px) {
-  .atividade, #reviews-usuario, #curtidas-usuario {
+  .atividade, #reviews-usuario {
     width: 90vw;
   }
 }
@@ -241,39 +211,27 @@
     justify-content: center;
   }
 
-  .profile-data, .inner-profile-data, .atividade, #reviews-usuario, #curtidas-usuario {
+  .profile-data, .inner-profile-data, .atividade, #reviews-usuario {
     width: 75vw;
   }
 }
 
 @media (max-width: 606px) {
-  .atividade, #reviews-usuario, #curtidas-usuario {
+  .atividade, #reviews-usuario {
     width: 75vw;
   }
 }
 
 @media (max-width: 512px) {
-  .tab {
-    width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-  }
 
   button > p {
     font-size: 0.9em;
   }
 
-  #topartists {
-    margin-top: 8px;
-  }
 }
 
 @media (max-width: 418px) {
-  #topartists {
-    height: 323px;
-  }
-    
+
   #listas {
     height: 620px;
   }

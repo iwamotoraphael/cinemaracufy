@@ -48,7 +48,7 @@
         <div class="profile-data">
             <h2 class="titulo-pagina">Listas</h2>
             <form action="/lista" method="post" autocomplete="off">
-                <p>Nome (30 caracteres)</p>
+                <p class="texto-pagina">Para criar uma lista, digite um nome de até 30 caracteres:</p>
                 <div class="inputwrapper">
                     <div>
                         <input type="textarea" id="nome" name="nome" maxlength="30" required>
@@ -87,7 +87,7 @@
         <div class="profile-wrapper">
         <div class="atividade">
             <h2 class="titulo-pagina">Atividade</h2>
-            <p class="texto-pagina"> As interações envolvendo seu perfil e a plataforma estão dispostas a seguir: suas reviews e curtidas fornecidas por outros usuários :)</p>
+            <p class="texto-pagina">Abaixo estão dispostas suas avaliações realizadas na plataforma :)</p>
             <h2 class="titulo-pagina-2">Reviews</h2>
             <div id="reviews-usuario"> 
                 {{#each reviews}}

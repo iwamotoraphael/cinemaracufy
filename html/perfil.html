@@ -57,39 +57,52 @@
         </div>
         <div class="profile-data">
             <h2 class="titulo-pagina">Listas</h2>
+            <form action="/lista" method="post" autocomplete="off">
+                <p class="texto-pagina">Para criar uma lista, digite um nome de até 30 caracteres:</p>
+                <div class="inputwrapper">
+                    <div>
+                        <input type="textarea" id="nome" name="nome" maxlength="30" required>
+                    </div>
+                </div>
+                <button id="analise" type="submit">Criar lista</button>
+            </form>
             <div id="listas">
                 <div class="lista">
-                    <h3 class="titulo-pagina-2">Nome da lista</h2>
+                    <h3 class="titulo-pagina-2">{{nome_lista}}</h2>
+                    
                     <div class="dado-itemlista">
                         <div class="dado-itemlista-circulo">
                             <p class="dado-itemlista-numero">1</p>
                         </div>
                         <img class="dado-itemlista-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
                         <div class="dado-itemlista-span">
-                            <a href="">
-                                <p class="dado-itemlista-nome">Nome</p>
-                            </a>
-                            <p class="dado-itemlista-ano">Ano</p>
+                                <p class="dado-itemlista-nome">{{nome}}</p>
+                            <p class="dado-itemlista-ano">{{data}}</p>
                         </div>
+                        <form action="/unlinkitem" method="post">
+                            <input type="hidden" value={{id_lista}} id="id_lista" name="id_lista">
+                            <input type="hidden" value={{id_item}} id="id_item" name="id_item">
+                            <button id="analise" type="submit">Remover</button>
+                        </form>
                     </div>
-                </div>
 
-                <div class="lista">
-                    <h3 class="titulo-pagina-2">Nome da lista</h2>
                     <div class="dado-itemlista">
                         <div class="dado-itemlista-circulo">
                             <p class="dado-itemlista-numero">1</p>
                         </div>
                         <img class="dado-itemlista-capa" src="https://image.tmdb.org/t/p/original/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="Capa do item do sistema">
                         <div class="dado-itemlista-span">
-                            <a href="">
-                                <p class="dado-itemlista-nome">Nome</p>
-                            </a>
-                            <p class="dado-itemlista-ano">Ano</p>
+                                <p class="dado-itemlista-nome">{{nome}}</p>
+                            <p class="dado-itemlista-ano">{{data}}</p>
                         </div>
+                        <form action="/unlinkitem" method="post">
+                            <input type="hidden" value={{id_lista}} id="id_lista" name="id_lista">
+                            <input type="hidden" value={{id_item}} id="id_item" name="id_item">
+                            <button id="analise" type="submit">Remover</button>
+                        </form>
                     </div>
+                    
                 </div>
-                
             </div>
         </div>
     </div>
