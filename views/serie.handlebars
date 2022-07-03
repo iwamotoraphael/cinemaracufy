@@ -64,33 +64,33 @@
                     <span class="dado-info-nome">{{nome_plataforma}}</span>
                     {{/each}}
                 </div>
-
+                
+                {{#each companhias}}
                 <div class="dados-companhia">
-                    {{#each companhias}}
                     <img id="dado-foto-companhia" src="{{poster_companhia}}" alt="">
                     <div class="dado-companhia">
                         <p id="dado-nome-companhia">{{nome_companhia}}</p>
                     </div>  
-                    {{/each}}
                 </div>
+                {{/each}}
 
+                {{#each emissoras}}
                 <div class="dados-companhia">
-                    {{#each emissoras}}
                     <img id="dado-foto-companhia" src="{{logo_emissora}}" alt="">
                     <div class="dado-companhia">
                         <p id="dado-nome-companhia">{{nome_emissora}}</p>
                     </div>
-                    {{/each}}
                 </div>
+                {{/each}}
 
+                {{#each criadores}}
                 <div class="dados-companhia">
-                    {{#each criadores}}
                     <img id="dado-foto-companhia" src="{{foto_criador}}" alt="">
                     <div class="dado-companhia">
                         <p id="dado-nome-companhia">{{nome_criador}}</p>
                     </div>
-                    {{/each}}
                 </div>
+                {{/each}}
 
             </div>
         </div>
