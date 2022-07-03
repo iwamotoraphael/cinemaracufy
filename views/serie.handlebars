@@ -51,17 +51,17 @@
         <div class="review-data">
             <h2 class="titulo-pagina">Informações</h2>
             <div id="info-itemsistema">
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Gêneros:</p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Gêneros: </p>
                     {{#each generos}}
-                    <span class="dado-genero-nome">{{this}}</span>
+                    <span class="dado-info-nome">{{this}}</span>
                     {{/each}}
                 </div>
 
-                <div class="dado-generos">
-                    <p id="dado-genero-titulo">Plataformas:</p>
+                <div class="dado-info">
+                    <p id="dado-info-titulo">Plataformas: </p>
                     {{#each plataformas}}
-                    <span class="dado-genero-nome">{{nome_plataforma}}</span>
+                    <span class="dado-info-nome">{{nome_plataforma}}</span>
                     {{/each}}
                 </div>
 
@@ -73,6 +73,25 @@
                     </div>  
                     {{/each}}
                 </div>
+
+                <div class="dados-companhia">
+                    {{#each emissoras}}
+                    <img id="dado-foto-companhia" src="{{logo_emissora}}" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">{{nome_emissora}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="dados-companhia">
+                    {{#each criadores}}
+                    <img id="dado-foto-companhia" src="{{foto_criador}}" alt="">
+                    <div class="dado-companhia">
+                        <p id="dado-nome-companhia">{{nome_criador}}</p>
+                    </div>
+                    {{/each}}
+                </div>
+
             </div>
         </div>
     </div>
@@ -91,32 +110,6 @@
                 {{/each}}
             </div>
        </div>
-    </div>
-
-    <div class="review-wrapper">
-        <div class="review-data">
-            <h2 class="titulo-pagina">Informações</h2>
-            <div id="info-itemsistema">
-                {{#each emissoras}}
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="{{logo_emissora}}" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">{{nome_emissora}}</p>
-                    </div>  
-                </div>
-                {{/each}}
-
-                {{#each criadores}}
-                <div class="dados-companhia">
-                    <img id="dado-foto-companhia" src="{{foto_criador}}" alt="">
-                    <div class="dado-companhia">
-                        <p id="dado-nome-companhia">{{nome_criador}}</p>
-                    </div>  
-                </div>
-                {{/each}}
-
-            </div>
-        </div>
     </div>
 
     <div class="review-wrapper">

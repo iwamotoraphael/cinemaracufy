@@ -86,46 +86,9 @@
     margin: 2px;
 }
 
-#logo-spotify {
-  margin: 0;
-  padding: 0;
-  width: 50px;
-  height: 50px;
-}
-
-iframe {
-  margin: 10px;
-}
-
 .tab {
   width: 266px;
   margin-bottom: 20px;
-}
-
-.dado-artista-similar-foto {
-  width: 64px;
-  height: 64px;
-  border: 5px;
-  margin-left: 5px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.39);
-}
-
-.dado-artista-similar-nome {
-  font-weight: 600;
-  font-size: 0.85em;
-  padding-top: 8px;
-}
-
-#dado-artista-similar-span {
-  display: flex;
-  flex-direction: column;
-  margin: 15px;
-}
-
-.dado-artista-similar {
-  display: flex;
-  flex-direction: row;
-  margin: 20px;
 }
 
 #info-itemsistema {
@@ -133,23 +96,6 @@ iframe {
   height: 330px;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-#barra-progresso {
-  background-color: black;
-  border-radius: 13px;
-  padding: 3px;
-}
-
-#barra-progresso > div {
-  background-color: var(--cor9);
-  height: 20px;
-  border-radius: 10px;
-}
-
-.nome-atributo {
-  font-weight: 800;
-  font-size: 1.1em;
 }
 
 .user-review-data, .review-data-cast {
@@ -194,7 +140,7 @@ iframe {
   border: 2px solid var(--branco);
 }
 
-.review-capa-album {
+.review-capa-itemsistema {
   width: 100px;
   height: 100px;
   margin-right: 15px;
@@ -393,11 +339,6 @@ button p {
     }
   }
 
-  @media (max-width: 592px) {
-    #conteudo-atributos > p {
-      font-size: 2.8vw;
-    }
-  }
 
   @media (max-width: 526px) {
     .review-data, .user-review-data, .user-review-history, #conteudo-reviews-feitas {
@@ -415,11 +356,6 @@ button p {
     }
   }
 
-  @media (max-width: 388px) {
-    #conteudo-atributos > p {
-      font-size: 3.2vw;
-    }
-  }
 
   @media (max-width: 362px) {
     .tab {
@@ -436,7 +372,4 @@ button p {
       font-size: 35px;
     }
 
-    #conteudo-atributos > p {
-      font-size: 3.4vw;
-    }
   }
